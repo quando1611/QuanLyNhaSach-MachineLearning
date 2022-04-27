@@ -28,4 +28,14 @@ public class KhachHang_BUS {
     {
         return khachHang_DAL.addKhachHang(khachHang);
     }
+    
+    public boolean updateKhachHang(KhachHang khachHang)
+    {
+        return khachHang_DAL.updateKhachHang(khachHang);
+    }
+    
+    public boolean deleteKhachHang(String maKH)
+    {
+        return khachHang_DAL.deleteKhachHang(maKH);
+    }
 }

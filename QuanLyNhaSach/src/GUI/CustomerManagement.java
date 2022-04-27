@@ -23,6 +23,7 @@ import javax.swing.JOptionPane;
 public class CustomerManagement extends javax.swing.JFrame {
 
     DBConnection connection;
+    public String valueMaKH;
     /**
      * Creates new form CustomerManagement
      */
@@ -66,7 +67,13 @@ public class CustomerManagement extends javax.swing.JFrame {
     
     public void resetText() // reset textfield after event done!
     {
-        
+        SearchTxb.setText("");
+        NameTxb.setText("");
+        NameTxb.enable(true);
+        AddressTxb.setText("");
+        PhoneNumberTxb.setText("");
+        EmailTxb.setText("");
+        ProductTxb.setText("");
     }
     
     public String randomID() // get random to generate ID for all of things
@@ -76,11 +83,27 @@ public class CustomerManagement extends javax.swing.JFrame {
         String id = Long.toString(milis);
         System.err.println(id);
         return id;
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.setTime(date);
-        
     }
 
+    public void SelectRow()
+    {
+        DefaultTableModel tableModel = (DefaultTableModel) SearchCustomerTable.getModel();
+            //Get Data from Table
+            valueMaKH = tableModel.getValueAt(SearchCustomerTable.getSelectedRow(), 0).toString();
+            String name = tableModel.getValueAt(SearchCustomerTable.getSelectedRow(), 1).toString();
+            String address = tableModel.getValueAt(SearchCustomerTable.getSelectedRow(), 2).toString();
+            String phone = tableModel.getValueAt(SearchCustomerTable.getSelectedRow(), 3).toString();
+            String email = tableModel.getValueAt(SearchCustomerTable.getSelectedRow(), 4).toString();
+            String soSP = tableModel.getValueAt(SearchCustomerTable.getSelectedRow(), 5).toString();
+            //Set TextField
+            NameTxb.setText(name);
+            NameTxb.enable(false);
+            AddressTxb.setText(address);
+            PhoneNumberTxb.setText(phone);
+            EmailTxb.setText(email);
+            ProductTxb.setText(soSP);
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -217,6 +240,11 @@ public class CustomerManagement extends javax.swing.JFrame {
         DeleteBtn.setBackground(new java.awt.Color(255, 51, 102));
         DeleteBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         DeleteBtn.setText("DELETE");
+        DeleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteBtnActionPerformed(evt);
+            }
+        });
         SearchTab.add(DeleteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 470, 116, 51));
 
         EditChangeBtn.setBackground(new java.awt.Color(255, 204, 204));
@@ -469,6 +497,7 @@ public class CustomerManagement extends javax.swing.JFrame {
 
     private void EditChangeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditChangeBtnActionPerformed
         // Move to Add Tab and set Textfield's text to update Customer
+        SelectRow();
         ParentPanel.setSelectedIndex(1);
     }//GEN-LAST:event_EditChangeBtnActionPerformed
 
@@ -502,8 +531,33 @@ public class CustomerManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_AddCustomerBtnActionPerformed
 
     private void UpdateCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateCustomerBtnActionPerformed
-        // TODO add your handling code here:
+        // Update Customer
+        KhachHang khachHang = new KhachHang();
+            khachHang.setMaKH(valueMaKH);
+            khachHang.setTenKH(NameTxb.getText());
+            khachHang.setDiaChi(AddressTxb.getText());
+            khachHang.setDienThoai(PhoneNumberTxb.getText());
+            khachHang.setEmail(EmailTxb.getText());
+            khachHang.setSoSPDaMua(ProductTxb.getText());
+        KhachHang_BUS khachHang_BUS = new KhachHang_BUS();
+        khachHang_BUS.updateKhachHang(khachHang);
+        JOptionPane.showMessageDialog(this, "Update Customer success!");
+        reset();
+        resetText();
+        loadAllCustomer();
+        ParentPanel.setSelectedIndex(0);
     }//GEN-LAST:event_UpdateCustomerBtnActionPerformed
+
+    private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
+        // Delete Customer
+        SelectRow();
+        KhachHang_BUS khachHang_BUS = new KhachHang_BUS();
+        khachHang_BUS.deleteKhachHang(valueMaKH);
+        JOptionPane.showMessageDialog(this, "Delete Customer success!");
+        reset();
+        resetText();
+        loadAllCustomer();
+    }//GEN-LAST:event_DeleteBtnActionPerformed
 
     /**
      * @param args the command line arguments

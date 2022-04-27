@@ -83,6 +83,36 @@ public class KhachHang_DAL {
             return false;
         }
     }
+    
+    public boolean updateKhachHang(KhachHang khachHang)
+    {
+        connection = new DBConnection();
+        String query = "update KhachHang set DiaChi = '" + khachHang.getDiaChi() + "', DienThoai = '" +khachHang.getDienThoai() +"', Email = '" +khachHang.getEmail() +"', SoSPDaMua = '" + khachHang.getSoSPDaMua() + "' where TenKH = '" +khachHang.getTenKH() + "'" ;
+        System.err.println(query);
+        try {
+            ResultSet rs = connection.ExcuteQueryUpdateDB(query);
+            return true;
+        } catch (Exception e) {
+            System.err.println("Failed!");
+            return false;
+        }
+    }
+    
+    public boolean deleteKhachHang(String maKH)
+    {
+        connection = new DBConnection();
+        String query = "delete from KhachHang where MaKH = '" + maKH + "'";
+        System.err.println(query);
+        try {
+            ResultSet rs = connection.ExcuteQueryUpdateDB(query);
+            return true;
+        } catch (Exception e) {
+            System.err.println("Failed!");
+            return false;
+        }
+    }
+    
+    
 
     
 }
