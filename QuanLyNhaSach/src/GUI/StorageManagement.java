@@ -4,17 +4,145 @@
  */
 package GUI;
 
+import DAL.DBConnection;
+import DAL.*;
+import BUS.*;
+import DTO.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author 19522
  */
 public class StorageManagement extends javax.swing.JFrame {
 
+    
+    DBConnection connection;
+    public String valueMaSach;
+    public int TypeCbindex;
     /**
      * Creates new form StorageManagement
      */
     public StorageManagement() {
         initComponents();
+        loadAllData();
+    }
+    
+    public void loadAllData()
+    {
+        loadAllBook();
+    }
+    //Get all data from Sach
+    public void loadAllBook()
+    {
+        DefaultTableModel table = (DefaultTableModel)SearchBookTable.getModel();
+        ArrayList<Sach> arr = new ArrayList<Sach>();
+        Sach_BUS sach_BUS= new Sach_BUS();
+        arr = sach_BUS.getAllSach();
+        Sach sach = new Sach();
+        try {
+            for(int i=0; i< arr.size();i++)
+            {
+                sach = arr.get(i);
+                String id = sach.getMaSach();
+                String name = sach.getTenSach();
+                String author = sach.getTenTG();
+                String type = sach.getTenTheLoai();
+                int amount = sach.getSoLuong();
+                float price = sach.getGia();
+                Object[] row = {id, name, author,type,amount,price};
+                table.addRow(row);
+            }
+        } catch (Exception e) {
+            System.err.println("No thing!");
+        }
+        SearchBookTable.setModel(table);
+    }
+    
+    public void seacrhBookWithFilter()
+    {
+        reset();
+        String name = SearchTxb.getText();
+        String type = TypeCb.getSelectedItem().toString();
+        if(type == "All")
+        {
+            type = "";
+        }
+        String author = AuthorSearchTxb.getText();
+        DefaultTableModel table = (DefaultTableModel) SearchBookTable.getModel();
+        ArrayList<Sach> arr = new ArrayList<Sach>();
+        Sach_BUS sach_BUS = new Sach_BUS();
+        arr = sach_BUS.searchSach(name, type, author);
+        Sach sach = new Sach();
+        try {
+            for(int i=0; i< arr.size();i++)
+            {
+                sach = arr.get(i);
+                String id = sach.getMaSach();
+                String name1 = sach.getTenSach();
+                String author1 = sach.getTenTG();
+                String type1 = sach.getTenTheLoai();
+                int amount = sach.getSoLuong();
+                float price = sach.getGia();
+                Object[] row = {id, name1, author1,type1,amount,price};
+                table.addRow(row);
+            }
+        } catch (Exception e) {
+            System.err.println("No thing!");
+        }
+        SearchBookTable.setModel(table);
+    }
+    
+    
+    public void reset() // reset the Jtable to null
+    {
+        DefaultTableModel tableModel = (DefaultTableModel) SearchBookTable.getModel();
+        tableModel.setRowCount(0);
+        SearchBookTable.setModel(tableModel);
+    }
+    
+    public void resetText() // reset textfield after event done!
+    {
+        SearchTxb.setText("");
+        NameTxb.setText("");
+        NameTxb.enable(true);
+        TypeTxb.setText("");
+        PriceTxb.setText("");
+        TypeTxb.setText("");
+        AuthorTxb.setText("");
+        AuthorSearchTxb.setText("");
+        AmountTxb.setText("");
+    }
+    
+    public String randomID() // get random to generate ID for all of things
+    {
+        LocalDateTime local = LocalDateTime.now();
+        long milis = local.getNano();
+        String id = Long.toString(milis);
+        System.err.println(id);
+        return id;
+    }
+    
+    public void SelectRow()
+    {
+        DefaultTableModel tableModel = (DefaultTableModel) SearchBookTable.getModel();
+            //Get Data from Table
+            valueMaSach = tableModel.getValueAt(SearchBookTable.getSelectedRow(), 0).toString();
+            String name = tableModel.getValueAt(SearchBookTable.getSelectedRow(), 1).toString();
+            String author = tableModel.getValueAt(SearchBookTable.getSelectedRow(), 2).toString();
+            String type = tableModel.getValueAt(SearchBookTable.getSelectedRow(), 3).toString();
+            int amount = Integer.parseInt(tableModel.getValueAt(SearchBookTable.getSelectedRow(), 4).toString());
+            String price = tableModel.getValueAt(SearchBookTable.getSelectedRow(), 5).toString();
+            //Set TextField
+            NameTxb.setText(name);
+            NameTxb.enable(false);
+            AuthorTxb.setText(author);
+            TypeSelectCb.setSelectedItem(type);
+            AmountTxb.setText(String.valueOf(amount));
+            PriceTxb.setText(price);
     }
 
     /**
@@ -26,6 +154,7 @@ public class StorageManagement extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -33,38 +162,38 @@ public class StorageManagement extends javax.swing.JFrame {
         ParentPanel = new javax.swing.JTabbedPane();
         SearchTab = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        SearchTable = new javax.swing.JTable();
+        SearchBookTable = new javax.swing.JTable();
         SearchBtn = new javax.swing.JButton();
         DeleteBtn = new javax.swing.JButton();
         EditChangeBtn = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        AllRadio = new javax.swing.JRadioButton();
+        FilterRadio = new javax.swing.JRadioButton();
         NewChangeBtn = new javax.swing.JButton();
-        SearchTxb6 = new javax.swing.JTextField();
-        AuthorCb = new javax.swing.JComboBox<>();
+        AuthorSearchTxb = new javax.swing.JTextField();
         TypeCb = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        SearchTxb = new javax.swing.JTextField();
         AddTab = new javax.swing.JPanel();
-        SearchTxb1 = new javax.swing.JTextField();
+        NameTxb = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        SearchTxb2 = new javax.swing.JTextField();
+        AuthorTxb = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        SearchTxb3 = new javax.swing.JTextField();
+        TypeTxb = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        SearchTxb4 = new javax.swing.JTextField();
-        AddCustomerBtn = new javax.swing.JButton();
+        PriceTxb = new javax.swing.JTextField();
+        AddBookBtn = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        UpdateCustomerBtn = new javax.swing.JButton();
+        UpdateBookBtn = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        TypeSelectCb = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
-        ViewTab = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        SearchTable1 = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
+        AmountTxb = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel2.setBackground(new java.awt.Color(153, 153, 200));
 
@@ -74,6 +203,11 @@ public class StorageManagement extends javax.swing.JFrame {
         jLabel1.setText("STORAGE MANAGEMENT");
 
         BackBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/icons8_previous_70px.png"))); // NOI18N
+        BackBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BackBtnMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -105,12 +239,9 @@ public class StorageManagement extends javax.swing.JFrame {
 
         jScrollPane1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        SearchTable.setModel(new javax.swing.table.DefaultTableModel(
+        SearchBookTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Name", "Author", "Type", "Amout", "Price"
@@ -124,22 +255,31 @@ public class StorageManagement extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        SearchTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        SearchTable.setCellSelectionEnabled(true);
-        SearchTable.setGridColor(new java.awt.Color(0, 0, 0));
-        SearchTable.setShowGrid(true);
-        jScrollPane1.setViewportView(SearchTable);
-        SearchTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        SearchBookTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        SearchBookTable.setGridColor(new java.awt.Color(0, 0, 0));
+        SearchBookTable.setShowGrid(true);
+        jScrollPane1.setViewportView(SearchBookTable);
+        SearchBookTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         SearchTab.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1000, 490));
 
         SearchBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png"))); // NOI18N
         SearchBtn.setToolTipText("Search");
-        SearchTab.add(SearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 40, 110, 50));
+        SearchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchBtnActionPerformed(evt);
+            }
+        });
+        SearchTab.add(SearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 40, 110, 50));
 
         DeleteBtn.setBackground(new java.awt.Color(255, 51, 102));
         DeleteBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         DeleteBtn.setText("DELETE");
+        DeleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteBtnActionPerformed(evt);
+            }
+        });
         SearchTab.add(DeleteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 520, 116, 51));
 
         EditChangeBtn.setBackground(new java.awt.Color(255, 204, 204));
@@ -150,17 +290,24 @@ public class StorageManagement extends javax.swing.JFrame {
                 EditChangeBtnMouseClicked(evt);
             }
         });
+        EditChangeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditChangeBtnActionPerformed(evt);
+            }
+        });
         SearchTab.add(EditChangeBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 440, 116, 51));
 
-        jRadioButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jRadioButton1.setSelected(true);
-        jRadioButton1.setText("All");
-        SearchTab.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        buttonGroup1.add(AllRadio);
+        AllRadio.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        AllRadio.setSelected(true);
+        AllRadio.setText("All");
+        SearchTab.add(AllRadio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jRadioButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jRadioButton2.setText("Filter");
-        jRadioButton2.setToolTipText("");
-        SearchTab.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
+        buttonGroup1.add(FilterRadio);
+        FilterRadio.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        FilterRadio.setText("Filter");
+        FilterRadio.setToolTipText("");
+        SearchTab.add(FilterRadio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
 
         NewChangeBtn.setBackground(new java.awt.Color(153, 255, 153));
         NewChangeBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -170,17 +317,18 @@ public class StorageManagement extends javax.swing.JFrame {
                 NewChangeBtnMouseClicked(evt);
             }
         });
+        NewChangeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NewChangeBtnActionPerformed(evt);
+            }
+        });
         SearchTab.add(NewChangeBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 360, 116, 51));
 
-        SearchTxb6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        SearchTxb6.setText("Search name ...");
-        SearchTxb6.setToolTipText("Search Here....");
-        SearchTab.add(SearchTxb6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 321, 42));
+        AuthorSearchTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        AuthorSearchTxb.setToolTipText("Search Here....");
+        SearchTab.add(AuthorSearchTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 40, 170, 42));
 
-        AuthorCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        SearchTab.add(AuthorCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 40, 182, 42));
-
-        TypeCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        TypeCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Lap Trinh" }));
         SearchTab.add(TypeCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 40, 182, 42));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -191,13 +339,18 @@ public class StorageManagement extends javax.swing.JFrame {
         jLabel7.setText("Author");
         SearchTab.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 50, -1, -1));
 
+        SearchTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        SearchTxb.setText("Search name ...");
+        SearchTxb.setToolTipText("Search Here....");
+        SearchTab.add(SearchTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 321, 42));
+
         ParentPanel.addTab("Search Book", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png")), SearchTab); // NOI18N
 
         AddTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        SearchTxb1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        SearchTxb1.setToolTipText("");
-        AddTab.add(SearchTxb1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 30, 431, 52));
+        NameTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        NameTxb.setToolTipText("");
+        AddTab.add(NameTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 30, 431, 52));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setText("Name :");
@@ -207,45 +360,55 @@ public class StorageManagement extends javax.swing.JFrame {
         jLabel3.setText("Author(s) :");
         AddTab.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 140, -1, -1));
 
-        SearchTxb2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        SearchTxb2.setToolTipText("");
-        AddTab.add(SearchTxb2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 120, 260, 52));
+        AuthorTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        AuthorTxb.setToolTipText("");
+        AddTab.add(AuthorTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 120, 260, 52));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel4.setText("Amount :");
         AddTab.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 310, -1, -1));
 
-        SearchTxb3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        SearchTxb3.setToolTipText("");
-        AddTab.add(SearchTxb3, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 290, 259, 50));
+        TypeTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        TypeTxb.setToolTipText("");
+        AddTab.add(TypeTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 210, 210, 50));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel5.setText("Price :");
         AddTab.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 390, -1, -1));
 
-        SearchTxb4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        SearchTxb4.setToolTipText("");
-        AddTab.add(SearchTxb4, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 370, 370, 50));
+        PriceTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        PriceTxb.setToolTipText("");
+        AddTab.add(PriceTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 370, 370, 50));
 
-        AddCustomerBtn.setBackground(new java.awt.Color(153, 255, 153));
-        AddCustomerBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        AddCustomerBtn.setText("ADD BOOK");
-        AddTab.add(AddCustomerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(616, 471, 244, 51));
+        AddBookBtn.setBackground(new java.awt.Color(153, 255, 153));
+        AddBookBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        AddBookBtn.setText("ADD BOOK");
+        AddBookBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddBookBtnActionPerformed(evt);
+            }
+        });
+        AddTab.add(AddBookBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(616, 471, 244, 51));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/icons8_open_book_250px.png"))); // NOI18N
         AddTab.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(116, 99, -1, -1));
 
-        UpdateCustomerBtn.setBackground(new java.awt.Color(255, 204, 204));
-        UpdateCustomerBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        UpdateCustomerBtn.setText("UPDATE BOOK");
-        AddTab.add(UpdateCustomerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(895, 471, 244, 51));
+        UpdateBookBtn.setBackground(new java.awt.Color(255, 204, 204));
+        UpdateBookBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        UpdateBookBtn.setText("UPDATE BOOK");
+        UpdateBookBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateBookBtnActionPerformed(evt);
+            }
+        });
+        AddTab.add(UpdateBookBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(895, 471, 244, 51));
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel8.setText("Type :");
-        AddTab.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 230, -1, -1));
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setText("Or");
+        AddTab.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 240, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        AddTab.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 210, 200, 50));
+        TypeSelectCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Lap Trinh" }));
+        AddTab.add(TypeSelectCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 210, 200, 50));
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -262,41 +425,15 @@ public class StorageManagement extends javax.swing.JFrame {
 
         AddTab.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 15, 3, 490));
 
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel9.setText("Type :");
+        AddTab.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 230, -1, -1));
+
+        AmountTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        AmountTxb.setToolTipText("");
+        AddTab.add(AmountTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 290, 200, 50));
+
         ParentPanel.addTab("Add Book", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_Plus_+_35px.png")), AddTab); // NOI18N
-
-        ViewTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jScrollPane3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        SearchTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "ID", "Name", "Author", "Type", "Amout", "Price"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        SearchTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        SearchTable1.setCellSelectionEnabled(true);
-        SearchTable1.setGridColor(new java.awt.Color(0, 0, 0));
-        SearchTable1.setShowGrid(true);
-        jScrollPane3.setViewportView(SearchTable1);
-        SearchTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-
-        ViewTab.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 935, 590));
-
-        ParentPanel.addTab("View Book", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_eye_35px.png")), ViewTab); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -326,15 +463,127 @@ public class StorageManagement extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void EditChangeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditChangeBtnMouseClicked
-        ParentPanel.setSelectedIndex(2);
+        ParentPanel.setSelectedIndex(1);
     }//GEN-LAST:event_EditChangeBtnMouseClicked
 
     private void NewChangeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewChangeBtnMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_NewChangeBtnMouseClicked
+
+    private void BackBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackBtnMouseClicked
+        // TODO add your handling code here:
+        this.dispose(); 
+    }//GEN-LAST:event_BackBtnMouseClicked
+
+    private void SearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBtnActionPerformed
+        // TODO add your handling code here:
+        if(AllRadio.isSelected() == true)
+        {
+            reset();
+            loadAllData();
+        }
+        else if(FilterRadio.isSelected() == true)
+        {
+            seacrhBookWithFilter();
+        }
+    }//GEN-LAST:event_SearchBtnActionPerformed
+
+    private void NewChangeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewChangeBtnActionPerformed
+        // TODO add your handling code here:
+        ParentPanel.setSelectedIndex(1);
+    }//GEN-LAST:event_NewChangeBtnActionPerformed
+
+    private void EditChangeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditChangeBtnActionPerformed
+        // TODO add your handling code here:
+        SelectRow();
+        ParentPanel.setSelectedIndex(1);
+    }//GEN-LAST:event_EditChangeBtnActionPerformed
+
+    private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
+        // TODO add your handling code here:
+        SelectRow();
+        Sach_BUS sach_BUS = new Sach_BUS();
+        sach_BUS.deleteSach(valueMaSach);
+        JOptionPane.showMessageDialog(this, "Delete Book success!");
+        reset();
+        resetText();
+        loadAllBook();
+    }//GEN-LAST:event_DeleteBtnActionPerformed
+
+    private void AddBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBookBtnActionPerformed
+        // TODO add your handling code here:
+        Sach sach = new Sach();
+        if(NameTxb.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(this, "Please fill atleast the name of book...");
+        }
+        else
+        {
+            sach.setMaSach("B" + randomID());
+            sach.setTenSach(NameTxb.getText());
+            sach.setTenTG(AuthorTxb.getText());
+            if(TypeTxb.getText().equals(""))
+            {
+                if(TypeSelectCb.getSelectedItem().toString().equals("All"))
+                {
+                    sach.setTenTheLoai("");
+                }
+                else
+                {
+                    sach.setTenTheLoai(TypeSelectCb.getSelectedItem().toString());
+                }
+            }
+            else
+            {
+                sach.setTenTheLoai(TypeTxb.getText());
+            }
+            sach.setSoLuong(Integer.parseInt(AmountTxb.getText()));
+            sach.setGia(Float.parseFloat(PriceTxb.getText()));
+        }
+        Sach_BUS sach_BUS = new Sach_BUS();
+        sach_BUS.addSach(sach);
+        JOptionPane.showMessageDialog(this, "Add Book success!");
+        reset();
+        resetText();
+        loadAllBook();
+        ParentPanel.setSelectedIndex(0);
+    }//GEN-LAST:event_AddBookBtnActionPerformed
+
+    private void UpdateBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateBookBtnActionPerformed
+        // TODO add your handling code here:
+        Sach sach = new Sach();
+            sach.setMaSach(valueMaSach);
+            sach.setTenSach(NameTxb.getText());
+            sach.setTenTG(AuthorTxb.getText());
+            if(TypeTxb.getText().equals(""))
+            {
+                if(TypeSelectCb.getSelectedItem().toString().equals("All"))
+                {
+                    sach.setTenTheLoai("");
+                }
+                else
+                {
+                    sach.setTenTheLoai(TypeSelectCb.getSelectedItem().toString());
+                }
+            }
+            else
+            {
+                sach.setTenTheLoai(TypeTxb.getText());
+            }
+            sach.setSoLuong(Integer.parseInt(AmountTxb.getText()));
+            sach.setGia(Float.parseFloat(PriceTxb.getText()));
+            Sach_BUS sach_BUS = new Sach_BUS();
+            sach_BUS.updateSach(sach);
+        JOptionPane.showMessageDialog(this, "Update Book success!");
+        reset();
+        resetText();
+        loadAllBook();
+        ParentPanel.setSelectedIndex(0);
+    }//GEN-LAST:event_UpdateBookBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -372,27 +621,29 @@ public class StorageManagement extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddCustomerBtn;
+    private javax.swing.JButton AddBookBtn;
     private javax.swing.JPanel AddTab;
-    private javax.swing.JComboBox<String> AuthorCb;
+    private javax.swing.JRadioButton AllRadio;
+    private javax.swing.JTextField AmountTxb;
+    private javax.swing.JTextField AuthorSearchTxb;
+    private javax.swing.JTextField AuthorTxb;
     private javax.swing.JLabel BackBtn;
     private javax.swing.JButton DeleteBtn;
     private javax.swing.JButton EditChangeBtn;
+    private javax.swing.JRadioButton FilterRadio;
+    private javax.swing.JTextField NameTxb;
     private javax.swing.JButton NewChangeBtn;
     private javax.swing.JTabbedPane ParentPanel;
+    private javax.swing.JTextField PriceTxb;
+    private javax.swing.JTable SearchBookTable;
     private javax.swing.JButton SearchBtn;
     private javax.swing.JPanel SearchTab;
-    private javax.swing.JTable SearchTable;
-    private javax.swing.JTable SearchTable1;
-    private javax.swing.JTextField SearchTxb1;
-    private javax.swing.JTextField SearchTxb2;
-    private javax.swing.JTextField SearchTxb3;
-    private javax.swing.JTextField SearchTxb4;
-    private javax.swing.JTextField SearchTxb6;
+    private javax.swing.JTextField SearchTxb;
     private javax.swing.JComboBox<String> TypeCb;
-    private javax.swing.JButton UpdateCustomerBtn;
-    private javax.swing.JPanel ViewTab;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> TypeSelectCb;
+    private javax.swing.JTextField TypeTxb;
+    private javax.swing.JButton UpdateBookBtn;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -402,12 +653,10 @@ public class StorageManagement extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
 }

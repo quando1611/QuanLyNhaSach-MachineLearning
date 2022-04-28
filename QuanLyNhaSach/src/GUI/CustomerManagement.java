@@ -145,9 +145,6 @@ public class CustomerManagement extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         ProductTxb = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
-        ViewTab = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        ViewTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -378,49 +375,6 @@ public class CustomerManagement extends javax.swing.JFrame {
 
         ParentPanel.addTab("Add Customer", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_Plus_+_35px.png")), AddTab); // NOI18N
 
-        jScrollPane2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        ViewTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "ID", "Name", "Address", "PhoneNumber", "Email"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        ViewTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        ViewTable.setCellSelectionEnabled(true);
-        ViewTable.setGridColor(new java.awt.Color(0, 0, 0));
-        ViewTable.setShowGrid(true);
-        jScrollPane2.setViewportView(ViewTable);
-
-        javax.swing.GroupLayout ViewTabLayout = new javax.swing.GroupLayout(ViewTab);
-        ViewTab.setLayout(ViewTabLayout);
-        ViewTabLayout.setHorizontalGroup(
-            ViewTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ViewTabLayout.createSequentialGroup()
-                .addGap(203, 203, 203)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 878, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(194, Short.MAX_VALUE))
-        );
-        ViewTabLayout.setVerticalGroup(
-            ViewTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
-        );
-
-        ParentPanel.addTab("View Customer", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_eye_35px.png")), ViewTab); // NOI18N
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -613,8 +567,6 @@ public class CustomerManagement extends javax.swing.JFrame {
     private javax.swing.JPanel SearchTab;
     private javax.swing.JTextField SearchTxb;
     private javax.swing.JButton UpdateCustomerBtn;
-    private javax.swing.JPanel ViewTab;
-    private javax.swing.JTable ViewTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -629,6 +581,5 @@ public class CustomerManagement extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }
