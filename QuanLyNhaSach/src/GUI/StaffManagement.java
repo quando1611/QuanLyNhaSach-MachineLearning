@@ -56,9 +56,6 @@ public class StaffManagement extends javax.swing.JFrame {
         UpdateCustomerBtn = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox<>();
-        ViewTab = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        ViewTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,10 +100,7 @@ public class StaffManagement extends javax.swing.JFrame {
 
         SearchTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Name", "Address", "PhoneNumber", "Email"
@@ -121,10 +115,11 @@ public class StaffManagement extends javax.swing.JFrame {
             }
         });
         SearchTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        SearchTable.setCellSelectionEnabled(true);
+        SearchTable.setColumnSelectionAllowed(false);
         SearchTable.setGridColor(new java.awt.Color(0, 0, 0));
         SearchTable.setShowGrid(true);
         jScrollPane1.setViewportView(SearchTable);
+        SearchTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         SearchTab.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 590));
 
@@ -154,6 +149,7 @@ public class StaffManagement extends javax.swing.JFrame {
 
         FilterStaffGroup.add(jRadioButton1);
         jRadioButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jRadioButton1.setSelected(true);
         jRadioButton1.setText("All");
         SearchTab.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(953, 9, -1, -1));
 
@@ -238,53 +234,9 @@ public class StaffManagement extends javax.swing.JFrame {
 
         AddTab.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 15, 3, 490));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         AddTab.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 360, 240, 50));
 
         ParentPanel.addTab("Add Staff", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_Plus_+_35px.png")), AddTab); // NOI18N
-
-        jScrollPane2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        ViewTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "ID", "Name", "Address", "PhoneNumber", "Email"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        ViewTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        ViewTable.setCellSelectionEnabled(true);
-        ViewTable.setGridColor(new java.awt.Color(0, 0, 0));
-        ViewTable.setShowGrid(true);
-        jScrollPane2.setViewportView(ViewTable);
-
-        javax.swing.GroupLayout ViewTabLayout = new javax.swing.GroupLayout(ViewTab);
-        ViewTab.setLayout(ViewTabLayout);
-        ViewTabLayout.setHorizontalGroup(
-            ViewTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ViewTabLayout.createSequentialGroup()
-                .addGap(203, 203, 203)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 878, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(206, Short.MAX_VALUE))
-        );
-        ViewTabLayout.setVerticalGroup(
-            ViewTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
-        );
-
-        ParentPanel.addTab("View Staff", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_eye_35px.png")), ViewTab); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -376,8 +328,6 @@ public class StaffManagement extends javax.swing.JFrame {
     private javax.swing.JTextField SearchTxb2;
     private javax.swing.JTextField SearchTxb3;
     private javax.swing.JButton UpdateCustomerBtn;
-    private javax.swing.JPanel ViewTab;
-    private javax.swing.JTable ViewTable;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
@@ -392,6 +342,5 @@ public class StaffManagement extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

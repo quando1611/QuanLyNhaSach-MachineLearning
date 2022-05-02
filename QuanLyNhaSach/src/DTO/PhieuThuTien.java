@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 public class PhieuThuTien {
     private String maPhieuThu;
     private String maKH;
-    private Timestamp ngaythu;
+    private String ngaythu;
     private Float soTienThu;
     private String maTaiKhoan;
 
@@ -33,11 +33,11 @@ public class PhieuThuTien {
         this.maKH = maKH;
     }
 
-    public Timestamp getNgaythu() {
+    public String getNgaythu() {
         return ngaythu;
     }
 
-    public void setNgaythu(Timestamp ngaythu) {
+    public void setNgaythu(String ngaythu) {
         this.ngaythu = ngaythu;
     }
 

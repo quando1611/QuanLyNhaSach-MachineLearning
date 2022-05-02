@@ -12,7 +12,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
+import java.sql.ResultSet;
+import javax.swing.DefaultComboBoxModel;
 /**
  *
  * @author 19522
@@ -34,6 +35,7 @@ public class StorageManagement extends javax.swing.JFrame {
     public void loadAllData()
     {
         loadAllBook();
+        loadTypeCbData();
     }
     //Get all data from Sach
     public void loadAllBook()
@@ -62,9 +64,27 @@ public class StorageManagement extends javax.swing.JFrame {
         SearchBookTable.setModel(table);
     }
     
+    public void loadTypeCbData()
+    {
+        connection = new DBConnection();
+        String query = "select TenTheLoai from Sach";
+        try {
+            ResultSet rs = connection.ExcuteQueryGetTable(query);
+            while(rs.next())
+            {
+                String name = rs.getString("TenTheLoai");
+                TypeCb.addItem(name);
+                TypeSelectCb.addItem(name);
+            }
+        } catch (Exception e) {
+            System.err.println("No thing!");
+        }
+        
+    }
+    
     public void seacrhBookWithFilter()
     {
-        reset();
+        resetData();
         String name = SearchTxb.getText();
         String type = TypeCb.getSelectedItem().toString();
         if(type == "All")
@@ -86,7 +106,7 @@ public class StorageManagement extends javax.swing.JFrame {
                 String author1 = sach.getTenTG();
                 String type1 = sach.getTenTheLoai();
                 int amount = sach.getSoLuong();
-                float price = sach.getGia();
+                double price = sach.getGia();
                 Object[] row = {id, name1, author1,type1,amount,price};
                 table.addRow(row);
             }
@@ -97,11 +117,19 @@ public class StorageManagement extends javax.swing.JFrame {
     }
     
     
-    public void reset() // reset the Jtable to null
+    public void resetData() // reset the Jtable to null
     {
         DefaultTableModel tableModel = (DefaultTableModel) SearchBookTable.getModel();
         tableModel.setRowCount(0);
         SearchBookTable.setModel(tableModel);
+    }
+    
+    public void resetCbData() //Reset Combobox Data
+    {
+        TypeCb.removeAllItems();
+        TypeCb.addItem("All");
+        TypeSelectCb.removeAllItems();
+        TypeSelectCb.addItem("All");
     }
     
     public void resetText() // reset textfield after event done!
@@ -328,7 +356,7 @@ public class StorageManagement extends javax.swing.JFrame {
         AuthorSearchTxb.setToolTipText("Search Here....");
         SearchTab.add(AuthorSearchTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 40, 170, 42));
 
-        TypeCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Lap Trinh" }));
+        TypeCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
         SearchTab.add(TypeCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 40, 182, 42));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -407,7 +435,7 @@ public class StorageManagement extends javax.swing.JFrame {
         jLabel8.setText("Or");
         AddTab.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 240, -1, -1));
 
-        TypeSelectCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Lap Trinh" }));
+        TypeSelectCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
         AddTab.add(TypeSelectCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 210, 200, 50));
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
@@ -483,12 +511,14 @@ public class StorageManagement extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(AllRadio.isSelected() == true)
         {
-            reset();
+            resetData();
             loadAllData();
         }
         else if(FilterRadio.isSelected() == true)
         {
             seacrhBookWithFilter();
+            resetCbData();
+            loadTypeCbData();
         }
     }//GEN-LAST:event_SearchBtnActionPerformed
 
@@ -509,7 +539,8 @@ public class StorageManagement extends javax.swing.JFrame {
         Sach_BUS sach_BUS = new Sach_BUS();
         sach_BUS.deleteSach(valueMaSach);
         JOptionPane.showMessageDialog(this, "Delete Book success!");
-        reset();
+        resetData();
+        resetCbData();
         resetText();
         loadAllBook();
     }//GEN-LAST:event_DeleteBtnActionPerformed
@@ -523,7 +554,7 @@ public class StorageManagement extends javax.swing.JFrame {
         }
         else
         {
-            sach.setMaSach("B" + randomID());
+            sach.setMaSach("b" + randomID());
             sach.setTenSach(NameTxb.getText());
             sach.setTenTG(AuthorTxb.getText());
             if(TypeTxb.getText().equals(""))
@@ -540,6 +571,7 @@ public class StorageManagement extends javax.swing.JFrame {
             else
             {
                 sach.setTenTheLoai(TypeTxb.getText());
+                
             }
             sach.setSoLuong(Integer.parseInt(AmountTxb.getText()));
             sach.setGia(Float.parseFloat(PriceTxb.getText()));
@@ -547,7 +579,8 @@ public class StorageManagement extends javax.swing.JFrame {
         Sach_BUS sach_BUS = new Sach_BUS();
         sach_BUS.addSach(sach);
         JOptionPane.showMessageDialog(this, "Add Book success!");
-        reset();
+        resetData();
+        resetCbData();
         resetText();
         loadAllBook();
         ParentPanel.setSelectedIndex(0);
@@ -579,9 +612,10 @@ public class StorageManagement extends javax.swing.JFrame {
             Sach_BUS sach_BUS = new Sach_BUS();
             sach_BUS.updateSach(sach);
         JOptionPane.showMessageDialog(this, "Update Book success!");
-        reset();
+        resetData();
+        resetCbData();
         resetText();
-        loadAllBook();
+        loadAllData();
         ParentPanel.setSelectedIndex(0);
     }//GEN-LAST:event_UpdateBookBtnActionPerformed
 

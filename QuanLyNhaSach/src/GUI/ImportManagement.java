@@ -38,6 +38,7 @@ public class ImportManagement extends javax.swing.JFrame {
         SearchBtn = new javax.swing.JButton();
         DeleteBtn = new javax.swing.JButton();
         EditChangeBtn = new javax.swing.JButton();
+        SelectBookBtn1 = new javax.swing.JButton();
         AddTab = new javax.swing.JPanel();
         SearchTxb1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -49,6 +50,21 @@ public class ImportManagement extends javax.swing.JFrame {
         SearchTxb4 = new javax.swing.JTextField();
         AddCustomerBtn = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
+        Search = new javax.swing.JPanel();
+        SearchBtn2 = new javax.swing.JButton();
+        PlusBtn = new javax.swing.JButton();
+        SubtractBtn = new javax.swing.JButton();
+        AllRadio = new javax.swing.JRadioButton();
+        FilterRadio = new javax.swing.JRadioButton();
+        SelectBookBtn = new javax.swing.JButton();
+        AmountTxb = new javax.swing.JTextField();
+        TypeCb = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        AuthorSearchTxb = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        SearchBookTable = new javax.swing.JTable();
+        SearchTxb5 = new javax.swing.JTextField();
         CreateBillTab = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         SearchTable1 = new javax.swing.JTable();
@@ -116,14 +132,13 @@ public class ImportManagement extends javax.swing.JFrame {
 
         ParentPanel.setBackground(new java.awt.Color(204, 204, 255));
 
+        SearchTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jScrollPane1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         SearchTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Name", "Address", "PhoneNumber", "Email"
@@ -138,20 +153,25 @@ public class ImportManagement extends javax.swing.JFrame {
             }
         });
         SearchTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        SearchTable.setCellSelectionEnabled(true);
         SearchTable.setGridColor(new java.awt.Color(0, 0, 0));
         SearchTable.setShowGrid(true);
         jScrollPane1.setViewportView(SearchTable);
+        SearchTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+
+        SearchTab.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 935, 590));
 
         SearchTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         SearchTxb.setText("Search here ...");
         SearchTxb.setToolTipText("Search Here....");
+        SearchTab.add(SearchTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(953, 0, 310, 52));
 
         SearchBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png"))); // NOI18N
         SearchBtn.setToolTipText("Search");
+        SearchTab.add(SearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1076, 70, -1, 52));
 
         DeleteBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         DeleteBtn.setText("DELETE");
+        SearchTab.add(DeleteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 420, 116, 51));
 
         EditChangeBtn.setBackground(new java.awt.Color(255, 204, 204));
         EditChangeBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -161,48 +181,14 @@ public class ImportManagement extends javax.swing.JFrame {
                 EditChangeBtnMouseClicked(evt);
             }
         });
+        SearchTab.add(EditChangeBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 330, 116, 51));
 
-        javax.swing.GroupLayout SearchTabLayout = new javax.swing.GroupLayout(SearchTab);
-        SearchTab.setLayout(SearchTabLayout);
-        SearchTabLayout.setHorizontalGroup(
-            SearchTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SearchTabLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 935, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(SearchTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(SearchTabLayout.createSequentialGroup()
-                        .addComponent(SearchTxb)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SearchTabLayout.createSequentialGroup()
-                        .addGap(0, 103, Short.MAX_VALUE)
-                        .addGroup(SearchTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(DeleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(SearchTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SearchTabLayout.createSequentialGroup()
-                                    .addComponent(SearchBtn)
-                                    .addGap(132, 132, 132))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SearchTabLayout.createSequentialGroup()
-                                    .addComponent(EditChangeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(103, 103, 103)))))))
-        );
-        SearchTabLayout.setVerticalGroup(
-            SearchTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SearchTabLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(SearchTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(SearchTabLayout.createSequentialGroup()
-                        .addComponent(SearchTxb, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(SearchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
-                        .addComponent(EditChangeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(DeleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)))
-        );
+        SelectBookBtn1.setBackground(new java.awt.Color(153, 255, 153));
+        SelectBookBtn1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        SelectBookBtn1.setText("NEW");
+        SearchTab.add(SelectBookBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 230, 116, 51));
 
-        ParentPanel.addTab("Search Customer", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png")), SearchTab); // NOI18N
+        ParentPanel.addTab("Search Supplier", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png")), SearchTab); // NOI18N
 
         SearchTxb1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         SearchTxb1.setToolTipText("");
@@ -300,6 +286,110 @@ public class ImportManagement extends javax.swing.JFrame {
         );
 
         ParentPanel.addTab("Add Supplier", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_Plus_+_35px.png")), AddTab); // NOI18N
+
+        Search.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        SearchBtn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png"))); // NOI18N
+        SearchBtn2.setToolTipText("Search");
+        SearchBtn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchBtn2ActionPerformed(evt);
+            }
+        });
+        Search.add(SearchBtn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 240, -1, 52));
+
+        PlusBtn.setBackground(new java.awt.Color(153, 255, 153));
+        PlusBtn.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        PlusBtn.setText("+");
+        PlusBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PlusBtnActionPerformed(evt);
+            }
+        });
+        Search.add(PlusBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 440, 60, 51));
+
+        SubtractBtn.setBackground(new java.awt.Color(255, 204, 204));
+        SubtractBtn.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        SubtractBtn.setText("-");
+        SubtractBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SubtractBtnActionPerformed(evt);
+            }
+        });
+        Search.add(SubtractBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 440, 60, 51));
+
+        AllRadio.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        AllRadio.setSelected(true);
+        AllRadio.setText("All");
+        Search.add(AllRadio, new org.netbeans.lib.awtextra.AbsoluteConstraints(945, 9, -1, -1));
+
+        FilterRadio.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        FilterRadio.setText("Filter");
+        FilterRadio.setToolTipText("");
+        Search.add(FilterRadio, new org.netbeans.lib.awtextra.AbsoluteConstraints(1216, 9, -1, -1));
+
+        SelectBookBtn.setBackground(new java.awt.Color(153, 255, 153));
+        SelectBookBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        SelectBookBtn.setText("SELECT");
+        SelectBookBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelectBookBtnActionPerformed(evt);
+            }
+        });
+        Search.add(SelectBookBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 530, 116, 51));
+
+        AmountTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        AmountTxb.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        AmountTxb.setText("0");
+        AmountTxb.setToolTipText("Search Here....");
+        Search.add(AmountTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 440, 70, 50));
+
+        TypeCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
+        Search.add(TypeCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(1055, 116, 200, 45));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setText("Type");
+        Search.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(964, 127, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setText("Author");
+        Search.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(964, 190, -1, -1));
+
+        AuthorSearchTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        AuthorSearchTxb.setToolTipText("Search Here....");
+        Search.add(AuthorSearchTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 180, 210, 42));
+
+        jScrollPane2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        SearchBookTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Name", "Author", "Type", "Amout", "Price"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        SearchBookTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        SearchBookTable.setGridColor(new java.awt.Color(0, 0, 0));
+        SearchBookTable.setShowGrid(true);
+        jScrollPane2.setViewportView(SearchBookTable);
+
+        Search.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 590));
+
+        SearchTxb5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        SearchTxb5.setText("Search name ...");
+        SearchTxb5.setToolTipText("Search Here....");
+        Search.add(SearchTxb5, new org.netbeans.lib.awtextra.AbsoluteConstraints(942, 56, 310, 42));
+
+        ParentPanel.addTab("Choose Book", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png")), Search); // NOI18N
 
         CreateBillTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -462,6 +552,8 @@ public class ImportManagement extends javax.swing.JFrame {
 
         ParentPanel.addTab("Purchased Bills", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_Plus_+_35px.png")), PurchasedBillTab); // NOI18N
 
+        ReturnTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jScrollPane6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         ViewTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -489,19 +581,7 @@ public class ImportManagement extends javax.swing.JFrame {
         ViewTable1.setShowGrid(true);
         jScrollPane6.setViewportView(ViewTable1);
 
-        javax.swing.GroupLayout ReturnTabLayout = new javax.swing.GroupLayout(ReturnTab);
-        ReturnTab.setLayout(ReturnTabLayout);
-        ReturnTabLayout.setHorizontalGroup(
-            ReturnTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ReturnTabLayout.createSequentialGroup()
-                .addGap(203, 203, 203)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 878, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(194, Short.MAX_VALUE))
-        );
-        ReturnTabLayout.setVerticalGroup(
-            ReturnTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
-        );
+        ReturnTab.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(203, 0, 878, 590));
 
         ParentPanel.addTab("Return Bills", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_eye_35px.png")), ReturnTab); // NOI18N
 
@@ -538,6 +618,36 @@ public class ImportManagement extends javax.swing.JFrame {
     private void EditChangeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditChangeBtnMouseClicked
         ParentPanel.setSelectedIndex(2);
     }//GEN-LAST:event_EditChangeBtnMouseClicked
+
+    private void SearchBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBtn2ActionPerformed
+        // Search btn in Search Book Tab
+        
+    }//GEN-LAST:event_SearchBtn2ActionPerformed
+
+    private void PlusBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlusBtnActionPerformed
+        // Plus Btn in SearchBook Tab
+        int amount = Integer.parseInt(AmountTxb.getText());
+        if (amount >= 0) {
+            amount += 1;
+        }
+        AmountTxb.setText(Integer.toString(amount));
+    }//GEN-LAST:event_PlusBtnActionPerformed
+
+    private void SubtractBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubtractBtnActionPerformed
+        // Subtraction Btn in SeacrhBook Tab
+        int amount = Integer.parseInt(AmountTxb.getText());
+        if (amount == 0) {
+
+        } else {
+            amount -= 1;
+        }
+        AmountTxb.setText(Integer.toString(amount));
+    }//GEN-LAST:event_SubtractBtnActionPerformed
+
+    private void SelectBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectBookBtnActionPerformed
+        // Select Button in SearchBook Tab
+        
+    }//GEN-LAST:event_SelectBookBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -578,6 +688,9 @@ public class ImportManagement extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddCustomerBtn;
     private javax.swing.JPanel AddTab;
+    private javax.swing.JRadioButton AllRadio;
+    private javax.swing.JTextField AmountTxb;
+    private javax.swing.JTextField AuthorSearchTxb;
     private javax.swing.JLabel BackBtn;
     private javax.swing.JPanel CreateBillTab;
     private javax.swing.JButton DeleteBtn;
@@ -587,11 +700,16 @@ public class ImportManagement extends javax.swing.JFrame {
     private javax.swing.JButton DeleteBtn4;
     private javax.swing.JButton DeleteBtn5;
     private javax.swing.JButton EditChangeBtn;
+    private javax.swing.JRadioButton FilterRadio;
     private javax.swing.JTabbedPane ParentPanel;
+    private javax.swing.JButton PlusBtn;
     private javax.swing.JPanel PurchasedBillTab;
     private javax.swing.JPanel ReturnTab;
+    private javax.swing.JPanel Search;
+    private javax.swing.JTable SearchBookTable;
     private javax.swing.JButton SearchBtn;
     private javax.swing.JButton SearchBtn1;
+    private javax.swing.JButton SearchBtn2;
     private javax.swing.JPanel SearchTab;
     private javax.swing.JTable SearchTable;
     private javax.swing.JTable SearchTable1;
@@ -602,7 +720,12 @@ public class ImportManagement extends javax.swing.JFrame {
     private javax.swing.JTextField SearchTxb2;
     private javax.swing.JTextField SearchTxb3;
     private javax.swing.JTextField SearchTxb4;
+    private javax.swing.JTextField SearchTxb5;
     private javax.swing.JTextField SearchTxb8;
+    private javax.swing.JButton SelectBookBtn;
+    private javax.swing.JButton SelectBookBtn1;
+    private javax.swing.JButton SubtractBtn;
+    private javax.swing.JComboBox<String> TypeCb;
     private javax.swing.JComboBox<String> TypeCb1;
     private javax.swing.JTable ViewTable1;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -618,10 +741,13 @@ public class ImportManagement extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;

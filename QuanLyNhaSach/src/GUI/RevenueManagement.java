@@ -39,27 +39,7 @@ public class RevenueManagement extends javax.swing.JFrame {
         DeleteBtn = new javax.swing.JButton();
         EditChangeBtn = new javax.swing.JButton();
         AddTab = new javax.swing.JPanel();
-        SearchTxb1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        SearchTxb2 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        SearchTxb3 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        SearchTxb4 = new javax.swing.JTextField();
-        AddCustomerBtn = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
         UpdateTab = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        SearchTxb5 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        SearchTxb6 = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        SearchTxb7 = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        SearchTxb8 = new javax.swing.JTextField();
-        UpdateCustomerBtn = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
         ViewTab = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         ViewTable = new javax.swing.JTable();
@@ -107,10 +87,7 @@ public class RevenueManagement extends javax.swing.JFrame {
 
         SearchTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Name", "Address", "PhoneNumber", "Email"
@@ -129,6 +106,7 @@ public class RevenueManagement extends javax.swing.JFrame {
         SearchTable.setGridColor(new java.awt.Color(0, 0, 0));
         SearchTable.setShowGrid(true);
         jScrollPane1.setViewportView(SearchTable);
+        SearchTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         SearchTab.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 13, 935, 577));
 
@@ -157,209 +135,17 @@ public class RevenueManagement extends javax.swing.JFrame {
 
         ParentPanel.addTab("Daily Report", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png")), SearchTab); // NOI18N
 
-        SearchTxb1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        SearchTxb1.setToolTipText("");
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel2.setText("Name :");
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel3.setText("Address :");
-
-        SearchTxb2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        SearchTxb2.setToolTipText("");
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel4.setText("Phonenumber :");
-
-        SearchTxb3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        SearchTxb3.setToolTipText("");
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel5.setText("Email :");
-
-        SearchTxb4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        SearchTxb4.setToolTipText("");
-
-        AddCustomerBtn.setBackground(new java.awt.Color(255, 204, 204));
-        AddCustomerBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        AddCustomerBtn.setText("ADD CUSTOMER");
-
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/istockphoto-1223671392-612x612-1.jpg"))); // NOI18N
-
-        javax.swing.GroupLayout AddTabLayout = new javax.swing.GroupLayout(AddTab);
-        AddTab.setLayout(AddTabLayout);
-        AddTabLayout.setHorizontalGroup(
-            AddTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AddTabLayout.createSequentialGroup()
-                .addGap(116, 116, 116)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
-                .addGroup(AddTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(AddTabLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(AddTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddTabLayout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(55, 55, 55)
-                                .addComponent(SearchTxb1, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(114, 114, 114))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddTabLayout.createSequentialGroup()
-                                .addComponent(AddCustomerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(361, 361, 361))))
-                    .addGroup(AddTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddTabLayout.createSequentialGroup()
-                            .addGroup(AddTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addGap(55, 55, 55)
-                            .addGroup(AddTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(SearchTxb2, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(SearchTxb3, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddTabLayout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addGap(55, 55, 55)
-                            .addComponent(SearchTxb4, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(175, 175, 175))))
-                .addGap(22, 22, 22))
-        );
-        AddTabLayout.setVerticalGroup(
-            AddTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddTabLayout.createSequentialGroup()
-                .addContainerGap(79, Short.MAX_VALUE)
-                .addGroup(AddTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(AddTabLayout.createSequentialGroup()
-                        .addGroup(AddTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(SearchTxb1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(40, 40, 40)
-                        .addGroup(AddTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(SearchTxb2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(44, 44, 44)
-                        .addGroup(AddTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(SearchTxb3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(46, 46, 46)
-                        .addGroup(AddTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(SearchTxb4, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addGap(54, 54, 54)
-                        .addComponent(AddCustomerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(AddTabLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel11)))
-                .addGap(68, 68, 68))
-        );
-
+        AddTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         ParentPanel.addTab("Monthly Report", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_Plus_+_35px.png")), AddTab); // NOI18N
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel6.setText("Name :");
-
-        SearchTxb5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        SearchTxb5.setToolTipText("");
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel7.setText("Address :");
-
-        SearchTxb6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        SearchTxb6.setToolTipText("");
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel8.setText("Phonenumber :");
-
-        SearchTxb7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        SearchTxb7.setToolTipText("");
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel9.setText("Email :");
-
-        SearchTxb8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        SearchTxb8.setToolTipText("");
-
-        UpdateCustomerBtn.setBackground(new java.awt.Color(255, 204, 204));
-        UpdateCustomerBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        UpdateCustomerBtn.setText("UPDATE CUSTOMER");
-
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/istockphoto-1223671392-612x612-1.jpg"))); // NOI18N
-
-        javax.swing.GroupLayout UpdateTabLayout = new javax.swing.GroupLayout(UpdateTab);
-        UpdateTab.setLayout(UpdateTabLayout);
-        UpdateTabLayout.setHorizontalGroup(
-            UpdateTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UpdateTabLayout.createSequentialGroup()
-                .addGroup(UpdateTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(UpdateTabLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(UpdateTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UpdateTabLayout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(55, 55, 55)
-                                .addComponent(SearchTxb8, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(175, 175, 175))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UpdateTabLayout.createSequentialGroup()
-                                .addComponent(UpdateCustomerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(361, 361, 361))))
-                    .addGroup(UpdateTabLayout.createSequentialGroup()
-                        .addGap(114, 114, 114)
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
-                        .addGroup(UpdateTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UpdateTabLayout.createSequentialGroup()
-                                .addGroup(UpdateTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(55, 55, 55)
-                                .addGroup(UpdateTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(SearchTxb6, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(SearchTxb7, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UpdateTabLayout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(55, 55, 55)
-                                .addComponent(SearchTxb5, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(114, 114, 114)))))
-                .addGap(41, 41, 41))
-        );
-        UpdateTabLayout.setVerticalGroup(
-            UpdateTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UpdateTabLayout.createSequentialGroup()
-                .addContainerGap(82, Short.MAX_VALUE)
-                .addGroup(UpdateTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(UpdateTabLayout.createSequentialGroup()
-                        .addGroup(UpdateTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(SearchTxb5, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addGap(40, 40, 40)
-                        .addGroup(UpdateTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(SearchTxb6, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
-                        .addGap(44, 44, 44)
-                        .addGroup(UpdateTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(SearchTxb7, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))
-                        .addGap(46, 46, 46)
-                        .addGroup(UpdateTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(SearchTxb8, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9))
-                        .addGap(54, 54, 54)
-                        .addComponent(UpdateCustomerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(UpdateTabLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel10)))
-                .addGap(65, 65, 65))
-        );
-
+        UpdateTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         ParentPanel.addTab("Monthly Revenue", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_restart_35px.png")), UpdateTab); // NOI18N
 
         jScrollPane2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         ViewTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Name", "Address", "PhoneNumber", "Email"
@@ -374,10 +160,11 @@ public class RevenueManagement extends javax.swing.JFrame {
             }
         });
         ViewTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        ViewTable.setCellSelectionEnabled(true);
+        ViewTable.setColumnSelectionAllowed(false);
         ViewTable.setGridColor(new java.awt.Color(0, 0, 0));
         ViewTable.setShowGrid(true);
         jScrollPane2.setViewportView(ViewTable);
+        ViewTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         javax.swing.GroupLayout ViewTabLayout = new javax.swing.GroupLayout(ViewTab);
         ViewTab.setLayout(ViewTabLayout);
@@ -465,7 +252,6 @@ public class RevenueManagement extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddCustomerBtn;
     private javax.swing.JPanel AddTab;
     private javax.swing.JLabel BackBtn;
     private javax.swing.JButton DeleteBtn;
@@ -475,29 +261,10 @@ public class RevenueManagement extends javax.swing.JFrame {
     private javax.swing.JPanel SearchTab;
     private javax.swing.JTable SearchTable;
     private javax.swing.JTextField SearchTxb;
-    private javax.swing.JTextField SearchTxb1;
-    private javax.swing.JTextField SearchTxb2;
-    private javax.swing.JTextField SearchTxb3;
-    private javax.swing.JTextField SearchTxb4;
-    private javax.swing.JTextField SearchTxb5;
-    private javax.swing.JTextField SearchTxb6;
-    private javax.swing.JTextField SearchTxb7;
-    private javax.swing.JTextField SearchTxb8;
-    private javax.swing.JButton UpdateCustomerBtn;
     private javax.swing.JPanel UpdateTab;
     private javax.swing.JPanel ViewTab;
     private javax.swing.JTable ViewTable;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

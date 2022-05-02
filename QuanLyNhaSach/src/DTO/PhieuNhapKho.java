@@ -12,8 +12,8 @@ import java.sql.Timestamp;
  */
 public class PhieuNhapKho {
     private String maPhieuNhap;
-    private Timestamp ngayNhapKho;
-    private Timestamp ngayTaoPhieu;
+    private String ngayNhapKho;
+    private String ngayTaoPhieu;
     private String maTK;
     private String maNhaCC;
 
@@ -25,19 +25,19 @@ public class PhieuNhapKho {
         this.maPhieuNhap = maPhieuNhap;
     }
 
-    public Timestamp getNgayNhapKho() {
+    public String getNgayNhapKho() {
         return ngayNhapKho;
     }
 
-    public void setNgayNhapKho(Timestamp ngayNhapKho) {
+    public void setNgayNhapKho(String ngayNhapKho) {
         this.ngayNhapKho = ngayNhapKho;
     }
 
-    public Timestamp getNgayTaoPhieu() {
+    public String getNgayTaoPhieu() {
         return ngayTaoPhieu;
     }
 
-    public void setNgayTaoPhieu(Timestamp ngayTaoPhieu) {
+    public void setNgayTaoPhieu(String ngayTaoPhieu) {
         this.ngayTaoPhieu = ngayTaoPhieu;
     }
 
