@@ -44,18 +44,22 @@ public class StaffManagement extends javax.swing.JFrame {
         jRadioButton3 = new javax.swing.JRadioButton();
         EditChangeBtn1 = new javax.swing.JButton();
         AddTab = new javax.swing.JPanel();
-        SearchTxb1 = new javax.swing.JTextField();
+        EmailText = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        SearchTxb2 = new javax.swing.JTextField();
+        PhoneText = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        SearchTxb3 = new javax.swing.JTextField();
+        NameText = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         AddCustomerBtn = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         UpdateCustomerBtn = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        PassText = new javax.swing.JTextField();
+        AddressText = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -115,7 +119,6 @@ public class StaffManagement extends javax.swing.JFrame {
             }
         });
         SearchTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        SearchTable.setColumnSelectionAllowed(false);
         SearchTable.setGridColor(new java.awt.Color(0, 0, 0));
         SearchTable.setShowGrid(true);
         jScrollPane1.setViewportView(SearchTable);
@@ -178,33 +181,33 @@ public class StaffManagement extends javax.swing.JFrame {
 
         AddTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        SearchTxb1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        SearchTxb1.setToolTipText("");
-        AddTab.add(SearchTxb1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 60, 431, 52));
+        EmailText.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        EmailText.setToolTipText("");
+        AddTab.add(EmailText, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 20, 431, 52));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setText("Email :");
-        AddTab.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, -1, -1));
+        AddTab.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 40, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel3.setText("Password :");
-        AddTab.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, 130, -1));
+        AddTab.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 110, 130, -1));
 
-        SearchTxb2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        SearchTxb2.setToolTipText("");
-        AddTab.add(SearchTxb2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 160, 430, 52));
+        PhoneText.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        PhoneText.setToolTipText("");
+        AddTab.add(PhoneText, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 310, 430, 52));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel4.setText("Full Name :");
-        AddTab.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 280, -1, -1));
+        jLabel4.setText("Phone Number :");
+        AddTab.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 320, -1, -1));
 
-        SearchTxb3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        SearchTxb3.setToolTipText("");
-        AddTab.add(SearchTxb3, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 260, 500, 52));
+        NameText.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        NameText.setToolTipText("");
+        AddTab.add(NameText, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 170, 470, 52));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel5.setText("Role :");
-        AddTab.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 370, -1, -1));
+        AddTab.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 430, -1, -1));
 
         AddCustomerBtn.setBackground(new java.awt.Color(153, 255, 153));
         AddCustomerBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -234,7 +237,23 @@ public class StaffManagement extends javax.swing.JFrame {
 
         AddTab.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 15, 3, 490));
 
-        AddTab.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 360, 240, 50));
+        AddTab.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 420, 240, 50));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel6.setText("Full Name :");
+        AddTab.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 180, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel7.setText("Address :");
+        AddTab.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 250, -1, -1));
+
+        PassText.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        PassText.setToolTipText("");
+        AddTab.add(PassText, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 100, 430, 52));
+
+        AddressText.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        AddressText.setToolTipText("");
+        AddTab.add(AddressText, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 240, 430, 52));
 
         ParentPanel.addTab("Add Staff", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_Plus_+_35px.png")), AddTab); // NOI18N
 
@@ -314,19 +333,21 @@ public class StaffManagement extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddCustomerBtn;
     private javax.swing.JPanel AddTab;
+    private javax.swing.JTextField AddressText;
     private javax.swing.JLabel BackBtn;
     private javax.swing.JButton DeleteBtn;
     private javax.swing.JButton EditChangeBtn;
     private javax.swing.JButton EditChangeBtn1;
+    private javax.swing.JTextField EmailText;
     private javax.swing.ButtonGroup FilterStaffGroup;
+    private javax.swing.JTextField NameText;
     private javax.swing.JTabbedPane ParentPanel;
+    private javax.swing.JTextField PassText;
+    private javax.swing.JTextField PhoneText;
     private javax.swing.JButton SearchBtn;
     private javax.swing.JPanel SearchTab;
     private javax.swing.JTable SearchTable;
     private javax.swing.JTextField SearchTxb;
-    private javax.swing.JTextField SearchTxb1;
-    private javax.swing.JTextField SearchTxb2;
-    private javax.swing.JTextField SearchTxb3;
     private javax.swing.JButton UpdateCustomerBtn;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
@@ -335,6 +356,8 @@ public class StaffManagement extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

@@ -14,6 +14,8 @@ public class TaiKhoan {
     private String matKhau;
     private String hoTen;
     private String maPhanQuyen;
+    private String DiaChi;
+    private int SDT;
 
     public String getMaTK() {
         return maTK;
@@ -53,6 +55,22 @@ public class TaiKhoan {
 
     public void setMaPhanQuyen(String maPhanQuyen) {
         this.maPhanQuyen = maPhanQuyen;
+    }
+
+    public String getDiaChi() {
+        return DiaChi;
+    }
+
+    public void setDiaChi(String DiaChi) {
+        this.DiaChi = DiaChi;
+    }
+
+    public int getSDT() {
+        return SDT;
+    }
+
+    public void setSDT(int SDT) {
+        this.SDT = SDT;
     }
     
     
