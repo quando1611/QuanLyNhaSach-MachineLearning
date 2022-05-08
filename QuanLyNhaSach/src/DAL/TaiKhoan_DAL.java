@@ -30,7 +30,7 @@ public class TaiKhoan_DAL {
                 taikhoan.setMaTK(rs.getString("MaTK"));
                 taikhoan.setHoTen(rs.getString("HoTen"));
                 taikhoan.setDiaChi(rs.getString("DiaChi"));
-                taikhoan.setSDT(rs.getInt("SDT"));
+                taikhoan.setSDT(rs.getString("SDT"));
                 taikhoan.setEmail(rs.getString("Email"));
                 result.add(taikhoan);
             }
@@ -87,11 +87,11 @@ public class TaiKhoan_DAL {
     }
     
     //Search TaiKhoan
-    public ArrayList<TaiKhoan> searchTaiKhoan(String hoten, String email, int sdt )
+    public ArrayList<TaiKhoan> searchTaiKhoan(String search )
     {
         connection = new DBConnection();
         ArrayList<TaiKhoan> result = new ArrayList<TaiKhoan>();
-        String query = "select * from where HoTen like '%" + hoten + "%' and Email like '%" + email + "%' and SDT like '%" + sdt + "%'";
+        String query = "select * from where HoTen like '%" + search + "%' or Email like '%" + search + "%' or SDT like '%" + search + "%'";
         System.out.println(query);
         try{
             ResultSet rs = connection.ExcuteQueryGetTable(query);
@@ -100,7 +100,7 @@ public class TaiKhoan_DAL {
                 taikhoan.setMaTK(rs.getString("MaTK"));
                 taikhoan.setHoTen(rs.getString("HoTen"));
                 taikhoan.setDiaChi(rs.getString("DiaChi"));
-                taikhoan.setSDT(rs.getInt("SDT"));
+                taikhoan.setSDT(rs.getString("SDT"));
                 taikhoan.setEmail(rs.getString("Email"));
                 result.add(taikhoan);
             }

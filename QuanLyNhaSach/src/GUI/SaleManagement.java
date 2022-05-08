@@ -517,6 +517,11 @@ public class SaleManagement extends javax.swing.JFrame {
         FilterRadio.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         FilterRadio.setText("Filter");
         FilterRadio.setToolTipText("");
+        FilterRadio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FilterRadioActionPerformed(evt);
+            }
+        });
         SearchTab.add(FilterRadio, new org.netbeans.lib.awtextra.AbsoluteConstraints(1216, 9, -1, -1));
 
         SelectBookBtn.setBackground(new java.awt.Color(153, 255, 153));
@@ -1032,6 +1037,10 @@ public class SaleManagement extends javax.swing.JFrame {
         loadReturnBill();
         ParentPanel.setSelectedIndex(3);
     }//GEN-LAST:event_ReturnBillBtnActionPerformed
+
+    private void FilterRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FilterRadioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FilterRadioActionPerformed
 
     /**
      * @param args the command line arguments

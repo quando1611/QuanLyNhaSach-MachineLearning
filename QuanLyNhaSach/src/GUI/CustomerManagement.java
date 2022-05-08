@@ -269,6 +269,11 @@ public class CustomerManagement extends javax.swing.JFrame {
         jRadioButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jRadioButton2.setText("Familiar customers");
         jRadioButton2.setToolTipText("");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
         SearchTab.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(953, 43, -1, -1));
 
         CustomerTypeGroup.add(jRadioButton3);
@@ -512,6 +517,10 @@ public class CustomerManagement extends javax.swing.JFrame {
         resetText();
         loadAllCustomer();
     }//GEN-LAST:event_DeleteBtnActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     /**
      * @param args the command line arguments
