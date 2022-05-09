@@ -4,18 +4,138 @@
  */
 package GUI;
 
+import BUS.Sach_BUS;
+import DAL.DBConnection;
+import DTO.Sach;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author 19522
  */
 public class ImportManagement extends javax.swing.JFrame {
+    
+    DBConnection connection;
+    private String valueMaSach;
+    private double total = 0.0;
 
     /**
      * Creates new form Storage
      */
     public ImportManagement() {
         initComponents();
+        loadAllData();
     }
+    
+    public void loadAllData()
+    {
+        loadAllBook();
+        loadTypeCbData();
+    }
+    
+    public void loadAllBook()
+    {
+        DefaultTableModel table = (DefaultTableModel) SearchBookTable.getModel();
+        ArrayList<Sach> arr = new ArrayList<Sach>();
+        Sach_BUS sach_BUS= new Sach_BUS();
+        arr = sach_BUS.getAllSach();
+        Sach sach = new Sach();
+        try {
+            for(int i=0; i< arr.size();i++)
+            {
+                sach = arr.get(i);
+                String id = sach.getMaSach();
+                String name = sach.getTenSach();
+                String author = sach.getTenTG();
+                String type = sach.getTenTheLoai();
+                int amount = sach.getSoLuong();
+                float price = sach.getGia();
+                Object[] row = {id, name, author,type,amount,price};
+                table.addRow(row);
+            }
+        } catch (Exception e) {
+            System.err.println("Not thing to show!");
+        }
+        SearchBookTable.setModel(table);
+    }
+    
+    public void loadTypeCbData()
+    {
+        connection = new DBConnection();
+        String query = "select TenTheLoai from Sach";
+        try {
+            ResultSet rs = connection.ExcuteQueryGetTable(query);
+            while(rs.next())
+            {
+                String name = rs.getString("TenTheLoai");
+                TypeCb.addItem(name);
+            }
+        } catch (Exception e) {
+            System.err.println("Not thing to show!");
+        }
+    }
+    
+    public void resetData() // reset the Jtable to null
+    {
+        DefaultTableModel tableModel = (DefaultTableModel) SearchBookTable.getModel();
+        tableModel.setRowCount(0);
+        SearchBookTable.setModel(tableModel);
+    }
+    
+    public void seacrhBookWithFilter()
+    {
+        resetData();
+        String name = SupplySearchTxb.getText();
+        String type = TypeCb.getSelectedItem().toString();
+        if(type == "All")
+        {
+            type = "";
+        }
+        String author = AuthorSearchTxb.getText();
+        DefaultTableModel table = (DefaultTableModel) SearchBookTable.getModel();
+        ArrayList<Sach> arr = new ArrayList<Sach>();
+        Sach_BUS sach_BUS = new Sach_BUS();
+        arr = sach_BUS.searchSach(name, type, author);
+        Sach sach = new Sach();
+        try {
+            for(int i=0; i< arr.size();i++)
+            {
+                sach = arr.get(i);
+                String ma = sach.getMaSach();
+                String ten = sach.getTenSach();
+                String tacgia = sach.getTenTG();
+                String loai = sach.getTenTheLoai();
+                int soluong = sach.getSoLuong();
+                double gia = sach.getGia();
+                Object[] row = {ma, ten, tacgia, loai, soluong, gia};
+                table.addRow(row);
+            }
+        } catch (Exception e) {
+            System.err.println("No thing!");
+        }
+        SearchBookTable.setModel(table);
+    }
+    
+     public void resetCbData() //Reset Combobox Data
+    {
+        TypeCb.removeAllItems();
+        TypeCb.addItem("All");
+        SupplyCb.removeAllItems();
+        SupplyCb.addItem("All");
+    }
+    
+    public void resetText() // reset textfield after event done!
+    {
+        SearchText.setText("");
+        NameTxb.setText("");
+        AuthorSearchTxb.setText("");
+        BillText.setText("");
+        TotalText.setText("");
+        total = 0;
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,20 +154,14 @@ public class ImportManagement extends javax.swing.JFrame {
         SearchTab = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         SearchTable = new javax.swing.JTable();
-        SearchTxb = new javax.swing.JTextField();
+        SupplySearchTxb = new javax.swing.JTextField();
         SearchBtn = new javax.swing.JButton();
         DeleteBtn = new javax.swing.JButton();
         EditChangeBtn = new javax.swing.JButton();
         SelectBookBtn1 = new javax.swing.JButton();
         AddTab = new javax.swing.JPanel();
-        SearchTxb1 = new javax.swing.JTextField();
+        NameTxb = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        SearchTxb2 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        SearchTxb3 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        SearchTxb4 = new javax.swing.JTextField();
         AddCustomerBtn = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         Search = new javax.swing.JPanel();
@@ -64,18 +178,18 @@ public class ImportManagement extends javax.swing.JFrame {
         AuthorSearchTxb = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         SearchBookTable = new javax.swing.JTable();
-        SearchTxb5 = new javax.swing.JTextField();
+        SearchText = new javax.swing.JTextField();
         CreateBillTab = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         SearchTable1 = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        BillText = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        SupplyCb = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         DeleteBtn1 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
+        TotalText = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         DeleteBtn2 = new javax.swing.JButton();
         DeleteBtn3 = new javax.swing.JButton();
@@ -160,10 +274,10 @@ public class ImportManagement extends javax.swing.JFrame {
 
         SearchTab.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 935, 590));
 
-        SearchTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        SearchTxb.setText("Search here ...");
-        SearchTxb.setToolTipText("Search Here....");
-        SearchTab.add(SearchTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(953, 0, 310, 52));
+        SupplySearchTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        SupplySearchTxb.setText("Search here ...");
+        SupplySearchTxb.setToolTipText("Search Here....");
+        SearchTab.add(SupplySearchTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(953, 0, 310, 52));
 
         SearchBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png"))); // NOI18N
         SearchBtn.setToolTipText("Search");
@@ -190,29 +304,11 @@ public class ImportManagement extends javax.swing.JFrame {
 
         ParentPanel.addTab("Search Supplier", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png")), SearchTab); // NOI18N
 
-        SearchTxb1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        SearchTxb1.setToolTipText("");
+        NameTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        NameTxb.setToolTipText("");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setText("Name :");
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel3.setText("Address :");
-
-        SearchTxb2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        SearchTxb2.setToolTipText("");
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel4.setText("Phonenumber :");
-
-        SearchTxb3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        SearchTxb3.setToolTipText("");
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel5.setText("Email :");
-
-        SearchTxb4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        SearchTxb4.setToolTipText("");
 
         AddCustomerBtn.setBackground(new java.awt.Color(255, 204, 204));
         AddCustomerBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -227,34 +323,16 @@ public class ImportManagement extends javax.swing.JFrame {
             .addGroup(AddTabLayout.createSequentialGroup()
                 .addGap(116, 116, 116)
                 .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 208, Short.MAX_VALUE)
                 .addGroup(AddTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(AddTabLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(AddTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddTabLayout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(55, 55, 55)
-                                .addComponent(SearchTxb1, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(114, 114, 114))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddTabLayout.createSequentialGroup()
-                                .addComponent(AddCustomerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(361, 361, 361))))
-                    .addGroup(AddTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddTabLayout.createSequentialGroup()
-                            .addGroup(AddTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addGap(55, 55, 55)
-                            .addGroup(AddTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(SearchTxb2, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(SearchTxb3, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddTabLayout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addGap(55, 55, 55)
-                            .addComponent(SearchTxb4, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(175, 175, 175))))
-                .addGap(22, 22, 22))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddTabLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(55, 55, 55)
+                        .addComponent(NameTxb, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(136, 136, 136))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddTabLayout.createSequentialGroup()
+                        .addComponent(AddCustomerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(286, 286, 286))))
         );
         AddTabLayout.setVerticalGroup(
             AddTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -263,26 +341,14 @@ public class ImportManagement extends javax.swing.JFrame {
                 .addGroup(AddTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(AddTabLayout.createSequentialGroup()
                         .addGroup(AddTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(SearchTxb1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(NameTxb, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
-                        .addGap(40, 40, 40)
-                        .addGroup(AddTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(SearchTxb2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(44, 44, 44)
-                        .addGroup(AddTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(SearchTxb3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(46, 46, 46)
-                        .addGroup(AddTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(SearchTxb4, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addGap(54, 54, 54)
+                        .addGap(131, 131, 131)
                         .addComponent(AddCustomerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(AddTabLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(jLabel11)))
-                .addGap(68, 68, 68))
+                .addGap(241, 241, 241))
         );
 
         ParentPanel.addTab("Add Supplier", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_Plus_+_35px.png")), AddTab); // NOI18N
@@ -382,12 +448,12 @@ public class ImportManagement extends javax.swing.JFrame {
         SearchBookTable.setShowGrid(true);
         jScrollPane2.setViewportView(SearchBookTable);
 
-        Search.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 590));
+        Search.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 930, 590));
 
-        SearchTxb5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        SearchTxb5.setText("Search name ...");
-        SearchTxb5.setToolTipText("Search Here....");
-        Search.add(SearchTxb5, new org.netbeans.lib.awtextra.AbsoluteConstraints(942, 56, 310, 42));
+        SearchText.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        SearchText.setText("Search name ...");
+        SearchText.setToolTipText("Search Here....");
+        Search.add(SearchText, new org.netbeans.lib.awtextra.AbsoluteConstraints(942, 56, 310, 42));
 
         ParentPanel.addTab("Choose Book", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png")), Search); // NOI18N
 
@@ -425,15 +491,15 @@ public class ImportManagement extends javax.swing.JFrame {
         jLabel12.setText("Bill ID");
         CreateBillTab.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, -1, -1));
 
-        jTextField1.setText("jTextField1");
-        CreateBillTab.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 160, 30));
+        BillText.setText("jTextField1");
+        CreateBillTab.add(BillText, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 160, 30));
 
         jLabel13.setText("Date");
         CreateBillTab.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 60, -1, -1));
         CreateBillTab.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 50, 210, 30));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        CreateBillTab.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 50, 180, 30));
+        SupplyCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CreateBillTab.add(SupplyCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 50, 180, 30));
 
         jLabel14.setText("Supplier ID");
         CreateBillTab.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, -1, -1));
@@ -443,8 +509,8 @@ public class ImportManagement extends javax.swing.JFrame {
         DeleteBtn1.setText("CANCEL");
         CreateBillTab.add(DeleteBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 510, 116, 51));
 
-        jTextField2.setText("jTextField1");
-        CreateBillTab.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 420, 210, 50));
+        TotalText.setText("jTextField1");
+        CreateBillTab.add(TotalText, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 420, 210, 50));
 
         jLabel15.setText("Total");
         CreateBillTab.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 430, 30, 30));
@@ -692,6 +758,7 @@ public class ImportManagement extends javax.swing.JFrame {
     private javax.swing.JTextField AmountTxb;
     private javax.swing.JTextField AuthorSearchTxb;
     private javax.swing.JLabel BackBtn;
+    private javax.swing.JTextField BillText;
     private javax.swing.JPanel CreateBillTab;
     private javax.swing.JButton DeleteBtn;
     private javax.swing.JButton DeleteBtn1;
@@ -701,6 +768,7 @@ public class ImportManagement extends javax.swing.JFrame {
     private javax.swing.JButton DeleteBtn5;
     private javax.swing.JButton EditChangeBtn;
     private javax.swing.JRadioButton FilterRadio;
+    private javax.swing.JTextField NameTxb;
     private javax.swing.JTabbedPane ParentPanel;
     private javax.swing.JButton PlusBtn;
     private javax.swing.JPanel PurchasedBillTab;
@@ -715,20 +783,17 @@ public class ImportManagement extends javax.swing.JFrame {
     private javax.swing.JTable SearchTable1;
     private javax.swing.JTable SearchTable2;
     private javax.swing.JTable SearchTable3;
-    private javax.swing.JTextField SearchTxb;
-    private javax.swing.JTextField SearchTxb1;
-    private javax.swing.JTextField SearchTxb2;
-    private javax.swing.JTextField SearchTxb3;
-    private javax.swing.JTextField SearchTxb4;
-    private javax.swing.JTextField SearchTxb5;
+    private javax.swing.JTextField SearchText;
     private javax.swing.JTextField SearchTxb8;
     private javax.swing.JButton SelectBookBtn;
     private javax.swing.JButton SelectBookBtn1;
     private javax.swing.JButton SubtractBtn;
+    private javax.swing.JComboBox<String> SupplyCb;
+    private javax.swing.JTextField SupplySearchTxb;
+    private javax.swing.JTextField TotalText;
     private javax.swing.JComboBox<String> TypeCb;
     private javax.swing.JComboBox<String> TypeCb1;
     private javax.swing.JTable ViewTable1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -738,9 +803,6 @@ public class ImportManagement extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
@@ -752,7 +814,5 @@ public class ImportManagement extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
