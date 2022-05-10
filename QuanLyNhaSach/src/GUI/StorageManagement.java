@@ -329,6 +329,11 @@ public class StorageManagement extends javax.swing.JFrame {
         AllRadio.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         AllRadio.setSelected(true);
         AllRadio.setText("All");
+        AllRadio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AllRadioActionPerformed(evt);
+            }
+        });
         SearchTab.add(AllRadio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         buttonGroup1.add(FilterRadio);
@@ -436,6 +441,11 @@ public class StorageManagement extends javax.swing.JFrame {
         AddTab.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 240, -1, -1));
 
         TypeSelectCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
+        TypeSelectCb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TypeSelectCbActionPerformed(evt);
+            }
+        });
         AddTab.add(TypeSelectCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 210, 200, 50));
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
@@ -618,6 +628,14 @@ public class StorageManagement extends javax.swing.JFrame {
         loadAllData();
         ParentPanel.setSelectedIndex(0);
     }//GEN-LAST:event_UpdateBookBtnActionPerformed
+
+    private void AllRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AllRadioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AllRadioActionPerformed
+
+    private void TypeSelectCbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TypeSelectCbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TypeSelectCbActionPerformed
 
     /**
      * @param args the command line arguments

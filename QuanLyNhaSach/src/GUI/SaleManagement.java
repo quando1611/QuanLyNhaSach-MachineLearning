@@ -511,6 +511,11 @@ public class SaleManagement extends javax.swing.JFrame {
         AllRadio.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         AllRadio.setSelected(true);
         AllRadio.setText("All");
+        AllRadio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AllRadioActionPerformed(evt);
+            }
+        });
         SearchTab.add(AllRadio, new org.netbeans.lib.awtextra.AbsoluteConstraints(945, 9, -1, -1));
 
         buttonGroup1.add(FilterRadio);
@@ -1039,8 +1044,13 @@ public class SaleManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_ReturnBillBtnActionPerformed
 
     private void FilterRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FilterRadioActionPerformed
+
         // TODO add your handling code here:
     }//GEN-LAST:event_FilterRadioActionPerformed
+
+    private void AllRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AllRadioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AllRadioActionPerformed
 
     /**
      * @param args the command line arguments

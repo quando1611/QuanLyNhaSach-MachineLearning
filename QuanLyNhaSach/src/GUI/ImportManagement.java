@@ -8,7 +8,9 @@ import BUS.Sach_BUS;
 import DAL.DBConnection;
 import DTO.Sach;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,6 +22,9 @@ public class ImportManagement extends javax.swing.JFrame {
     DBConnection connection;
     private String valueMaSach;
     private double total = 0.0;
+    private int maximum = 0;
+    private ArrayList<Sach> selectarr = new ArrayList<Sach>();
+    private boolean exist = false;
 
     /**
      * Creates new form Storage
@@ -77,7 +82,16 @@ public class ImportManagement extends javax.swing.JFrame {
         }
     }
     
-    public void resetData() // reset the Jtable to null
+    public String randomID() // get random to generate ID for all of things
+    {
+        LocalDateTime local = LocalDateTime.now();
+        long milis = local.getNano();
+        String id = Long.toString(milis);
+        System.err.println(id);
+        return id;
+    }
+    
+    public void resetBookData() // reset the Jtable to null
     {
         DefaultTableModel tableModel = (DefaultTableModel) SearchBookTable.getModel();
         tableModel.setRowCount(0);
@@ -86,7 +100,7 @@ public class ImportManagement extends javax.swing.JFrame {
     
     public void seacrhBookWithFilter()
     {
-        resetData();
+        resetBookData();
         String name = SupplySearchTxb.getText();
         String type = TypeCb.getSelectedItem().toString();
         if(type == "All")
@@ -136,6 +150,74 @@ public class ImportManagement extends javax.swing.JFrame {
         total = 0;
     }
     
+    public void resetSelectTable() { //reset SelectBookTable to Null
+        DefaultTableModel tableModel = (DefaultTableModel) SearchBookTable.getModel();
+        tableModel.setRowCount(0);
+        SearchBookTable.setModel(tableModel);
+        exist = false;
+    }
+    
+    public void SelectRow()
+    {
+        total = 0;
+        DefaultTableModel choosetable = (DefaultTableModel) SearchBookTable.getModel();
+        
+        
+        String id = choosetable.getValueAt(SearchBookTable.getSelectedRow(), 0).toString();
+        String name = choosetable.getValueAt(SearchBookTable.getSelectedRow(), 1).toString();
+        String author = choosetable.getValueAt(SearchBookTable.getSelectedRow(), 2).toString();
+        String type = choosetable.getValueAt(SearchBookTable.getSelectedRow(), 3).toString();
+        int amount = Integer.parseInt(AmountTxb.getText());   
+        maximum = Integer.parseInt(choosetable.getValueAt(SearchBookTable.getSelectedRow(), 4).toString());
+        Float price = Float.parseFloat(choosetable.getValueAt(SearchBookTable.getSelectedRow(), 5).toString());
+        System.out.println(maximum);
+        if (amount >= maximum)
+        {
+            JOptionPane.showMessageDialog(this, "Exceeding : numbers want to buy must < numbers left in storage!");
+        }else
+        {
+            //insert in to SelectBookTable
+            Sach sach = new Sach();
+            sach.setMaSach(id);
+            sach.setTenSach(name);
+            sach.setTenTG(author);
+            sach.setTenTheLoai(type);
+            sach.setSoLuong(amount);
+            sach.setGia(price);
+            if (selectarr.size() > 0) {
+                for (Sach existsach : selectarr) {
+                    if (existsach.getMaSach().equals(id)) {
+                        existsach.setSoLuong(existsach.getSoLuong() + amount);
+                        exist = true;
+                        break;
+                    } else {
+                        exist = false;
+                    }
+                }
+                if (exist == false) {
+                    selectarr.add(sach);
+                }
+            } else {
+                selectarr.add(sach);
+            }
+            resetSelectTable();
+            for (Sach sachFinal : selectarr) {
+                String idFinal = sachFinal.getMaSach();
+                String nameFinal = sachFinal.getTenSach();
+                String authorFinal = sachFinal.getTenTG();
+                String typeFinal = sachFinal.getTenTheLoai();
+                int amountFinal = sachFinal.getSoLuong();
+                double priceFinal = sachFinal.getGia();
+                Object[] row = {idFinal, nameFinal, amountFinal};
+                choosetable.addRow(row);
+                total += amountFinal * priceFinal;
+            }
+            SearchBookTable.setModel(choosetable);
+            TotalText.setText(Double.toString(total));
+        
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -153,7 +235,7 @@ public class ImportManagement extends javax.swing.JFrame {
         ParentPanel = new javax.swing.JTabbedPane();
         SearchTab = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        SearchTable = new javax.swing.JTable();
+        SearchSupplierTable = new javax.swing.JTable();
         SupplySearchTxb = new javax.swing.JTextField();
         SearchBtn = new javax.swing.JButton();
         DeleteBtn = new javax.swing.JButton();
@@ -250,7 +332,7 @@ public class ImportManagement extends javax.swing.JFrame {
 
         jScrollPane1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        SearchTable.setModel(new javax.swing.table.DefaultTableModel(
+        SearchSupplierTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -266,11 +348,11 @@ public class ImportManagement extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        SearchTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        SearchTable.setGridColor(new java.awt.Color(0, 0, 0));
-        SearchTable.setShowGrid(true);
-        jScrollPane1.setViewportView(SearchTable);
-        SearchTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        SearchSupplierTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        SearchSupplierTable.setGridColor(new java.awt.Color(0, 0, 0));
+        SearchSupplierTable.setShowGrid(true);
+        jScrollPane1.setViewportView(SearchSupplierTable);
+        SearchSupplierTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         SearchTab.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 935, 590));
 
@@ -687,6 +769,14 @@ public class ImportManagement extends javax.swing.JFrame {
 
     private void SearchBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBtn2ActionPerformed
         // Search btn in Search Book Tab
+        if (AllRadio.isSelected() == true) {
+            resetBookData();
+            loadAllData();
+        } else if (FilterRadio.isSelected() == true) {
+            seacrhBookWithFilter();
+            resetCbData();
+            loadTypeCbData();
+        }
         
     }//GEN-LAST:event_SearchBtn2ActionPerformed
 
@@ -778,8 +868,8 @@ public class ImportManagement extends javax.swing.JFrame {
     private javax.swing.JButton SearchBtn;
     private javax.swing.JButton SearchBtn1;
     private javax.swing.JButton SearchBtn2;
+    private javax.swing.JTable SearchSupplierTable;
     private javax.swing.JPanel SearchTab;
-    private javax.swing.JTable SearchTable;
     private javax.swing.JTable SearchTable1;
     private javax.swing.JTable SearchTable2;
     private javax.swing.JTable SearchTable3;
