@@ -5,6 +5,8 @@
 package GUI;
 
 import BUS.Sach_BUS;
+import BUS.NhaCungCap_BUS;
+import DTO.NhaCungCap;
 import DAL.DBConnection;
 import DTO.Sach;
 import java.sql.ResultSet;
@@ -21,6 +23,7 @@ public class ImportManagement extends javax.swing.JFrame {
     
     DBConnection connection;
     private String valueMaSach;
+    public String valueMaNCC;
     private double total = 0.0;
     private int maximum = 0;
     private ArrayList<Sach> selectarr = new ArrayList<Sach>();
@@ -37,6 +40,7 @@ public class ImportManagement extends javax.swing.JFrame {
     public void loadAllData()
     {
         loadAllBook();
+        loadAllSupplier();
         loadTypeCbData();
     }
     
@@ -64,6 +68,27 @@ public class ImportManagement extends javax.swing.JFrame {
             System.err.println("Not thing to show!");
         }
         SearchBookTable.setModel(table);
+    }
+    
+    private void loadAllSupplier() {
+        DefaultTableModel tableModel = (DefaultTableModel) SearchSupplierTable.getModel();
+        ArrayList<NhaCungCap> arr = new ArrayList<NhaCungCap>();
+        NhaCungCap_BUS nhacungcap_BUS = new NhaCungCap_BUS();
+        arr = nhacungcap_BUS.getNhaCungCap();
+        NhaCungCap nhacungcap = new NhaCungCap();
+        try {
+            for(int i = 0; i< arr.size(); i++)
+            {
+                nhacungcap = arr.get(i);
+                String id = nhacungcap.getMaNhaCC();
+                String name = nhacungcap.getTenNhaCC();
+                Object[] row = {id, name};
+                tableModel.addRow(row);
+            }
+        } catch (Exception e) {
+            System.err.println("No thing!");
+        }
+        SearchSupplierTable.setModel(tableModel);
     }
     
     public void loadTypeCbData()
@@ -98,6 +123,12 @@ public class ImportManagement extends javax.swing.JFrame {
         SearchBookTable.setModel(tableModel);
     }
     
+    public void resetSupplier() // reset the Jtable to null
+    {
+        DefaultTableModel tableModel = (DefaultTableModel) SearchSupplierTable.getModel();
+        tableModel.setRowCount(0);
+        SearchSupplierTable.setModel(tableModel);
+    }
     public void seacrhBookWithFilter()
     {
         resetBookData();
@@ -218,7 +249,17 @@ public class ImportManagement extends javax.swing.JFrame {
         }
     }
     
-
+    public void SelectRowSupplier()
+    {
+        DefaultTableModel tableModel = (DefaultTableModel) SearchSupplierTable.getModel();
+            //Get Data from Table
+            valueMaNCC = tableModel.getValueAt(SearchSupplierTable.getSelectedRow(), 0).toString();
+            String name = tableModel.getValueAt(SearchSupplierTable.getSelectedRow(), 1).toString();
+            //Set TextField
+            NameTxb.setText(name);
+            NameTxb.enable(false);
+            
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -240,11 +281,11 @@ public class ImportManagement extends javax.swing.JFrame {
         SearchBtn = new javax.swing.JButton();
         DeleteBtn = new javax.swing.JButton();
         EditChangeBtn = new javax.swing.JButton();
-        SelectBookBtn1 = new javax.swing.JButton();
+        SelectSupplierBtn1 = new javax.swing.JButton();
         AddTab = new javax.swing.JPanel();
         NameTxb = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        AddCustomerBtn = new javax.swing.JButton();
+        AddSupplierBtn = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         Search = new javax.swing.JPanel();
         SearchBtn2 = new javax.swing.JButton();
@@ -301,6 +342,11 @@ public class ImportManagement extends javax.swing.JFrame {
         jLabel1.setText("IMPORT MANAGEMENT");
 
         BackBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/icons8_previous_70px.png"))); // NOI18N
+        BackBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BackBtnMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -363,10 +409,20 @@ public class ImportManagement extends javax.swing.JFrame {
 
         SearchBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png"))); // NOI18N
         SearchBtn.setToolTipText("Search");
+        SearchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchBtnActionPerformed(evt);
+            }
+        });
         SearchTab.add(SearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1076, 70, -1, 52));
 
         DeleteBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         DeleteBtn.setText("DELETE");
+        DeleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteBtnActionPerformed(evt);
+            }
+        });
         SearchTab.add(DeleteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 420, 116, 51));
 
         EditChangeBtn.setBackground(new java.awt.Color(255, 204, 204));
@@ -377,12 +433,22 @@ public class ImportManagement extends javax.swing.JFrame {
                 EditChangeBtnMouseClicked(evt);
             }
         });
+        EditChangeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditChangeBtnActionPerformed(evt);
+            }
+        });
         SearchTab.add(EditChangeBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 330, 116, 51));
 
-        SelectBookBtn1.setBackground(new java.awt.Color(153, 255, 153));
-        SelectBookBtn1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        SelectBookBtn1.setText("NEW");
-        SearchTab.add(SelectBookBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 230, 116, 51));
+        SelectSupplierBtn1.setBackground(new java.awt.Color(153, 255, 153));
+        SelectSupplierBtn1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        SelectSupplierBtn1.setText("NEW");
+        SelectSupplierBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelectSupplierBtn1ActionPerformed(evt);
+            }
+        });
+        SearchTab.add(SelectSupplierBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 230, 116, 51));
 
         ParentPanel.addTab("Search Supplier", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png")), SearchTab); // NOI18N
 
@@ -392,9 +458,14 @@ public class ImportManagement extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setText("Name :");
 
-        AddCustomerBtn.setBackground(new java.awt.Color(255, 204, 204));
-        AddCustomerBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        AddCustomerBtn.setText("ADD CUSTOMER");
+        AddSupplierBtn.setBackground(new java.awt.Color(255, 204, 204));
+        AddSupplierBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        AddSupplierBtn.setText("ADD CUSTOMER");
+        AddSupplierBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddSupplierBtnActionPerformed(evt);
+            }
+        });
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/istockphoto-1223671392-612x612-1.jpg"))); // NOI18N
 
@@ -413,7 +484,7 @@ public class ImportManagement extends javax.swing.JFrame {
                         .addComponent(NameTxb, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(136, 136, 136))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddTabLayout.createSequentialGroup()
-                        .addComponent(AddCustomerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(AddSupplierBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(286, 286, 286))))
         );
         AddTabLayout.setVerticalGroup(
@@ -426,7 +497,7 @@ public class ImportManagement extends javax.swing.JFrame {
                             .addComponent(NameTxb, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
                         .addGap(131, 131, 131)
-                        .addComponent(AddCustomerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(AddSupplierBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(AddTabLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(jLabel11)))
@@ -805,6 +876,72 @@ public class ImportManagement extends javax.swing.JFrame {
         
     }//GEN-LAST:event_SelectBookBtnActionPerformed
 
+    private void BackBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackBtnMouseClicked
+        // Return to Home
+        this.dispose(); 
+    }//GEN-LAST:event_BackBtnMouseClicked
+
+    private void SearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBtnActionPerformed
+        // Search Supplier
+        resetSupplier(); //reset to null table
+        String search = SupplySearchTxb.getText();
+        DefaultTableModel tableModel = (DefaultTableModel) SearchSupplierTable.getModel();
+        ArrayList<NhaCungCap> arr = new ArrayList<NhaCungCap>();
+        NhaCungCap_BUS nhacungcap_BUS = new NhaCungCap_BUS();
+        arr = nhacungcap_BUS.seacrhNhaCungCap(search);
+        NhaCungCap nhacungcap = new NhaCungCap();
+        try {
+            for(int i = 0; i< arr.size(); i++)
+            {
+                nhacungcap = arr.get(i);
+                String id = nhacungcap.getMaNhaCC();
+                String name = nhacungcap.getTenNhaCC();
+                
+                Object[] row = {id, name};
+                tableModel.addRow(row);
+            }
+        } catch (Exception e) {
+            System.err.println("No thing!");
+        }
+        SearchSupplierTable.setModel(tableModel);    }//GEN-LAST:event_SearchBtnActionPerformed
+
+    private void EditChangeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditChangeBtnActionPerformed
+        // Move to Add Tab and set Textfield's text to update Customer
+        SelectRow();
+        ParentPanel.setSelectedIndex(1);
+    }//GEN-LAST:event_EditChangeBtnActionPerformed
+
+    private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
+        
+    }//GEN-LAST:event_DeleteBtnActionPerformed
+
+    private void AddSupplierBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddSupplierBtnActionPerformed
+        // Add Supplier
+        NhaCungCap nhacungcap = new NhaCungCap();
+        if(NameTxb.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(this, "Please fill atleast the name of supplier...");
+        }
+        else
+        {
+            nhacungcap.setMaNhaCC("C" + randomID());
+            nhacungcap.setTenNhaCC(NameTxb.getText());
+            
+        }
+        NhaCungCap_BUS nhacungcap_BUS = new NhaCungCap_BUS();
+        nhacungcap_BUS.addNhaCungCap(nhacungcap);
+        JOptionPane.showMessageDialog(this, "Add Customer success!");
+        resetSupplier();
+        loadAllSupplier();
+        ParentPanel.setSelectedIndex(0);
+    }//GEN-LAST:event_AddSupplierBtnActionPerformed
+
+    private void SelectSupplierBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectSupplierBtn1ActionPerformed
+        // Move to Add Tab, no thing to set
+        ParentPanel.setSelectedIndex(1);
+    }//GEN-LAST:event_SelectSupplierBtn1ActionPerformed
+
+    
     /**
      * @param args the command line arguments
      */
@@ -842,7 +979,7 @@ public class ImportManagement extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddCustomerBtn;
+    private javax.swing.JButton AddSupplierBtn;
     private javax.swing.JPanel AddTab;
     private javax.swing.JRadioButton AllRadio;
     private javax.swing.JTextField AmountTxb;
@@ -876,7 +1013,7 @@ public class ImportManagement extends javax.swing.JFrame {
     private javax.swing.JTextField SearchText;
     private javax.swing.JTextField SearchTxb8;
     private javax.swing.JButton SelectBookBtn;
-    private javax.swing.JButton SelectBookBtn1;
+    private javax.swing.JButton SelectSupplierBtn1;
     private javax.swing.JButton SubtractBtn;
     private javax.swing.JComboBox<String> SupplyCb;
     private javax.swing.JTextField SupplySearchTxb;
@@ -905,4 +1042,6 @@ public class ImportManagement extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     // End of variables declaration//GEN-END:variables
+
+    
 }
