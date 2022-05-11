@@ -21,9 +21,14 @@ public class ChiTietPhieuNhap_BUS {
         return chitietphieunhap_DAL.addChiTietPhieuNhap(chitietnhap);
     }
     
-    ArrayList<ChiTietPhieuNhap> danhsachChiTietPhieuNhap(String manhap)
+    public ArrayList<ChiTietPhieuNhap> danhsachChiTietPhieuNhap()
     {
-        return chitietphieunhap_DAL.danhSachChiTietPhieuNhap(manhap);
+        return chitietphieunhap_DAL.danhSachChiTietPhieuNhap();
+    }
+    
+    public ArrayList<ChiTietPhieuNhap> searchChiTietPhieuNhapWithKhachHangID(String search)
+    {
+        return chitietphieunhap_DAL.seacrChiTietPhieuNhapBySupplierID(search);
     }
     
     public boolean deleteChiTietPhieuNhap(String manhap)

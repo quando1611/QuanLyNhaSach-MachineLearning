@@ -23,4 +23,18 @@ public class PhieuNhapKho_BUS {
     {
         return phieunhapkho_DAL.addPhieuNhapKho(phieunhap);
     }
+    
+     public ArrayList<PhieuNhapKho> searchPhieuNhapKhoWithSupplierID(String search)
+    {
+        return phieunhapkho_DAL.seacrhPhieuNhapKhoBySupplierID(search);
+    }
+     
+    public boolean updatePhieuNhapKho(PhieuNhapKho phieuNhapKho)
+    {
+        return phieunhapkho_DAL.updatePhieuNhapKho(phieuNhapKho);
+    }
+     public boolean deleteHoaDon(String maPNK)
+    {
+        return phieunhapkho_DAL.deletePhieuNhapKho(maPNK);
+    }
 }

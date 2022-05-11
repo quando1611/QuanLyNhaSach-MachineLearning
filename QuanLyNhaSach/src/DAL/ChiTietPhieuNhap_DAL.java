@@ -32,11 +32,11 @@ public class ChiTietPhieuNhap_DAL{
         }
         }
         
-        public ArrayList<ChiTietPhieuNhap> danhSachChiTietPhieuNhap(String manhap)
+        public ArrayList<ChiTietPhieuNhap> danhSachChiTietPhieuNhap()
     {
         connection = new DBConnection();
         ArrayList<ChiTietPhieuNhap> result = new ArrayList<ChiTietPhieuNhap>();
-        String query = "select * from ChiTietPhieuNhap where MaPhieuNhap = '" + manhap + "'";
+        String query = "select * from ChiTietPhieuNhap ";
         System.out.println(query);
         try{
             ResultSet rs = connection.ExcuteQueryGetTable(query);
@@ -54,15 +54,15 @@ public class ChiTietPhieuNhap_DAL{
         return result;
     }
         
-        public ArrayList<ChiTietPhieuNhap> danhsachChiTietPhieuNhap(String manhap)
+        public ArrayList<ChiTietPhieuNhap> seacrChiTietPhieuNhapBySupplierID(String search)
     {
         connection = new DBConnection();
         ArrayList<ChiTietPhieuNhap> result = new ArrayList<ChiTietPhieuNhap>();
-        String query = "select * from ChiTietPhieuNhap where MaPhieuNhap = '" + manhap + "'";
+        String query = "select * from ChiTietPhieuNhap where MaNCC like '%" + search + "%'";
         System.out.println(query);
         try{
             ResultSet rs = connection.ExcuteQueryGetTable(query);
-            while (rs.next()) {                
+            while (rs.next()) { 
                 ChiTietPhieuNhap chiTietPhieuNhap = new ChiTietPhieuNhap();
                 chiTietPhieuNhap.setMaPhieuNhap(rs.getString("MaPhieuNhap"));
                 chiTietPhieuNhap.setMaSach(rs.getString("MaSach"));
@@ -75,6 +75,7 @@ public class ChiTietPhieuNhap_DAL{
         }
         return result;
     }
+    
         
         public boolean deleteChiTietPhieuNhap(String manhap)
     {

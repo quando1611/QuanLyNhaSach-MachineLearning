@@ -354,7 +354,7 @@
                             <Column editable="false" title="Name" type="java.lang.Object"/>
                             <Column editable="false" title="Author" type="java.lang.Object"/>
                             <Column editable="false" title="Type" type="java.lang.Object"/>
-                            <Column editable="false" title="Amout" type="java.lang.Object"/>
+                            <Column editable="false" title="Amount" type="java.lang.Object"/>
                             <Column editable="false" title="Price" type="java.lang.Object"/>
                           </Table>
                         </Property>
@@ -393,6 +393,7 @@
                             </Column>
                           </TableColumnModel>
                         </Property>
+                        <Property name="columnSelectionAllowed" type="boolean" value="true"/>
                         <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="0" green="0" red="0" type="rgb"/>
                         </Property>
@@ -774,7 +775,7 @@
                             <Column editable="false" title="CustomerID" type="java.lang.Object"/>
                             <Column editable="false" title="Date" type="java.lang.Object"/>
                             <Column editable="false" title="Total" type="java.lang.Object"/>
-                            <Column editable="false" title="Receive" type="java.lang.Object"/>
+                            <Column editable="false" title="Recieve" type="java.lang.Object"/>
                             <Column editable="false" title="Status" type="java.lang.Object"/>
                           </Table>
                         </Property>
@@ -813,6 +814,7 @@
                             </Column>
                           </TableColumnModel>
                         </Property>
+                        <Property name="columnSelectionAllowed" type="boolean" value="true"/>
                         <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="0" green="0" red="0" type="rgb"/>
                         </Property>

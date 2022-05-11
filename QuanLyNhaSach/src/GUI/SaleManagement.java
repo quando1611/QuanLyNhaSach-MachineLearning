@@ -75,7 +75,8 @@ public class SaleManagement extends javax.swing.JFrame {
         SearchBookTable.setModel(table);
     }
 
-    public void loadAllBill() {     //Load All bill to  BillShowTable
+    public void loadAllBill() {    
+        //Load All bill to  BillShowTable
         DefaultTableModel table = (DefaultTableModel) BillShowTable.getModel();
         ArrayList<HoaDon> arr = new ArrayList<HoaDon>();
         HoaDon_BUS hoaDon_BUS = new HoaDon_BUS();
@@ -562,7 +563,7 @@ public class SaleManagement extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Name", "Author", "Type", "Amout", "Price"
+                "ID", "Name", "Author", "Type", "Amount", "Price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -574,6 +575,7 @@ public class SaleManagement extends javax.swing.JFrame {
             }
         });
         SearchBookTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        SearchBookTable.setColumnSelectionAllowed(true);
         SearchBookTable.setGridColor(new java.awt.Color(0, 0, 0));
         SearchBookTable.setShowGrid(true);
         jScrollPane1.setViewportView(SearchBookTable);
@@ -724,7 +726,7 @@ public class SaleManagement extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "CustomerID", "Date", "Total", "Receive", "Status"
+                "ID", "CustomerID", "Date", "Total", "Recieve", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -736,6 +738,7 @@ public class SaleManagement extends javax.swing.JFrame {
             }
         });
         BillShowTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        BillShowTable.setColumnSelectionAllowed(true);
         BillShowTable.setGridColor(new java.awt.Color(0, 0, 0));
         BillShowTable.setShowGrid(true);
         BillShowTable.addMouseListener(new java.awt.event.MouseAdapter() {
