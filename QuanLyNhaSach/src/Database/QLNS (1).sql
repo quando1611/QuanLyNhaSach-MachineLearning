@@ -52,6 +52,7 @@ NgayNhapKho date,
 NgayTaoPhieu date,
 MaTK varchar(10), --foreign key references TaiKhoan(MaTK),
 MaNCC varchar(10) ,--foreign key references NhaCungCap(MaNCC),
+TongTien money,
 )
 
 create table ChiTietPhieuNhap

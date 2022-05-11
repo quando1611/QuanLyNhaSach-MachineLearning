@@ -4,6 +4,7 @@
  */
 package GUI;
 
+import DTO.PublicClass;
 import java.awt.Panel;
 import javax.swing.JPanel;
 import GUI.*;

@@ -5,9 +5,7 @@
 package GUI;
 
 import BUS.*;
-import DTO.NhaCungCap;
-
-import DAL.DBConnection;
+import DAL.*;
 import DTO.*;
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
@@ -48,6 +46,7 @@ public class ImportManagement extends javax.swing.JFrame {
         loadAllBill();
         loadCurrentDate();
         loadReturnBill();
+        loadSupplierCBData();
     }
     
     public void loadAllBook() //Load all book from the begining
@@ -114,6 +113,22 @@ public class ImportManagement extends javax.swing.JFrame {
         }
     }
     
+    public void loadSupplierCBData()
+    {
+        connection = new DBConnection();
+        String query = "select TenNCC from NhaCungCap";
+        try {
+            ResultSet rs = connection.ExcuteQueryGetTable(query);
+            while(rs.next())
+            {
+                String name = rs.getString("TenNCC");
+                SupplierNameCb.addItem(name);
+            }
+        } catch (Exception e) {
+            System.err.println("No thing to show!");
+        }
+    }
+    
     public void resetSearchBookData() // reset SelectBookTable data to null
     {
         DefaultTableModel tableModel = (DefaultTableModel) SearchBookTable.getModel();
@@ -165,14 +180,14 @@ public class ImportManagement extends javax.swing.JFrame {
     {
         TypeCb.removeAllItems();
         TypeCb.addItem("All");
-        SupplierID.removeAllItems();
-        SupplierID.addItem("All");
+        SupplierNameCb.removeAllItems();
+        SupplierNameCb.addItem("All");
     }
     
     public void resetText() // reset textfield after event done!
     {
         SearchText.setText("");
-        NameTxb.setText("");
+        NameSupplierTxb.setText("");
         AuthorSearchTxb.setText("");
         ImportBillText.setText("");
         TotalText.setText("");
@@ -234,11 +249,6 @@ public class ImportManagement extends javax.swing.JFrame {
         maximum = Integer.parseInt(choosetable.getValueAt(SearchBookTable.getSelectedRow(), 4).toString());
         Float price = Float.parseFloat(choosetable.getValueAt(SearchBookTable.getSelectedRow(), 5).toString());
         System.out.println(maximum);
-        if (amount >= maximum)
-        {
-            JOptionPane.showMessageDialog(this, "Exceeding : numbers want to buy must < numbers left in storage!");
-        }else
-        {
             //insert in to SelectBookTable
             Sach sach = new Sach();
             sach.setMaSach(id);
@@ -263,7 +273,7 @@ public class ImportManagement extends javax.swing.JFrame {
             } else {
                 selectarr.add(sach);
             }
-            resetSearchBookTable();
+            resetBillTable(); 
             //add to BillTable
             for (Sach sachFinal : selectarr) {
                 String idFinal = sachFinal.getMaSach();
@@ -272,14 +282,13 @@ public class ImportManagement extends javax.swing.JFrame {
                 String typeFinal = sachFinal.getTenTheLoai();
                 int amountFinal = sachFinal.getSoLuong();
                 double priceFinal = sachFinal.getGia();
-                Object[] row = {idFinal, nameFinal, amountFinal};
-                choosetable.addRow(row);
+                Object[] row = {idFinal, nameFinal, amountFinal, priceFinal};
+                billtable.addRow(row);
                 total += amountFinal * priceFinal;
             }
             BillTable.setModel(billtable);
             TotalText.setText(Double.toString(total));
-        
-        }
+
     }
     
     
@@ -303,7 +312,7 @@ public class ImportManagement extends javax.swing.JFrame {
            }
        }catch(Exception e)
        {
-           System.err.println("NoT thing to show");
+           System.err.println("No thing to show");
        }
        return supplierSelectedID;
    }
@@ -322,9 +331,7 @@ public class ImportManagement extends javax.swing.JFrame {
             valueMaNCC = tableModel.getValueAt(SearchSupplierTable.getSelectedRow(), 0).toString();
             String name = tableModel.getValueAt(SearchSupplierTable.getSelectedRow(), 1).toString();
             //Set TextField
-            NameTxb.setText(name);
-            NameTxb.enable(false);
-            
+            NameSupplierTxb.setText(name);  
     }
 
     /**
@@ -336,6 +343,7 @@ public class ImportManagement extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -350,10 +358,11 @@ public class ImportManagement extends javax.swing.JFrame {
         EditChangeBtn = new javax.swing.JButton();
         SelectSupplierBtn1 = new javax.swing.JButton();
         AddTab = new javax.swing.JPanel();
-        NameTxb = new javax.swing.JTextField();
+        NameSupplierTxb = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         AddSupplierBtn = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
+        UpdateSupplierBtn = new javax.swing.JButton();
         Search = new javax.swing.JPanel();
         SearchBtn2 = new javax.swing.JButton();
         PlusBtn = new javax.swing.JButton();
@@ -376,7 +385,7 @@ public class ImportManagement extends javax.swing.JFrame {
         ImportBillText = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         DateBox = new com.toedter.calendar.JDateChooser();
-        SupplierID = new javax.swing.JComboBox<>();
+        SupplierNameCb = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         CancelBillBtn = new javax.swing.JButton();
         TotalText = new javax.swing.JTextField();
@@ -401,6 +410,7 @@ public class ImportManagement extends javax.swing.JFrame {
         BillReturnTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel2.setBackground(new java.awt.Color(153, 153, 200));
 
@@ -463,7 +473,6 @@ public class ImportManagement extends javax.swing.JFrame {
             }
         });
         SearchSupplierTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        SearchSupplierTable.setColumnSelectionAllowed(true);
         SearchSupplierTable.setGridColor(new java.awt.Color(0, 0, 0));
         SearchSupplierTable.setShowGrid(true);
         jScrollPane1.setViewportView(SearchSupplierTable);
@@ -521,13 +530,17 @@ public class ImportManagement extends javax.swing.JFrame {
 
         ParentPanel.addTab("Search Supplier", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png")), SearchTab); // NOI18N
 
-        NameTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        NameTxb.setToolTipText("");
+        AddTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        NameSupplierTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        NameSupplierTxb.setToolTipText("");
+        AddTab.add(NameSupplierTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 140, 431, 52));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setText("Name :");
+        AddTab.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 160, -1, -1));
 
-        AddSupplierBtn.setBackground(new java.awt.Color(255, 204, 204));
+        AddSupplierBtn.setBackground(new java.awt.Color(153, 255, 153));
         AddSupplierBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         AddSupplierBtn.setText("ADD SUPPLIER");
         AddSupplierBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -535,43 +548,20 @@ public class ImportManagement extends javax.swing.JFrame {
                 AddSupplierBtnActionPerformed(evt);
             }
         });
+        AddTab.add(AddSupplierBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 300, 244, 51));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/istockphoto-1223671392-612x612-1.jpg"))); // NOI18N
+        AddTab.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(116, 99, -1, -1));
 
-        javax.swing.GroupLayout AddTabLayout = new javax.swing.GroupLayout(AddTab);
-        AddTab.setLayout(AddTabLayout);
-        AddTabLayout.setHorizontalGroup(
-            AddTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AddTabLayout.createSequentialGroup()
-                .addGap(116, 116, 116)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 208, Short.MAX_VALUE)
-                .addGroup(AddTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddTabLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(55, 55, 55)
-                        .addComponent(NameTxb, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(136, 136, 136))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddTabLayout.createSequentialGroup()
-                        .addComponent(AddSupplierBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(286, 286, 286))))
-        );
-        AddTabLayout.setVerticalGroup(
-            AddTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddTabLayout.createSequentialGroup()
-                .addContainerGap(79, Short.MAX_VALUE)
-                .addGroup(AddTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(AddTabLayout.createSequentialGroup()
-                        .addGroup(AddTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(NameTxb, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(131, 131, 131)
-                        .addComponent(AddSupplierBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(AddTabLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel11)))
-                .addGap(241, 241, 241))
-        );
+        UpdateSupplierBtn.setBackground(new java.awt.Color(255, 204, 204));
+        UpdateSupplierBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        UpdateSupplierBtn.setText("UPDATE SUPPLIER");
+        UpdateSupplierBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateSupplierBtnActionPerformed(evt);
+            }
+        });
+        AddTab.add(UpdateSupplierBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 300, 244, 51));
 
         ParentPanel.addTab("Add Supplier", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_Plus_+_35px.png")), AddTab); // NOI18N
 
@@ -606,11 +596,13 @@ public class ImportManagement extends javax.swing.JFrame {
         });
         Search.add(SubtractBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 440, 60, 51));
 
+        buttonGroup1.add(AllRadio);
         AllRadio.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         AllRadio.setSelected(true);
         AllRadio.setText("All");
         Search.add(AllRadio, new org.netbeans.lib.awtextra.AbsoluteConstraints(945, 9, -1, -1));
 
+        buttonGroup1.add(FilterRadio);
         FilterRadio.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         FilterRadio.setText("Filter");
         FilterRadio.setToolTipText("");
@@ -675,7 +667,7 @@ public class ImportManagement extends javax.swing.JFrame {
         SearchText.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         SearchText.setText("Search name ...");
         SearchText.setToolTipText("Search Here....");
-        Search.add(SearchText, new org.netbeans.lib.awtextra.AbsoluteConstraints(942, 56, 310, 42));
+        Search.add(SearchText, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 60, 310, 42));
 
         ParentPanel.addTab("Choose Book", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png")), Search); // NOI18N
 
@@ -714,10 +706,11 @@ public class ImportManagement extends javax.swing.JFrame {
 
         jLabel13.setText("Date");
         CreateBillTab.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 60, -1, -1));
+
+        DateBox.setDateFormatString("yyyy-MM-dd");
         CreateBillTab.add(DateBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 50, 210, 30));
 
-        SupplierID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        CreateBillTab.add(SupplierID, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 50, 180, 30));
+        CreateBillTab.add(SupplierNameCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 50, 180, 30));
 
         jLabel14.setText("Supplier ID");
         CreateBillTab.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, -1, -1));
@@ -730,7 +723,7 @@ public class ImportManagement extends javax.swing.JFrame {
                 CancelBillBtnActionPerformed(evt);
             }
         });
-        CreateBillTab.add(CancelBillBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 510, 116, 51));
+        CreateBillTab.add(CancelBillBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 490, 116, 51));
 
         TotalText.setText("0.0");
         CreateBillTab.add(TotalText, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 420, 210, 50));
@@ -756,7 +749,7 @@ public class ImportManagement extends javax.swing.JFrame {
                 ConfirmBillBtnActionPerformed(evt);
             }
         });
-        CreateBillTab.add(ConfirmBillBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 510, 116, 51));
+        CreateBillTab.add(ConfirmBillBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 490, 116, 51));
 
         DeleteBillBtn.setBackground(new java.awt.Color(255, 51, 102));
         DeleteBillBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -776,10 +769,7 @@ public class ImportManagement extends javax.swing.JFrame {
 
         BillDetailTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Name", "Author", "Type", "Amout", "Price"
@@ -798,6 +788,7 @@ public class ImportManagement extends javax.swing.JFrame {
         BillDetailTable.setGridColor(new java.awt.Color(0, 0, 0));
         BillDetailTable.setShowGrid(true);
         jScrollPane4.setViewportView(BillDetailTable);
+        BillDetailTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         PurchasedBillTab.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 930, 260));
 
@@ -805,10 +796,7 @@ public class ImportManagement extends javax.swing.JFrame {
 
         ShowBillTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Name", "Author", "Type", "Amout", "Price"
@@ -827,6 +815,7 @@ public class ImportManagement extends javax.swing.JFrame {
         ShowBillTable.setGridColor(new java.awt.Color(0, 0, 0));
         ShowBillTable.setShowGrid(true);
         jScrollPane5.setViewportView(ShowBillTable);
+        ShowBillTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         PurchasedBillTab.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 280));
 
@@ -862,7 +851,6 @@ public class ImportManagement extends javax.swing.JFrame {
         jLabel10.setText("Supplier ID");
         PurchasedBillTab.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 90, -1, -1));
 
-        SuppliersID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         PurchasedBillTab.add(SuppliersID, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 80, 182, 45));
 
         SearchPurchaseBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png"))); // NOI18N
@@ -882,10 +870,7 @@ public class ImportManagement extends javax.swing.JFrame {
 
         BillReturnTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Name", "Address", "PhoneNumber", "Email"
@@ -904,6 +889,7 @@ public class ImportManagement extends javax.swing.JFrame {
         BillReturnTable.setGridColor(new java.awt.Color(0, 0, 0));
         BillReturnTable.setShowGrid(true);
         jScrollPane6.setViewportView(BillReturnTable);
+        BillReturnTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         ReturnTab.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(203, 0, 878, 590));
 
@@ -937,6 +923,7 @@ public class ImportManagement extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     
@@ -1010,7 +997,7 @@ public class ImportManagement extends javax.swing.JFrame {
         else 
         {
             nhap.setMaPhieuNhap(ImportBillText.getText());
-            nhap.setMaNhaCC(getSupplierID(SupplierID.getSelectedItem().toString()));
+            nhap.setMaNhaCC(getSupplierID(SupplierNameCb.getSelectedItem().toString()));
             nhap.setNgayTaoPhieu(date);
             nhap.setNgayNhapKho(date);
             nhap.setTongTien(total);
@@ -1026,28 +1013,22 @@ public class ImportManagement extends javax.swing.JFrame {
                 chitietnhap.setSoLuong(sach.getSoLuong());
                 ChiTietPhieuNhap_BUS chitietphieunhap_BUS = new ChiTietPhieuNhap_BUS();
                 chitietphieunhap_BUS.addChiTietPhieuNhap(chitietnhap);
-                
+                //GetOldAmount and update new amount for Sach
                 Sach sachStorage = new Sach();
                 int amount_old = 0;
                 ArrayList<Sach> arrStorage = new ArrayList<Sach>();
                 Sach_BUS sach_BUS = new Sach_BUS();
-                arrStorage = sach_BUS.searchSach(sach.getTenSach(), "", "");
-                try
-                {
-                    for (int i = 0; i < arrStorage.size(); i++) {
-                        sachStorage = arrStorage.get(i);
-                        String id = sachStorage.getMaSach();
-                        String name1 = sachStorage.getTenSach();
-                        String author1 = sachStorage.getTenTG();
-                        String type1 = sachStorage.getTenTheLoai();
-                        amount_old = sachStorage.getSoLuong();
-                        double price = sachStorage.getGia();
-                    }
-                } catch (Exception e) {
-                    System.err.println("No thing!");
-                }
-                sach.setSoLuong(amount_old - sach.getSoLuong());
-                sach_BUS.updateSach(sach);
+                arrStorage = sach_BUS.searchSachbyID(sach.getMaSach());
+                            sachStorage = arrStorage.get(0);
+                            String id = sachStorage.getMaSach();
+                            String name1 = sachStorage.getTenSach();
+                            String author1 = sachStorage.getTenTG();
+                            String type1 = sachStorage.getTenTheLoai();
+                            amount_old = sachStorage.getSoLuong();
+                            double price = sachStorage.getGia();
+                    //get new amount and update for Sach           
+                    sach.setSoLuong(amount_old + sach.getSoLuong());
+                    sach_BUS.updateSach(sach);
             }
             System.err.println("Succeed!");
         }
@@ -1087,13 +1068,13 @@ public class ImportManagement extends javax.swing.JFrame {
 
     private void EditChangeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditChangeBtnActionPerformed
         // Move to Add Tab and set Textfield's text to update Customer
-        SelectRow();
+        SelectRowSupplier();
         ParentPanel.setSelectedIndex(1);
     }//GEN-LAST:event_EditChangeBtnActionPerformed
 
     private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
         // Delete Supplier
-        SelectRow();
+        SelectRowSupplier();
         NhaCungCap_BUS nhacungcap_BUS = new NhaCungCap_BUS();
         nhacungcap_BUS.deleteNhaCungCap(valueMaNCC);
         JOptionPane.showMessageDialog(this, "Delete Supplier success!");
@@ -1105,14 +1086,14 @@ public class ImportManagement extends javax.swing.JFrame {
     private void AddSupplierBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddSupplierBtnActionPerformed
         // Add Supplier
         NhaCungCap nhacungcap = new NhaCungCap();
-        if(NameTxb.getText().equals(""))
+        if(NameSupplierTxb.getText().equals(""))
         {
             JOptionPane.showMessageDialog(this, "Please fill atleast the name of supplier...");
         }
         else
         {
             nhacungcap.setMaNhaCC("C" + randomID());
-            nhacungcap.setTenNhaCC(NameTxb.getText());
+            nhacungcap.setTenNhaCC(NameSupplierTxb.getText());
             
         }
         NhaCungCap_BUS nhacungcap_BUS = new NhaCungCap_BUS();
@@ -1136,7 +1117,7 @@ public class ImportManagement extends javax.swing.JFrame {
         resetDetailBillTable();
         loadAllBill();
         loadAllBook();
-        ParentPanel.setSelectedIndex(0);
+        ParentPanel.setSelectedIndex(2);
         
     }//GEN-LAST:event_CancelBillBtnActionPerformed
 
@@ -1225,6 +1206,27 @@ public class ImportManagement extends javax.swing.JFrame {
         ParentPanel.setSelectedIndex(0);
     }//GEN-LAST:event_CancelPurchaseBtnActionPerformed
 
+    private void UpdateSupplierBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateSupplierBtnActionPerformed
+        // TODO add your handling code here:
+        if(NameSupplierTxb.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(this, "Please fill atleast the name of supplier...");
+        }
+        else
+        {
+            NhaCungCap nhacungcap = new NhaCungCap();
+            nhacungcap.setMaNhaCC(valueMaNCC);
+            nhacungcap.setTenNhaCC(NameSupplierTxb.getText());
+            NhaCungCap_BUS nhaCungCap_BUS = new NhaCungCap_BUS();
+            nhaCungCap_BUS.updateNhaCungCap(nhacungcap);
+            JOptionPane.showMessageDialog(this, "Update Supplier success!");
+            resetText();
+            resetSupplier();
+            loadAllSupplier();
+            ParentPanel.setSelectedIndex(0);
+        }
+    }//GEN-LAST:event_UpdateSupplierBtnActionPerformed
+
     
 
     /**
@@ -1284,7 +1286,7 @@ public class ImportManagement extends javax.swing.JFrame {
     private javax.swing.JRadioButton FilterRadio;
     private javax.swing.JButton IDBtn;
     private javax.swing.JTextField ImportBillText;
-    private javax.swing.JTextField NameTxb;
+    private javax.swing.JTextField NameSupplierTxb;
     private javax.swing.JTabbedPane ParentPanel;
     private javax.swing.JButton PlusBtn;
     private javax.swing.JPanel PurchasedBillTab;
@@ -1303,11 +1305,13 @@ public class ImportManagement extends javax.swing.JFrame {
     private javax.swing.JButton SelectSupplierBtn1;
     private javax.swing.JTable ShowBillTable;
     private javax.swing.JButton SubtractBtn;
-    private javax.swing.JComboBox<String> SupplierID;
+    private javax.swing.JComboBox<String> SupplierNameCb;
     private javax.swing.JComboBox<String> SuppliersID;
     private javax.swing.JTextField SupplySearchTxb;
     private javax.swing.JTextField TotalText;
     private javax.swing.JComboBox<String> TypeCb;
+    private javax.swing.JButton UpdateSupplierBtn;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

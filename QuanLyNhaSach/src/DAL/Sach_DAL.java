@@ -43,6 +43,31 @@ public class Sach_DAL {
         return result;
     }
     
+    public ArrayList<Sach> searchSachbyID(String ID)
+    {
+        connection = new DBConnection();
+        ArrayList<Sach> result = new ArrayList<Sach>();
+        String query = "select * from Sach where MaSach like '%" + ID +"%'";
+        System.out.println(query);
+        try{
+            ResultSet rs = connection.ExcuteQueryGetTable(query);
+            while (rs.next()) {                
+                Sach sach = new Sach();
+                sach.setMaSach(rs.getString("MaSach"));
+                sach.setTenSach(rs.getString("TenSach"));
+                sach.setTenTG(rs.getString("TenTacGia"));
+                sach.setTenTheLoai(rs.getString("TenTheLoai"));
+                sach.setSoLuong(rs.getInt("SoLuong"));
+                sach.setGia(rs.getFloat("Gia"));
+                result.add(sach);
+            }
+        }catch(SQLException e)
+        {
+            System.out.println("Null Table!");
+        }
+        return result;
+    }
+    
     //Search with Filter
     public ArrayList<Sach> searchSach(String name, String type, String author)
     {

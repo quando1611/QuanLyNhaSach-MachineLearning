@@ -46,7 +46,7 @@ public class PhieuNhapKho_DAL {
     public boolean addPhieuNhapKho(PhieuNhapKho phieunhap)
     {
         connection = new DBConnection();
-        String query = "insert into PhieuNhapKho values('" + phieunhap.getMaPhieuNhap() + "', " + phieunhap.getMaNhaCC() + "', '" + phieunhap.getMaTK() + "', '" + phieunhap.getNgayTaoPhieu() + "', '" + phieunhap.getNgayNhapKho() + ")'";
+        String query = "insert into PhieuNhapKho values('" + phieunhap.getMaPhieuNhap() + "', '" + phieunhap.getNgayTaoPhieu() + "', '" + phieunhap.getNgayNhapKho() + "', '" + phieunhap.getMaTK() + "', '" + phieunhap.getMaNhaCC() + "', '" + phieunhap.getTongTien() + "')";
         try {
             ResultSet rs = connection.ExcuteQueryUpdateDB(query);
             return true;

@@ -29,8 +29,8 @@ public class NhaCungCap_DAL {
             ResultSet rs = connection.ExcuteQueryGetTable(query);
             while (rs.next()) {                
                 NhaCungCap nhacungcap = new NhaCungCap();
-                nhacungcap.setMaNhaCC(rs.getString("MaNhaCC"));
-                nhacungcap.setTenNhaCC(rs.getString("TenNhaCC"));
+                nhacungcap.setMaNhaCC(rs.getString("MaNCC"));
+                nhacungcap.setTenNhaCC(rs.getString("TenNCC"));
                 result.add(nhacungcap);
             }
         }catch(SQLException e)
@@ -45,14 +45,14 @@ public class NhaCungCap_DAL {
     {
         connection = new DBConnection();
         ArrayList<NhaCungCap> result = new ArrayList<NhaCungCap>();
-        String query = "select * from NhaCungCap where MaNhaCC like '%" + search + "%' or TenKH like '%" + search+ "%'";
+        String query = "select * from NhaCungCap where MaNCC like '%" + search + "%' or TenNCC like '%" + search+ "%'";
         System.out.println(query);
         try{
             ResultSet rs = connection.ExcuteQueryGetTable(query);
             while (rs.next()) {                
                 NhaCungCap nhacungcap = new NhaCungCap();
-                nhacungcap.setMaNhaCC(rs.getString("MaNhaCC"));
-                nhacungcap.setTenNhaCC(rs.getString("TenNhaCC"));
+                nhacungcap.setMaNhaCC(rs.getString("MaNCC"));
+                nhacungcap.setTenNhaCC(rs.getString("TenNCC"));
                 result.add(nhacungcap);
             }
         }catch(SQLException e)
@@ -65,7 +65,7 @@ public class NhaCungCap_DAL {
     public boolean addNhaCungCap(NhaCungCap nhacungcap)
     {
         connection = new DBConnection();
-        String query = "insert into NhaCungCap values ('" + nhacungcap.getMaNhaCC()+ "','" +nhacungcap.getTenNhaCC() + "'";
+        String query = "insert into NhaCungCap values ('" + nhacungcap.getMaNhaCC()+ "','" +nhacungcap.getTenNhaCC() + "')";
         System.err.println(query);
         try {
             ResultSet rs = connection.ExcuteQueryUpdateDB(query);
@@ -79,7 +79,7 @@ public class NhaCungCap_DAL {
     public boolean updateNhaCungCap(NhaCungCap nhacungcap)
     {
         connection = new DBConnection();
-        String query = "update NhaCungCap set TenNhaCC = '"  + nhacungcap.getTenNhaCC() + "' where TenKH = '" + nhacungcap.getMaNhaCC() + "'" ;
+        String query = "update NhaCungCap set TenNCC = '"  + nhacungcap.getTenNhaCC() + "' where MaNCC = '" + nhacungcap.getMaNhaCC() + "'" ;
         System.err.println(query);
         try {
             ResultSet rs = connection.ExcuteQueryUpdateDB(query);
@@ -93,7 +93,7 @@ public class NhaCungCap_DAL {
     public boolean deleteNhaCungCap(String maNhaCC)
     {
         connection = new DBConnection();
-        String query = "delete from NhaCungCap where MaNhaCC = '" + maNhaCC + "'";
+        String query = "delete from NhaCungCap where MaNCC = '" + maNhaCC + "'";
         System.err.println(query);
         try {
             ResultSet rs = connection.ExcuteQueryUpdateDB(query);

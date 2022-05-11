@@ -575,7 +575,6 @@ public class SaleManagement extends javax.swing.JFrame {
             }
         });
         SearchBookTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        SearchBookTable.setColumnSelectionAllowed(true);
         SearchBookTable.setGridColor(new java.awt.Color(0, 0, 0));
         SearchBookTable.setShowGrid(true);
         jScrollPane1.setViewportView(SearchBookTable);
@@ -937,23 +936,17 @@ public class SaleManagement extends javax.swing.JFrame {
                 int amountOld = 0;
                 ArrayList<Sach> arrInStorage = new ArrayList<Sach>();
                 Sach_BUS sach_BUS = new Sach_BUS();
-                arrInStorage = sach_BUS.searchSach(sach.getTenSach(), "", "");
-                try {
-                    for (int i = 0; i < arrInStorage.size(); i++) {
-                        sachInStorage = arrInStorage.get(i);
-                        String id = sachInStorage.getMaSach();
-                        String name1 = sachInStorage.getTenSach();
-                        String author1 = sachInStorage.getTenTG();
-                        String type1 = sachInStorage.getTenTheLoai();
-                        amountOld = sachInStorage.getSoLuong();
-                        double price = sachInStorage.getGia();
-                    }
-                } catch (Exception e) {
-                    System.err.println("No thing!");
-                }
-                //get new amount and update for Sach
-                sach.setSoLuong(amountOld - sach.getSoLuong());
-                sach_BUS.updateSach(sach);
+                arrInStorage = sach_BUS.searchSachbyID(sach.getMaSach());
+                    sachInStorage = arrInStorage.get(0);
+                    String id = sachInStorage.getMaSach();
+                    String name1 = sachInStorage.getTenSach();
+                    String author1 = sachInStorage.getTenTG();
+                    String type1 = sachInStorage.getTenTheLoai();
+                    amountOld = sachInStorage.getSoLuong();
+                    double price = sachInStorage.getGia();
+                    //get new amount and update for Sach
+                    sach.setSoLuong(amountOld - sach.getSoLuong());
+                    sach_BUS.updateSach(sach);
             }
             System.err.println("Success!");
         }

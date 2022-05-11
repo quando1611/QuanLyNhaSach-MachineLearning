@@ -24,6 +24,11 @@ public class Sach_BUS {
         return sach_DAL.searchSach(name, type, author);
     }
     
+    public ArrayList<Sach> searchSachbyID(String id)
+    {
+        return sach_DAL.searchSachbyID(id);
+    }
+    
     public boolean addSach(Sach sach)
     {
         return sach_DAL.addSach(sach);
