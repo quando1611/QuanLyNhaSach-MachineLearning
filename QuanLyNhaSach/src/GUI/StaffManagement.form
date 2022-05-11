@@ -114,6 +114,9 @@
                   <Image iconType="3" name="/GUI/Component/icons8_previous_70px.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BackBtnMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

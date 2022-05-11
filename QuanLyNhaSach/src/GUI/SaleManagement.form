@@ -449,7 +449,7 @@
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="180" y="130" width="930" height="280"/>
+                      <AbsoluteConstraints x="170" y="130" width="930" height="280"/>
                     </Constraint>
                   </Constraints>
 
@@ -580,9 +580,12 @@
                   </Constraints>
                 </Component>
                 <Component class="javax.swing.JTextField" name="TotalTxb">
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TotalTxbActionPerformed"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="620" y="420" width="210" height="50"/>
+                      <AbsoluteConstraints x="610" y="420" width="210" height="50"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -592,7 +595,7 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="580" y="430" width="30" height="30"/>
+                      <AbsoluteConstraints x="570" y="430" width="30" height="30"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -602,14 +605,14 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="850" y="430" width="50" height="30"/>
+                      <AbsoluteConstraints x="840" y="430" width="50" height="30"/>
                     </Constraint>
                   </Constraints>
                 </Component>
                 <Component class="javax.swing.JTextField" name="ReceiveTxb">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="900" y="420" width="210" height="50"/>
+                      <AbsoluteConstraints x="890" y="420" width="210" height="50"/>
                     </Constraint>
                   </Constraints>
                 </Component>

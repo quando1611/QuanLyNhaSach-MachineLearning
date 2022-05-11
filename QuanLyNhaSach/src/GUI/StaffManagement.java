@@ -149,10 +149,7 @@ public class StaffManagement extends javax.swing.JFrame {
         
     }
     
-    private void BackBtnMouseClicked(java.awt.event.MouseEvent evt) {                                     
-        // Return to Home
-        this.dispose();
-    }
+    
     
     
     public String randomID() // get random to generate ID for all of things
@@ -268,6 +265,11 @@ public class StaffManagement extends javax.swing.JFrame {
         jLabel1.setText("STAFF MANAGEMENT");
 
         BackBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/icons8_previous_70px.png"))); // NOI18N
+        BackBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BackBtnMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -646,6 +648,11 @@ public class StaffManagement extends javax.swing.JFrame {
     private void RoleCbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RoleCbActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_RoleCbActionPerformed
+
+    private void BackBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackBtnMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_BackBtnMouseClicked
 
     /**
      * @param args the command line arguments
