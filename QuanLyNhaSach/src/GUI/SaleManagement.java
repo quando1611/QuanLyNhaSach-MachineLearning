@@ -75,7 +75,8 @@ public class SaleManagement extends javax.swing.JFrame {
         SearchBookTable.setModel(table);
     }
 
-    public void loadAllBill() {     //Load All bill to  BillShowTable
+    public void loadAllBill() { 
+        //Load All bill to  BillShowTable
         DefaultTableModel table = (DefaultTableModel) BillShowTable.getModel();
         ArrayList<HoaDon> arr = new ArrayList<HoaDon>();
         HoaDon_BUS hoaDon_BUS = new HoaDon_BUS();
@@ -157,7 +158,8 @@ public class SaleManagement extends javax.swing.JFrame {
         }
     }
 
-    public void loadCurrentDate() {             //get the current day by default for JDateChooser - DatePicker
+    public void loadCurrentDate() {             
+        //get the current day by default for JDateChooser - DatePicker
         Calendar today = Calendar.getInstance();
         DatePicker.setCalendar(today);
     }
@@ -347,7 +349,8 @@ public class SaleManagement extends javax.swing.JFrame {
         }
     }
 
-    public void SelectBillRow() { //Select BillShowTable row to show detail Bill in DetailBillTable
+    public void SelectBillRow() {
+        //Select BillShowTable row to show detail Bill in DetailBillTable
         DefaultTableModel tableModel = (DefaultTableModel) BillShowTable.getModel();
         DefaultTableModel tableDetailModel = (DefaultTableModel) DetailBillTable.getModel();
         //Get Data from Table

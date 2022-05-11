@@ -4,6 +4,7 @@
  */
 package GUI;
 
+import BUS.HoaDon_BUS;
 import BUS.Sach_BUS;
 import BUS.NhaCungCap_BUS;
 import DTO.NhaCungCap;
@@ -12,6 +13,7 @@ import DTO.*;
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -44,6 +46,9 @@ public class ImportManagement extends javax.swing.JFrame {
         loadAllBook();
         loadAllSupplier();
         loadTypeCbData();
+        loadAllBill();
+        loadCurrentDate();
+        loadReturnBill();
     }
     
     public void loadAllBook()
@@ -373,7 +378,7 @@ public class ImportManagement extends javax.swing.JFrame {
         SearchBtn1 = new javax.swing.JButton();
         ReturnTab = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        ViewTable1 = new javax.swing.JTable();
+        BillReturnTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -832,7 +837,7 @@ public class ImportManagement extends javax.swing.JFrame {
 
         jScrollPane6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        ViewTable1.setModel(new javax.swing.table.DefaultTableModel(
+        BillReturnTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -851,11 +856,11 @@ public class ImportManagement extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        ViewTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        ViewTable1.setCellSelectionEnabled(true);
-        ViewTable1.setGridColor(new java.awt.Color(0, 0, 0));
-        ViewTable1.setShowGrid(true);
-        jScrollPane6.setViewportView(ViewTable1);
+        BillReturnTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        BillReturnTable.setCellSelectionEnabled(true);
+        BillReturnTable.setGridColor(new java.awt.Color(0, 0, 0));
+        BillReturnTable.setShowGrid(true);
+        jScrollPane6.setViewportView(BillReturnTable);
 
         ReturnTab.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(203, 0, 878, 590));
 
@@ -1064,6 +1069,7 @@ public class ImportManagement extends javax.swing.JFrame {
     private javax.swing.JTextField AuthorSearchTxb;
     private javax.swing.JLabel BackBtn;
     private javax.swing.JTable BillDetailTable;
+    private javax.swing.JTable BillReturnTable;
     private javax.swing.JTable BillTable;
     private javax.swing.JButton ConfirmBtn;
     private javax.swing.JPanel CreateBillTab;
@@ -1100,7 +1106,6 @@ public class ImportManagement extends javax.swing.JFrame {
     private javax.swing.JTextField TotalText;
     private javax.swing.JComboBox<String> TypeCb;
     private javax.swing.JComboBox<String> TypeCb1;
-    private javax.swing.JTable ViewTable1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1121,6 +1126,65 @@ public class ImportManagement extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     // End of variables declaration//GEN-END:variables
+
+    private void loadAllBill() {
+        //Load All bill to  BillShowTable
+        DefaultTableModel table = (DefaultTableModel) ShowBillTable.getModel();
+        ArrayList<HoaDon> arr = new ArrayList<HoaDon>();
+        HoaDon_BUS hoaDon_BUS = new HoaDon_BUS();
+        arr = hoaDon_BUS.danhSachHoaDon();
+        HoaDon hoaDon = new HoaDon();
+        {
+            try {
+                for (int i = 0; i < arr.size(); i++) {
+                    hoaDon = arr.get(i);
+                    String id = hoaDon.getMaHoaDon();
+                    String customerID = hoaDon.getMaKH();
+                    String billDay = hoaDon.getNgayNhap();
+                    Double billToTal = hoaDon.getTongTien();
+                    Double billReceive = hoaDon.getTienTra();
+                    String billStatus = hoaDon.getTinhTrang();
+                    Object[] row = {id, customerID, billDay, billToTal, billReceive, billStatus};
+                    table.addRow(row);
+                }
+            } catch (Exception e) {
+                System.err.println("No thing!");
+            }
+            ShowBillTable.setModel(table);
+        }
+    }
+
+    private void loadCurrentDate() {
+        //get the current day by default for JDateChooser - DatePicker
+        Calendar today = Calendar.getInstance();
+        DateBox.setCalendar(today);
+    }
+
+    private void loadReturnBill() {
+        DefaultTableModel table = (DefaultTableModel) BillReturnTable.getModel();
+        ArrayList<HoaDon> arr = new ArrayList<HoaDon>();
+        HoaDon_BUS hoaDon_BUS = new HoaDon_BUS();
+        arr = hoaDon_BUS.danhSachHoaDonReturn();
+        HoaDon hoaDon = new HoaDon();
+        {
+            try {
+                for (int i = 0; i < arr.size(); i++) {
+                    hoaDon = arr.get(i);
+                    String id = hoaDon.getMaHoaDon();
+                    String customerID = hoaDon.getMaKH();
+                    String billDay = hoaDon.getNgayNhap();
+                    Double billToTal = hoaDon.getTongTien();
+                    Double billReceive = hoaDon.getTienTra();
+                    String billStatus = hoaDon.getTinhTrang();
+                    Object[] row = {id, customerID, billDay, billToTal, billReceive, billStatus};
+                    table.addRow(row);
+                }
+            } catch (Exception e) {
+                System.err.println("No thing!");
+            }
+            BillReturnTable.setModel(table);
+        }
+    }
 
     
 }
