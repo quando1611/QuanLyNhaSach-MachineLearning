@@ -521,21 +521,6 @@ public class StaffManagement extends javax.swing.JFrame {
         // TODO add your handling code here: 
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
-    private void BackBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackBtnMouseClicked
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_BackBtnMouseClicked
-
-    private void BackBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackBtnMouseClicked
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_BackBtnMouseClicked
-
-    private void BackBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackBtnMouseClicked
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_BackBtnMouseClicked
-
     /**
      * @param args the command line arguments
      */
