@@ -1091,12 +1091,10 @@ public class ImportManagement extends javax.swing.JFrame {
     private javax.swing.JTextField SearchText;
     private javax.swing.JTextField SearchTxb8;
     private javax.swing.JButton SelectBookBtn;
-<<<<<<< HEAD
     private javax.swing.JButton SelectBookBtn1;
     private javax.swing.JTable ShowBillTable;
-=======
     private javax.swing.JButton SelectSupplierBtn1;
->>>>>>> e24acee903d6e87d8ccc59eb1b029c772c5ae13a
+    
     private javax.swing.JButton SubtractBtn;
     private javax.swing.JComboBox<String> SupplierID;
     private javax.swing.JTextField SupplySearchTxb;
