@@ -511,11 +511,6 @@ public class SaleManagement extends javax.swing.JFrame {
         AllRadio.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         AllRadio.setSelected(true);
         AllRadio.setText("All");
-        AllRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AllRadioActionPerformed(evt);
-            }
-        });
         SearchTab.add(AllRadio, new org.netbeans.lib.awtextra.AbsoluteConstraints(945, 9, -1, -1));
 
         buttonGroup1.add(FilterRadio);
@@ -619,7 +614,7 @@ public class SaleManagement extends javax.swing.JFrame {
         jScrollPane3.setViewportView(SelectBookTable);
         SelectBookTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
-        CreateBillTab.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 930, 280));
+        CreateBillTab.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 930, 280));
 
         jLabel2.setText("Bill ID");
         CreateBillTab.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, -1, -1));
@@ -647,14 +642,20 @@ public class SaleManagement extends javax.swing.JFrame {
             }
         });
         CreateBillTab.add(CancelBillBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 510, 116, 51));
-        CreateBillTab.add(TotalTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 420, 210, 50));
+
+        TotalTxb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TotalTxbActionPerformed(evt);
+            }
+        });
+        CreateBillTab.add(TotalTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 420, 210, 50));
 
         jLabel5.setText("Total");
-        CreateBillTab.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 430, 30, 30));
+        CreateBillTab.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 430, 30, 30));
 
         jLabel8.setText("Receive");
-        CreateBillTab.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 430, 50, 30));
-        CreateBillTab.add(ReceiveTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 420, 210, 50));
+        CreateBillTab.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 430, 50, 30));
+        CreateBillTab.add(ReceiveTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 420, 210, 50));
 
         DeleteRowBtn.setBackground(new java.awt.Color(255, 51, 102));
         DeleteRowBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -906,7 +907,7 @@ public class SaleManagement extends javax.swing.JFrame {
         String date = ((JTextField) DatePicker.getDateEditor().getUiComponent()).getText(); //Get String from DatePicker - JDateChooser
         System.err.println(date);
         if (IDBill.getText().equals("")) { //if BillID is null
-            JOptionPane.showMessageDialog(this, "Please Generate Bill ID by click the button 'ID Generate'...");
+            JOptionPane.showMessageDialog(this, "Please Generate Bill ID by clicking the button 'ID Generate'...");
         } else if (ReceiveTxb.getText().equals("") || Double.parseDouble(ReceiveTxb.getText()) < total) { //If receive < total
             JOptionPane.showMessageDialog(this, "Receive money doesn't match with Total cost!");
         } else {
@@ -1044,13 +1045,16 @@ public class SaleManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_ReturnBillBtnActionPerformed
 
     private void FilterRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FilterRadioActionPerformed
-
         // TODO add your handling code here:
     }//GEN-LAST:event_FilterRadioActionPerformed
 
     private void AllRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AllRadioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_AllRadioActionPerformed
+
+    private void TotalTxbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TotalTxbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TotalTxbActionPerformed
 
     /**
      * @param args the command line arguments

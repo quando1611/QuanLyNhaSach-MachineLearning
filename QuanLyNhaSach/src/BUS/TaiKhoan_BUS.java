@@ -19,22 +19,11 @@ public class TaiKhoan_BUS {
     {
         return taikhoan_DAL.getAllTaiKhoan();
     }
-   
-    public ArrayList<TaiKhoan> getAllAdmin()
-    {
-        return taikhoan_DAL.getAllAdmin();
-    }
-    
-     public ArrayList<TaiKhoan> getAllStaff()
-    {
-        return taikhoan_DAL.getAllStaff();
-    }
     
     public ArrayList<TaiKhoan> searchTaiKhoan(String search )
     {
         return taikhoan_DAL.searchTaiKhoan(search);
     }
-    
     
     public boolean addTaiKhoan(TaiKhoan taikhoan)
     {

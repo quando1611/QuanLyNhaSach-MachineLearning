@@ -41,52 +41,6 @@ public class TaiKhoan_DAL {
         return result;
     }
     
-    public ArrayList<TaiKhoan> getAllAdmin() {
-       connection = new DBConnection();
-       ArrayList<TaiKhoan> result = new ArrayList<TaiKhoan>();
-       String query = "select * from TaiKhoan where MaPhanQuyen = 'admin'";
-       System.out.println(query);
-       try{
-            ResultSet rs = connection.ExcuteQueryGetTable(query);
-            while (rs.next()) {                
-                TaiKhoan taikhoan = new TaiKhoan();
-                taikhoan.setMaTK(rs.getString("MaTK"));
-                taikhoan.setHoTen(rs.getString("HoTen"));
-                taikhoan.setDiaChi(rs.getString("DiaChi"));
-                taikhoan.setSDT(rs.getString("SDT"));
-                taikhoan.setEmail(rs.getString("Email"));
-                result.add(taikhoan);
-            }
-        }catch(SQLException e)
-        {
-            System.out.println("Null Table!");
-        }
-        return result;
-    }
-    
-    public ArrayList<TaiKhoan> getAllStaff() {
-       connection = new DBConnection();
-       ArrayList<TaiKhoan> result = new ArrayList<TaiKhoan>();
-       String query = "select * from TaiKhoan where MaPhanQuyen = 'staff'";
-       System.out.println(query);
-       try{
-            ResultSet rs = connection.ExcuteQueryGetTable(query);
-            while (rs.next()) {                
-                TaiKhoan taikhoan = new TaiKhoan();
-                taikhoan.setMaTK(rs.getString("MaTK"));
-                taikhoan.setHoTen(rs.getString("HoTen"));
-                taikhoan.setDiaChi(rs.getString("DiaChi"));
-                taikhoan.setSDT(rs.getString("SDT"));
-                taikhoan.setEmail(rs.getString("Email"));
-                result.add(taikhoan);
-            }
-        }catch(SQLException e)
-        {
-            System.out.println("Null Table!");
-        }
-        return result;
-    }
-    
     //add TaiKhoan
     public boolean addTaiKhoan( TaiKhoan taikhoan)
     {
@@ -156,9 +110,5 @@ public class TaiKhoan_DAL {
     }
         return result;
     }
-    
-    
-    
-    
     
 }

@@ -16,6 +16,7 @@ public class PhieuNhapKho {
     private String ngayTaoPhieu;
     private String maTK;
     private String maNhaCC;
+    private double TongTien;
 
     public String getMaPhieuNhap() {
         return maPhieuNhap;
@@ -55,6 +56,14 @@ public class PhieuNhapKho {
 
     public void setMaNhaCC(String maNhaCC) {
         this.maNhaCC = maNhaCC;
+    }
+
+    public double getTongTien() {
+        return TongTien;
+    }
+
+    public void setTongTien(double TongTien) {
+        this.TongTien = TongTien;
     }
     
     
