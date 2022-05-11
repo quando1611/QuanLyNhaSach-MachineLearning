@@ -1012,9 +1012,9 @@ public class ImportManagement extends javax.swing.JFrame {
         }
         resetBillTableAfterConfirm();
         resetSearchBookTable();
-        resetShowBillTable();
+        /*resetShowBillTable();
         resetDetailBillTable();
-        loadAllBill();
+        loadAllBill();*/
         loadAllBook();
         ParentPanel.setSelectedIndex(0);
     }//GEN-LAST:event_ConfirmBtnActionPerformed
@@ -1085,9 +1085,9 @@ public class ImportManagement extends javax.swing.JFrame {
         // TODO add your handling code here:
         resetBillTableAfterConfirm();
         resetSearchBookData();
-        resetShowBillTable();
+        /*resetShowBillTable();
         resetDetailBillTable();
-        loadAllBill();
+        loadAllBill();*/
         loadAllBook();
         ParentPanel.setSelectedIndex(0);
         
