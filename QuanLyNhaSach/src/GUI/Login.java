@@ -5,6 +5,7 @@
 package GUI;
 
 import DAL.*;
+import DTO.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -251,6 +252,8 @@ public class Login extends javax.swing.JFrame {
             if (rs.next()) {
                 result = true;
                 role = rs.getString("MaPhanQuyen");
+                PublicClass.StaffID = rs.getString("MaTK");
+                
             }
         }catch (SQLException ex) {
             System.out.println("lỗi đăng nhập");

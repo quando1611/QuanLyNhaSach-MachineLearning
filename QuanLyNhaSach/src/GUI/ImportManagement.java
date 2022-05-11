@@ -4,13 +4,15 @@
  */
 package GUI;
 
+import BUS.ChiTietHoaDon_BUS;
 import BUS.Sach_BUS;
 import DAL.DBConnection;
-import DTO.Sach;
+import DTO.*;
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,6 +27,9 @@ public class ImportManagement extends javax.swing.JFrame {
     private int maximum = 0;
     private ArrayList<Sach> selectarr = new ArrayList<Sach>();
     private boolean exist = false;
+    private String BillID;
+    private String supplierSelectedID = "";
+    private String staffID = "";
 
     /**
      * Creates new form Storage
@@ -136,8 +141,8 @@ public class ImportManagement extends javax.swing.JFrame {
     {
         TypeCb.removeAllItems();
         TypeCb.addItem("All");
-        SupplyCb.removeAllItems();
-        SupplyCb.addItem("All");
+        SupplierID.removeAllItems();
+        SupplierID.addItem("All");
     }
     
     public void resetText() // reset textfield after event done!
@@ -145,7 +150,7 @@ public class ImportManagement extends javax.swing.JFrame {
         SearchText.setText("");
         NameTxb.setText("");
         AuthorSearchTxb.setText("");
-        BillText.setText("");
+        ImportBillText.setText("");
         TotalText.setText("");
         total = 0;
     }
@@ -161,8 +166,7 @@ public class ImportManagement extends javax.swing.JFrame {
     {
         total = 0;
         DefaultTableModel choosetable = (DefaultTableModel) SearchBookTable.getModel();
-        
-        
+        DefaultTableModel billtable = (DefaultTableModel) BillTable.getModel();     
         String id = choosetable.getValueAt(SearchBookTable.getSelectedRow(), 0).toString();
         String name = choosetable.getValueAt(SearchBookTable.getSelectedRow(), 1).toString();
         String author = choosetable.getValueAt(SearchBookTable.getSelectedRow(), 2).toString();
@@ -212,12 +216,49 @@ public class ImportManagement extends javax.swing.JFrame {
                 choosetable.addRow(row);
                 total += amountFinal * priceFinal;
             }
-            SearchBookTable.setModel(choosetable);
+            BillTable.setModel(billtable);
             TotalText.setText(Double.toString(total));
         
         }
     }
     
+   public void resetBillTable() { //reset SelectBookTable to Null
+        DefaultTableModel tableModel = (DefaultTableModel) BillTable.getModel();
+        tableModel.setRowCount(0);
+        BillTable.setModel(tableModel);
+        exist = false;
+    }
+    
+   public void resetBillTableAfterConfirm() { //reset SelectTable after confirm the bill
+        DefaultTableModel tableModel = (DefaultTableModel) BillTable.getModel();
+        tableModel.setRowCount(0);
+        BillTable.setModel(tableModel);
+        selectarr.clear();
+        exist = false;
+    }
+   
+   public String getSupplierID(String search)
+   {
+       connection = new DBConnection();
+       String query = "select * from NhaCungCap where TenNCC ='" + search + "'";
+       try{
+           ResultSet rs = connection.ExcuteQueryGetTable(query);
+           while(rs.next())
+           {
+               supplierSelectedID = rs.getString("MaNCC");
+           }
+       }catch(Exception e)
+       {
+           System.err.println("NoT thing to show");
+       }
+       return supplierSelectedID;
+   }
+   
+  /* public String getStaffID(String search)
+   {
+       connection = new DBConnection();
+       String query = "select"
+   }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -263,23 +304,24 @@ public class ImportManagement extends javax.swing.JFrame {
         SearchText = new javax.swing.JTextField();
         CreateBillTab = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        SearchTable1 = new javax.swing.JTable();
+        BillTable = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
-        BillText = new javax.swing.JTextField();
+        ImportBillText = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        SupplyCb = new javax.swing.JComboBox<>();
+        DateBox = new com.toedter.calendar.JDateChooser();
+        SupplierID = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         DeleteBtn1 = new javax.swing.JButton();
         TotalText = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        DeleteBtn2 = new javax.swing.JButton();
-        DeleteBtn3 = new javax.swing.JButton();
+        IDBtn = new javax.swing.JButton();
+        ConfirmBtn = new javax.swing.JButton();
+        DeleteBtn6 = new javax.swing.JButton();
         PurchasedBillTab = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        SearchTable2 = new javax.swing.JTable();
+        BillDetailTable = new javax.swing.JTable();
         jScrollPane5 = new javax.swing.JScrollPane();
-        SearchTable3 = new javax.swing.JTable();
+        ShowBillTable = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         DeleteBtn4 = new javax.swing.JButton();
         DeleteBtn5 = new javax.swing.JButton();
@@ -301,6 +343,11 @@ public class ImportManagement extends javax.swing.JFrame {
         jLabel1.setText("IMPORT MANAGEMENT");
 
         BackBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/icons8_previous_70px.png"))); // NOI18N
+        BackBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BackBtnMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -543,7 +590,7 @@ public class ImportManagement extends javax.swing.JFrame {
 
         jScrollPane3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        SearchTable1.setModel(new javax.swing.table.DefaultTableModel(
+        BillTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -562,26 +609,24 @@ public class ImportManagement extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        SearchTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        SearchTable1.setCellSelectionEnabled(true);
-        SearchTable1.setGridColor(new java.awt.Color(0, 0, 0));
-        SearchTable1.setShowGrid(true);
-        jScrollPane3.setViewportView(SearchTable1);
+        BillTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        BillTable.setCellSelectionEnabled(true);
+        BillTable.setGridColor(new java.awt.Color(0, 0, 0));
+        BillTable.setShowGrid(true);
+        jScrollPane3.setViewportView(BillTable);
 
-        CreateBillTab.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 930, 280));
+        CreateBillTab.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 930, 280));
 
-        jLabel12.setText("Bill ID");
-        CreateBillTab.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, -1, -1));
-
-        BillText.setText("jTextField1");
-        CreateBillTab.add(BillText, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 160, 30));
+        jLabel12.setText("Import Bill ID");
+        CreateBillTab.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, -1, -1));
+        CreateBillTab.add(ImportBillText, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 160, 30));
 
         jLabel13.setText("Date");
         CreateBillTab.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 60, -1, -1));
-        CreateBillTab.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 50, 210, 30));
+        CreateBillTab.add(DateBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 50, 210, 30));
 
-        SupplyCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        CreateBillTab.add(SupplyCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 50, 180, 30));
+        SupplierID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CreateBillTab.add(SupplierID, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 50, 180, 30));
 
         jLabel14.setText("Supplier ID");
         CreateBillTab.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, -1, -1));
@@ -591,21 +636,36 @@ public class ImportManagement extends javax.swing.JFrame {
         DeleteBtn1.setText("CANCEL");
         CreateBillTab.add(DeleteBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 510, 116, 51));
 
-        TotalText.setText("jTextField1");
-        CreateBillTab.add(TotalText, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 420, 210, 50));
+        TotalText.setText("0.0");
+        CreateBillTab.add(TotalText, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 420, 210, 50));
 
         jLabel15.setText("Total");
-        CreateBillTab.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 430, 30, 30));
+        CreateBillTab.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 430, 30, 30));
 
-        DeleteBtn2.setBackground(new java.awt.Color(255, 51, 102));
-        DeleteBtn2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        DeleteBtn2.setText("DELETE");
-        CreateBillTab.add(DeleteBtn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 360, 116, 51));
+        IDBtn.setBackground(new java.awt.Color(153, 204, 255));
+        IDBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        IDBtn.setText("GENERATE ID");
+        IDBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IDBtnActionPerformed(evt);
+            }
+        });
+        CreateBillTab.add(IDBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 140, 30));
 
-        DeleteBtn3.setBackground(new java.awt.Color(255, 51, 102));
-        DeleteBtn3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        DeleteBtn3.setText("CONFIRM");
-        CreateBillTab.add(DeleteBtn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 510, 116, 51));
+        ConfirmBtn.setBackground(new java.awt.Color(255, 51, 102));
+        ConfirmBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        ConfirmBtn.setText("CONFIRM");
+        ConfirmBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConfirmBtnActionPerformed(evt);
+            }
+        });
+        CreateBillTab.add(ConfirmBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 510, 116, 51));
+
+        DeleteBtn6.setBackground(new java.awt.Color(255, 51, 102));
+        DeleteBtn6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        DeleteBtn6.setText("DELETE");
+        CreateBillTab.add(DeleteBtn6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 350, 116, 51));
 
         ParentPanel.addTab("Create Bill", CreateBillTab);
 
@@ -613,7 +673,7 @@ public class ImportManagement extends javax.swing.JFrame {
 
         jScrollPane4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        SearchTable2.setModel(new javax.swing.table.DefaultTableModel(
+        BillDetailTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -632,17 +692,17 @@ public class ImportManagement extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        SearchTable2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        SearchTable2.setCellSelectionEnabled(true);
-        SearchTable2.setGridColor(new java.awt.Color(0, 0, 0));
-        SearchTable2.setShowGrid(true);
-        jScrollPane4.setViewportView(SearchTable2);
+        BillDetailTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        BillDetailTable.setCellSelectionEnabled(true);
+        BillDetailTable.setGridColor(new java.awt.Color(0, 0, 0));
+        BillDetailTable.setShowGrid(true);
+        jScrollPane4.setViewportView(BillDetailTable);
 
         PurchasedBillTab.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 930, 260));
 
         jScrollPane5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        SearchTable3.setModel(new javax.swing.table.DefaultTableModel(
+        ShowBillTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -661,11 +721,11 @@ public class ImportManagement extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        SearchTable3.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        SearchTable3.setCellSelectionEnabled(true);
-        SearchTable3.setGridColor(new java.awt.Color(0, 0, 0));
-        SearchTable3.setShowGrid(true);
-        jScrollPane5.setViewportView(SearchTable3);
+        ShowBillTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        ShowBillTable.setCellSelectionEnabled(true);
+        ShowBillTable.setGridColor(new java.awt.Color(0, 0, 0));
+        ShowBillTable.setShowGrid(true);
+        jScrollPane5.setViewportView(ShowBillTable);
 
         PurchasedBillTab.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 280));
 
@@ -805,6 +865,36 @@ public class ImportManagement extends javax.swing.JFrame {
         
     }//GEN-LAST:event_SelectBookBtnActionPerformed
 
+    private void BackBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackBtnMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_BackBtnMouseClicked
+
+    private void IDBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDBtnActionPerformed
+        // TODO add your handling code here:
+        BillID ="B" + randomID();
+        ImportBillText.setText(BillID);
+    }//GEN-LAST:event_IDBtnActionPerformed
+
+    private void ConfirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmBtnActionPerformed
+        // TODO add your handling code here:
+        PhieuNhapKho nhap = new PhieuNhapKho();
+        String date = ((JTextField) DateBox.getDateEditor().getUiComponent()).getText();
+        System.err.println(date);
+        if(ImportBillText.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(this, "Please generate bill ID by cliking the button 'GENERATE ID'");
+        }
+        else 
+            nhap.setMaPhieuNhap(ImportBillText.getText());
+            nhap.setMaNhaCC(getSupplierID(SupplierID.getSelectedItem().toString()));
+            nhap.setNgayTaoPhieu(date);
+            nhap.setNgayNhapKho(date);
+            nhap.setTongTien(total);
+            nhap.setMaTK(PublicClass.StaffID);
+            
+    }//GEN-LAST:event_ConfirmBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -848,16 +938,20 @@ public class ImportManagement extends javax.swing.JFrame {
     private javax.swing.JTextField AmountTxb;
     private javax.swing.JTextField AuthorSearchTxb;
     private javax.swing.JLabel BackBtn;
-    private javax.swing.JTextField BillText;
+    private javax.swing.JTable BillDetailTable;
+    private javax.swing.JTable BillTable;
+    private javax.swing.JButton ConfirmBtn;
     private javax.swing.JPanel CreateBillTab;
+    private com.toedter.calendar.JDateChooser DateBox;
     private javax.swing.JButton DeleteBtn;
     private javax.swing.JButton DeleteBtn1;
-    private javax.swing.JButton DeleteBtn2;
-    private javax.swing.JButton DeleteBtn3;
     private javax.swing.JButton DeleteBtn4;
     private javax.swing.JButton DeleteBtn5;
+    private javax.swing.JButton DeleteBtn6;
     private javax.swing.JButton EditChangeBtn;
     private javax.swing.JRadioButton FilterRadio;
+    private javax.swing.JButton IDBtn;
+    private javax.swing.JTextField ImportBillText;
     private javax.swing.JTextField NameTxb;
     private javax.swing.JTabbedPane ParentPanel;
     private javax.swing.JButton PlusBtn;
@@ -870,21 +964,18 @@ public class ImportManagement extends javax.swing.JFrame {
     private javax.swing.JButton SearchBtn2;
     private javax.swing.JTable SearchSupplierTable;
     private javax.swing.JPanel SearchTab;
-    private javax.swing.JTable SearchTable1;
-    private javax.swing.JTable SearchTable2;
-    private javax.swing.JTable SearchTable3;
     private javax.swing.JTextField SearchText;
     private javax.swing.JTextField SearchTxb8;
     private javax.swing.JButton SelectBookBtn;
     private javax.swing.JButton SelectBookBtn1;
+    private javax.swing.JTable ShowBillTable;
     private javax.swing.JButton SubtractBtn;
-    private javax.swing.JComboBox<String> SupplyCb;
+    private javax.swing.JComboBox<String> SupplierID;
     private javax.swing.JTextField SupplySearchTxb;
     private javax.swing.JTextField TotalText;
     private javax.swing.JComboBox<String> TypeCb;
     private javax.swing.JComboBox<String> TypeCb1;
     private javax.swing.JTable ViewTable1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
