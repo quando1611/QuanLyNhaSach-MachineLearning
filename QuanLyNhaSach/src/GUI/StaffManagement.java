@@ -163,11 +163,6 @@ public class StaffManagement extends javax.swing.JFrame {
         jLabel1.setText("STAFF MANAGEMENT");
 
         BackBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/icons8_previous_70px.png"))); // NOI18N
-        BackBtn.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                BackBtnMouseDragged(evt);
-            }
-        });
         BackBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BackBtnMouseClicked(evt);
@@ -526,10 +521,10 @@ public class StaffManagement extends javax.swing.JFrame {
         // TODO add your handling code here: 
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
-    private void BackBtnMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackBtnMouseDragged
+    private void BackBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackBtnMouseClicked
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_BackBtnMouseDragged
+    }//GEN-LAST:event_BackBtnMouseClicked
 
     /**
      * @param args the command line arguments

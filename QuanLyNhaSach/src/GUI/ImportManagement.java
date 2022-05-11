@@ -4,8 +4,7 @@
  */
 package GUI;
 
-import BUS.Sach_BUS;
-import BUS.NhaCungCap_BUS;
+import BUS.*;
 import DTO.NhaCungCap;
 import DAL.DBConnection;
 import DTO.*;
@@ -39,14 +38,14 @@ public class ImportManagement extends javax.swing.JFrame {
         loadAllData();
     }
     
-    public void loadAllData()
+    public void loadAllData() //Load all data from the begining
     {
         loadAllBook();
         loadAllSupplier();
         loadTypeCbData();
     }
     
-    public void loadAllBook()
+    public void loadAllBook() //Load all book from the begining
     {
         DefaultTableModel table = (DefaultTableModel) SearchBookTable.getModel();
         ArrayList<Sach> arr = new ArrayList<Sach>();
@@ -72,7 +71,8 @@ public class ImportManagement extends javax.swing.JFrame {
         SearchBookTable.setModel(table);
     }
     
-    private void loadAllSupplier() {
+    private void loadAllSupplier() //load all Supplier from the begining
+    {
         DefaultTableModel tableModel = (DefaultTableModel) SearchSupplierTable.getModel();
         ArrayList<NhaCungCap> arr = new ArrayList<NhaCungCap>();
         NhaCungCap_BUS nhacungcap_BUS = new NhaCungCap_BUS();
@@ -93,7 +93,7 @@ public class ImportManagement extends javax.swing.JFrame {
         SearchSupplierTable.setModel(tableModel);
     }
     
-    public void loadTypeCbData()
+    public void loadTypeCbData() //load type data to the Data ComboBox
     {
         connection = new DBConnection();
         String query = "select TenTheLoai from Sach";
@@ -109,7 +109,7 @@ public class ImportManagement extends javax.swing.JFrame {
         }
     }
     
-    public void resetData() // reset the Jtable to null
+    public void resetSearchBookData() // reset SelectBookTable data to null
     {
         DefaultTableModel tableModel = (DefaultTableModel) SearchBookTable.getModel();
         tableModel.setRowCount(0);
@@ -122,9 +122,9 @@ public class ImportManagement extends javax.swing.JFrame {
         tableModel.setRowCount(0);
         SearchSupplierTable.setModel(tableModel);
     }
-    public void seacrhBookWithFilter()
+    public void seacrhBookWithFilter() //Search books with filter
     {
-        resetData();
+        resetSearchBookData();
         String name = SupplySearchTxb.getText();
         String type = TypeCb.getSelectedItem().toString();
         if(type == "All")
@@ -174,7 +174,7 @@ public class ImportManagement extends javax.swing.JFrame {
         total = 0;
     }
     
-    public void resetSelectTable() { //reset SelectBookTable to Null
+    public void resetSearchBookTable() { //reset SelectBookTable to Null
         DefaultTableModel tableModel = (DefaultTableModel) SearchBookTable.getModel();
         tableModel.setRowCount(0);
         SearchBookTable.setModel(tableModel);
@@ -190,9 +190,9 @@ public class ImportManagement extends javax.swing.JFrame {
         return id;
     }
     
-    public void SelectRow()
+    public void SelectRow() //Select row from SearchBookTable to add into BillTable
     {
-        total = 0;
+        total = 0; //when reset -> total = 0 & calculate again from the start
         DefaultTableModel choosetable = (DefaultTableModel) SearchBookTable.getModel();
         DefaultTableModel billtable = (DefaultTableModel) BillTable.getModel();     
         String id = choosetable.getValueAt(SearchBookTable.getSelectedRow(), 0).toString();
@@ -232,7 +232,8 @@ public class ImportManagement extends javax.swing.JFrame {
             } else {
                 selectarr.add(sach);
             }
-            resetSelectTable();
+            resetSearchBookTable();
+            //add to BillTable
             for (Sach sachFinal : selectarr) {
                 String idFinal = sachFinal.getMaSach();
                 String nameFinal = sachFinal.getTenSach();
@@ -251,14 +252,14 @@ public class ImportManagement extends javax.swing.JFrame {
     }
     
 
-   public void resetBillTable() { //reset SelectBookTable to Null
+   public void resetBillTable() { //reset BillTable to Null
         DefaultTableModel tableModel = (DefaultTableModel) BillTable.getModel();
         tableModel.setRowCount(0);
         BillTable.setModel(tableModel);
         exist = false;
     }
     
-   public void resetBillTableAfterConfirm() { //reset SelectTable after confirm the bill
+   public void resetBillTableAfterConfirm() { //reset BillTable after confirm the bill
         DefaultTableModel tableModel = (DefaultTableModel) BillTable.getModel();
         tableModel.setRowCount(0);
         BillTable.setModel(tableModel);
@@ -266,7 +267,7 @@ public class ImportManagement extends javax.swing.JFrame {
         exist = false;
     }
    
-   public String getSupplierID(String search)
+   public String getSupplierID(String search) //Get Supplier ID by using Supplier's name
    {
        connection = new DBConnection();
        String query = "select * from NhaCungCap where TenNCC ='" + search + "'";
@@ -290,7 +291,7 @@ public class ImportManagement extends javax.swing.JFrame {
    }*/
 
 
-    public void SelectRowSupplier()
+    public void SelectRowSupplier() //Select row in the SearchSupplierTable
     {
         DefaultTableModel tableModel = (DefaultTableModel) SearchSupplierTable.getModel();
             //Get Data from Table
@@ -702,6 +703,11 @@ public class ImportManagement extends javax.swing.JFrame {
         DeleteBtn1.setBackground(new java.awt.Color(255, 51, 102));
         DeleteBtn1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         DeleteBtn1.setText("CANCEL");
+        DeleteBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteBtn1ActionPerformed(evt);
+            }
+        });
         CreateBillTab.add(DeleteBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 510, 116, 51));
 
         TotalText.setText("0.0");
@@ -891,12 +897,26 @@ public class ImportManagement extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    //Edit Supplier Button event handling
     private void EditChangeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditChangeBtnMouseClicked
         ParentPanel.setSelectedIndex(2);
     }//GEN-LAST:event_EditChangeBtnMouseClicked
 
+    
+    //Search button in SelectBookTable's event handling
     private void SearchBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBtn2ActionPerformed
         // Search btn in Search Book Tab
+        if(AllRadio.isSelected() == true)
+        {
+            resetSearchBookData();
+            loadAllData();
+        } else if (FilterRadio.isSelected() == true)
+        {
+            seacrhBookWithFilter();
+            resetCbData();
+            loadTypeCbData();
+        }
         
     }//GEN-LAST:event_SearchBtn2ActionPerformed
 
@@ -947,13 +967,56 @@ public class ImportManagement extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please generate bill ID by cliking the button 'GENERATE ID'");
         }
         else 
+        {
             nhap.setMaPhieuNhap(ImportBillText.getText());
             nhap.setMaNhaCC(getSupplierID(SupplierID.getSelectedItem().toString()));
             nhap.setNgayTaoPhieu(date);
             nhap.setNgayNhapKho(date);
             nhap.setTongTien(total);
             nhap.setMaTK(PublicClass.StaffID);
+            PhieuNhapKho_BUS phieunhapkho_BUS = new PhieuNhapKho_BUS();
+            phieunhapkho_BUS.addPhieuNhapKho(nhap);
             
+            for (Sach sach : selectarr)
+            {
+                ChiTietPhieuNhap chitietnhap = new ChiTietPhieuNhap();
+                chitietnhap.setMaPhieuNhap(ImportBillText.getText());
+                chitietnhap.setMaSach(sach.getMaSach());
+                chitietnhap.setSoLuong(sach.getSoLuong());
+                ChiTietPhieuNhap_BUS chitietphieunhap_BUS = new ChiTietPhieuNhap_BUS();
+                chitietphieunhap_BUS.addChiTietPhieuNhap(chitietnhap);
+                
+                Sach sachStorage = new Sach();
+                int amount_old = 0;
+                ArrayList<Sach> arrStorage = new ArrayList<Sach>();
+                Sach_BUS sach_BUS = new Sach_BUS();
+                arrStorage = sach_BUS.searchSach(sach.getTenSach(), "", "");
+                try
+                {
+                    for (int i = 0; i < arrStorage.size(); i++) {
+                        sachStorage = arrStorage.get(i);
+                        String id = sachStorage.getMaSach();
+                        String name1 = sachStorage.getTenSach();
+                        String author1 = sachStorage.getTenTG();
+                        String type1 = sachStorage.getTenTheLoai();
+                        amount_old = sachStorage.getSoLuong();
+                        double price = sachStorage.getGia();
+                    }
+                } catch (Exception e) {
+                    System.err.println("No thing!");
+                }
+                sach.setSoLuong(amount_old - sach.getSoLuong());
+                sach_BUS.updateSach(sach);
+            }
+            System.err.println("Succeed!");
+        }
+        resetBillTableAfterConfirm();
+        resetSearchBookTable();
+        resetShowBillTable();
+        resetDetailBillTable();
+        loadAllBill();
+        loadAllBook();
+        ParentPanel.setSelectedIndex(0);
     }//GEN-LAST:event_ConfirmBtnActionPerformed
 
                                  
@@ -1017,6 +1080,18 @@ public class ImportManagement extends javax.swing.JFrame {
         // Move to Add Tab, no thing to set
         ParentPanel.setSelectedIndex(1);
     }//GEN-LAST:event_SelectSupplierBtn1ActionPerformed
+
+    private void DeleteBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtn1ActionPerformed
+        // TODO add your handling code here:
+        resetBillTableAfterConfirm();
+        resetSearchBookData();
+        resetShowBillTable();
+        resetDetailBillTable();
+        loadAllBill();
+        loadAllBook();
+        ParentPanel.setSelectedIndex(0);
+        
+    }//GEN-LAST:event_DeleteBtn1ActionPerformed
 
     
 

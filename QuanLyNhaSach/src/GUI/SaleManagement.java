@@ -291,7 +291,7 @@ public class SaleManagement extends javax.swing.JFrame {
     }
 
     public void SelectRow() { //SelectRow to add in searchBooktable to SelectBookTable
-        total = 0; //if reset -> total = 0 & calculator again from the start
+        total = 0; //if reset -> total = 0 & calculate again from the start
         DefaultTableModel selecttable = (DefaultTableModel) SelectBookTable.getModel();
         DefaultTableModel tableModel = (DefaultTableModel) SearchBookTable.getModel();
         //Get Data from Table
@@ -910,7 +910,8 @@ public class SaleManagement extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please Generate Bill ID by clicking the button 'ID Generate'...");
         } else if (ReceiveTxb.getText().equals("") || Double.parseDouble(ReceiveTxb.getText()) < total) { //If receive < total
             JOptionPane.showMessageDialog(this, "Receive money doesn't match with Total cost!");
-        } else {
+        } else 
+        {
             //Start Create HoaDon
             hoaDon.setMaHoaDon(IDBill.getText()); 
             hoaDon.setMaKH(getCustomerID(CustomerID.getSelectedItem().toString()));

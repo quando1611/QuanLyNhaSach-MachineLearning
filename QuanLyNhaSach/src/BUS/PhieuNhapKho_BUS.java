@@ -1,0 +1,26 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package BUS;
+
+import DTO.*;
+import DAL.*;
+import java.util.ArrayList;
+
+/**
+ *
+ * @author QUAN DO
+ */
+public class PhieuNhapKho_BUS {
+    PhieuNhapKho_DAL phieunhapkho_DAL = new PhieuNhapKho_DAL();
+    public ArrayList<PhieuNhapKho> danhsachPhieuNhapKho()
+    {
+        return phieunhapkho_DAL.danhsachPhieuNhap();
+    }
+    
+    public boolean addPhieuNhapKho(PhieuNhapKho phieunhap)
+    {
+        return phieunhapkho_DAL.addPhieuNhapKho(phieunhap);
+    }
+}
