@@ -75,7 +75,7 @@ public class TaiKhoan_DAL {
     public boolean deleteTaiKhoan(String matk)
     {
         connection = new DBConnection();
-        String query = "delete from Sach where MaSach = '" + matk + "'";
+        String query = "delete from TaiKhoan where MaTK = '" + matk + "'";
         System.err.println(query);
         try {
             ResultSet rs = connection.ExcuteQueryUpdateDB(query);
@@ -91,7 +91,7 @@ public class TaiKhoan_DAL {
     {
         connection = new DBConnection();
         ArrayList<TaiKhoan> result = new ArrayList<TaiKhoan>();
-        String query = "select * from where HoTen like '%" + search + "%' or Email like '%" + search + "%' or SDT like '%" + search + "%'";
+        String query = "select * from TaiKhoan where HoTen like '%" + search + "%' or Email like '%" + search + "%' or SDT like '%" + search + "%'";
         System.out.println(query);
         try{
             ResultSet rs = connection.ExcuteQueryGetTable(query);
@@ -108,6 +108,52 @@ public class TaiKhoan_DAL {
     {
         System.out.println("Null Table");
     }
+        return result;
+    }
+    
+    public ArrayList<TaiKhoan> getAllAdmin() {
+       connection = new DBConnection();
+       ArrayList<TaiKhoan> result = new ArrayList<TaiKhoan>();
+       String query = "select * from TaiKhoan where MaPhanQuyen = 'admin'";
+       System.out.println(query);
+       try{
+            ResultSet rs = connection.ExcuteQueryGetTable(query);
+            while (rs.next()) {                
+                TaiKhoan taikhoan = new TaiKhoan();
+                taikhoan.setMaTK(rs.getString("MaTK"));
+                taikhoan.setHoTen(rs.getString("HoTen"));
+                taikhoan.setDiaChi(rs.getString("DiaChi"));
+                taikhoan.setSDT(rs.getString("SDT"));
+                taikhoan.setEmail(rs.getString("Email"));
+                result.add(taikhoan);
+            }
+        }catch(SQLException e)
+        {
+            System.out.println("Null Table!");
+        }
+        return result;
+    }
+    
+    public ArrayList<TaiKhoan> getAllStaff() {
+       connection = new DBConnection();
+       ArrayList<TaiKhoan> result = new ArrayList<TaiKhoan>();
+       String query = "select * from TaiKhoan where MaPhanQuyen = 'Sale'";
+       System.out.println(query);
+       try{
+            ResultSet rs = connection.ExcuteQueryGetTable(query);
+            while (rs.next()) {                
+                TaiKhoan taikhoan = new TaiKhoan();
+                taikhoan.setMaTK(rs.getString("MaTK"));
+                taikhoan.setHoTen(rs.getString("HoTen"));
+                taikhoan.setDiaChi(rs.getString("DiaChi"));
+                taikhoan.setSDT(rs.getString("SDT"));
+                taikhoan.setEmail(rs.getString("Email"));
+                result.add(taikhoan);
+            }
+        }catch(SQLException e)
+        {
+            System.out.println("Null Table!");
+        }
         return result;
     }
     

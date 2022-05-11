@@ -246,7 +246,7 @@ public class ImportManagement extends javax.swing.JFrame {
             sach.setTenTG(author);
             sach.setTenTheLoai(type);
             sach.setSoLuong(amount);
-            sach.setGia(price);
+            sach.setGia(price * (float)PublicClass.ImportPrice);
             if (selectarr.size() > 0) {
                 for (Sach existsach : selectarr) {
                     if (existsach.getMaSach().equals(id)) {
@@ -685,17 +685,14 @@ public class ImportManagement extends javax.swing.JFrame {
 
         BillTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
-                "ID", "Name", "Author", "Type", "Amout", "Price"
+                "ID", "Name", "Amout", "Price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -707,6 +704,7 @@ public class ImportManagement extends javax.swing.JFrame {
         BillTable.setGridColor(new java.awt.Color(0, 0, 0));
         BillTable.setShowGrid(true);
         jScrollPane3.setViewportView(BillTable);
+        BillTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         CreateBillTab.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 930, 280));
 

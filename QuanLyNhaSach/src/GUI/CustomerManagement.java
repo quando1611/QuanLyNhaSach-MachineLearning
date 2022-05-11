@@ -237,6 +237,11 @@ public class CustomerManagement extends javax.swing.JFrame {
         DeleteBtn.setBackground(new java.awt.Color(255, 51, 102));
         DeleteBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         DeleteBtn.setText("DELETE");
+        DeleteBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DeleteBtnMouseClicked(evt);
+            }
+        });
         DeleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DeleteBtnActionPerformed(evt);
@@ -521,6 +526,10 @@ public class CustomerManagement extends javax.swing.JFrame {
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void DeleteBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBtnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DeleteBtnMouseClicked
 
     /**
      * @param args the command line arguments

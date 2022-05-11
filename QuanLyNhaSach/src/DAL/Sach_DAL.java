@@ -48,7 +48,7 @@ public class Sach_DAL {
     {
         connection = new DBConnection();
         ArrayList<Sach> result = new ArrayList<Sach>();
-        String query = "select * from Sach where TenSach like '%" + name + "%' and TenTheLoai like '%"+ type + "%' and TenTacGia like '%" + author +"%'";
+        String query = "select * from Sach where TenSach like '%" + name + "%' or TenTheLoai like '%"+ type + "%' or TenTacGia like '%" + author +"%'";
         System.out.println(query);
         try{
             ResultSet rs = connection.ExcuteQueryGetTable(query);
