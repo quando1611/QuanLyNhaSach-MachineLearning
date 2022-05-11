@@ -318,7 +318,7 @@ public class ImportManagement extends javax.swing.JFrame {
         ParentPanel = new javax.swing.JTabbedPane();
         SearchTab = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        SearchTable = new javax.swing.JTable();
+        SearchSupplierTable = new javax.swing.JTable();
         SupplySearchTxb = new javax.swing.JTextField();
         SearchBtn = new javax.swing.JButton();
         DeleteBtn = new javax.swing.JButton();
@@ -421,27 +421,28 @@ public class ImportManagement extends javax.swing.JFrame {
 
         jScrollPane1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        SearchTable.setModel(new javax.swing.table.DefaultTableModel(
+        SearchSupplierTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Name", "Address", "PhoneNumber", "Email"
+                "ID", "Name"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        SearchTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        SearchTable.setGridColor(new java.awt.Color(0, 0, 0));
-        SearchTable.setShowGrid(true);
-        jScrollPane1.setViewportView(SearchTable);
-        SearchTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        SearchSupplierTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        SearchSupplierTable.setColumnSelectionAllowed(true);
+        SearchSupplierTable.setGridColor(new java.awt.Color(0, 0, 0));
+        SearchSupplierTable.setShowGrid(true);
+        jScrollPane1.setViewportView(SearchSupplierTable);
+        SearchSupplierTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         SearchTab.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 935, 590));
 
@@ -503,7 +504,7 @@ public class ImportManagement extends javax.swing.JFrame {
 
         AddSupplierBtn.setBackground(new java.awt.Color(255, 204, 204));
         AddSupplierBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        AddSupplierBtn.setText("ADD CUSTOMER");
+        AddSupplierBtn.setText("ADD SUPPLIER");
         AddSupplierBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AddSupplierBtnActionPerformed(evt);
@@ -1086,15 +1087,13 @@ public class ImportManagement extends javax.swing.JFrame {
     private javax.swing.JButton SearchBtn;
     private javax.swing.JButton SearchBtn1;
     private javax.swing.JButton SearchBtn2;
+    private javax.swing.JTable SearchSupplierTable;
     private javax.swing.JPanel SearchTab;
-    private javax.swing.JTable SearchTable;
     private javax.swing.JTextField SearchText;
     private javax.swing.JTextField SearchTxb8;
     private javax.swing.JButton SelectBookBtn;
-    private javax.swing.JButton SelectBookBtn1;
-    private javax.swing.JTable ShowBillTable;
     private javax.swing.JButton SelectSupplierBtn1;
-    
+    private javax.swing.JTable ShowBillTable;
     private javax.swing.JButton SubtractBtn;
     private javax.swing.JComboBox<String> SupplierID;
     private javax.swing.JTextField SupplySearchTxb;
