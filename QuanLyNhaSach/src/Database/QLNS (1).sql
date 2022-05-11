@@ -170,3 +170,4 @@ INSERT INTO Sach VALUES('Test1', 'JavaBook', 'Coder', 'Lap Trinh', 10, 50000)
 --Update
 ALTER TABLE PhieuNhapKho
 ALTER COLUMN NgayNhapKho date
+alter table PhieuNhapKho add TongTien money
