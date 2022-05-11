@@ -82,7 +82,7 @@ public class StaffManagement extends javax.swing.JFrame {
             }
         }catch (Exception e)
         {
-            System.err.println("Not thing to show");
+            System.err.println("No thing to show");
         }
         SearchTable.setModel(tableModel);
     }

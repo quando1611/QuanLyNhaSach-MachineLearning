@@ -21,9 +21,9 @@ public class ChiTietPhieuNhap_BUS {
         return chitietphieunhap_DAL.addChiTietPhieuNhap(chitietnhap);
     }
     
-    public ArrayList<ChiTietPhieuNhap> danhsachChiTietPhieuNhap()
+    public ArrayList<ChiTietPhieuNhap> danhsachChiTietPhieuNhap(String id)
     {
-        return chitietphieunhap_DAL.danhSachChiTietPhieuNhap();
+        return chitietphieunhap_DAL.danhSachChiTietPhieuNhap(id);
     }
     
     public ArrayList<ChiTietPhieuNhap> searchChiTietPhieuNhapWithKhachHangID(String search)

@@ -128,6 +128,20 @@ public class ImportManagement extends javax.swing.JFrame {
             System.err.println("No thing to show!");
         }
     }
+    public String getBookName(String id) {      //Get bookname by ID
+        connection = new DBConnection();
+        String name = "";
+        String query = "select * from Sach where MaSach ='" + id + "'";
+        try {
+            ResultSet rs = connection.ExcuteQueryGetTable(query);
+            while (rs.next()) {
+                name = rs.getString("TenSach");
+            }
+        } catch (Exception e) {
+            System.err.println("No thing!");
+        }
+        return name;
+    }
     
     public void resetSearchBookData() // reset SelectBookTable data to null
     {
@@ -209,16 +223,16 @@ public class ImportManagement extends javax.swing.JFrame {
     }
 
     public void resetDetailBillTable() {    //reset DetailBillTable to Null
-        DefaultTableModel tableModel = (DefaultTableModel) BillDetailTable.getModel();
+        DefaultTableModel tableModel = (DefaultTableModel) DetailBillTable.getModel();
         tableModel.setRowCount(0);
-        BillDetailTable.setModel(tableModel);
+        DetailBillTable.setModel(tableModel);
     }
 
     public void resetBillShowTable() //reset BillShowTable to Null
     {
-        DefaultTableModel tableModel = (DefaultTableModel) ShowBillTable.getModel();
+        DefaultTableModel tableModel = (DefaultTableModel) BillShowTable.getModel();
         tableModel.setRowCount(0);
-        ShowBillTable.setModel(tableModel);
+        BillShowTable.setModel(tableModel);
     }
 
     public void resetReturnBillTable() //reset ReturnBillTable to Null
@@ -227,6 +241,9 @@ public class ImportManagement extends javax.swing.JFrame {
         tableModel.setRowCount(0);
         BillReturnTable.setModel(tableModel);
     }
+    
+    
+    
      public String randomID() // get random to generate ID for all of things
     {
         LocalDateTime local = LocalDateTime.now();
@@ -289,6 +306,32 @@ public class ImportManagement extends javax.swing.JFrame {
             BillTable.setModel(billtable);
             TotalText.setText(Double.toString(total));
 
+    }
+    
+    public void selectImportBillRow()
+    {
+        DefaultTableModel tableModel = (DefaultTableModel) BillShowTable.getModel();
+        DefaultTableModel tableDetailModel = (DefaultTableModel) DetailBillTable.getModel();
+        //Get Data from Table
+        String id = tableModel.getValueAt(BillShowTable.getSelectedRow(), 0).toString(); //Get MaHD from HoaDonTable to query and get data about ChiTietHoaDon in HoaDon
+        ArrayList<ChiTietPhieuNhap> arr = new ArrayList<ChiTietPhieuNhap>();
+        ChiTietPhieuNhap_BUS chiTietPhieuNhap_BUS = new ChiTietPhieuNhap_BUS();
+        arr = chiTietPhieuNhap_BUS.danhsachChiTietPhieuNhap(id);
+        ChiTietPhieuNhap chitiet = new ChiTietPhieuNhap();
+        try {
+            for (int i = 0; i < arr.size(); i++) {
+                chitiet = arr.get(i);
+                String chitietID = chitiet.getMaPhieuNhap();
+                String chitietSachID = chitiet.getMaSach();
+                String chitietTenSach = getBookName(chitietSachID);
+                int chitietSoLuong = chitiet.getSoLuong();
+                Object[] row = {chitietID, chitietTenSach, chitietSoLuong};
+                tableDetailModel.addRow(row);
+            }
+        } catch (Exception e) {
+            System.err.println("No thing!");
+        }
+        DetailBillTable.setModel(tableDetailModel);
     }
     
     
@@ -395,9 +438,9 @@ public class ImportManagement extends javax.swing.JFrame {
         DeleteBillBtn = new javax.swing.JButton();
         PurchasedBillTab = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        BillDetailTable = new javax.swing.JTable();
+        DetailBillTable = new javax.swing.JTable();
         jScrollPane5 = new javax.swing.JScrollPane();
-        ShowBillTable = new javax.swing.JTable();
+        BillShowTable = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         ReturnPurchaseBtn = new javax.swing.JButton();
         CancelPurchaseBtn = new javax.swing.JButton();
@@ -692,7 +735,7 @@ public class ImportManagement extends javax.swing.JFrame {
             }
         });
         BillTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        BillTable.setCellSelectionEnabled(true);
+        BillTable.setColumnSelectionAllowed(false);
         BillTable.setGridColor(new java.awt.Color(0, 0, 0));
         BillTable.setShowGrid(true);
         jScrollPane3.setViewportView(BillTable);
@@ -767,34 +810,33 @@ public class ImportManagement extends javax.swing.JFrame {
 
         jScrollPane4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        BillDetailTable.setModel(new javax.swing.table.DefaultTableModel(
+        DetailBillTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Name", "Author", "Type", "Amout", "Price"
+                "ID", "Name", "Amount", "Price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        BillDetailTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        BillDetailTable.setCellSelectionEnabled(true);
-        BillDetailTable.setGridColor(new java.awt.Color(0, 0, 0));
-        BillDetailTable.setShowGrid(true);
-        jScrollPane4.setViewportView(BillDetailTable);
-        BillDetailTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        DetailBillTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        DetailBillTable.setGridColor(new java.awt.Color(0, 0, 0));
+        DetailBillTable.setShowGrid(true);
+        jScrollPane4.setViewportView(DetailBillTable);
+        DetailBillTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         PurchasedBillTab.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 930, 260));
 
         jScrollPane5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        ShowBillTable.setModel(new javax.swing.table.DefaultTableModel(
+        BillShowTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -810,12 +852,17 @@ public class ImportManagement extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        ShowBillTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        ShowBillTable.setCellSelectionEnabled(true);
-        ShowBillTable.setGridColor(new java.awt.Color(0, 0, 0));
-        ShowBillTable.setShowGrid(true);
-        jScrollPane5.setViewportView(ShowBillTable);
-        ShowBillTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        BillShowTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        BillShowTable.setColumnSelectionAllowed(false);
+        BillShowTable.setGridColor(new java.awt.Color(0, 0, 0));
+        BillShowTable.setShowGrid(true);
+        BillShowTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BillShowTableMouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(BillShowTable);
+        BillShowTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         PurchasedBillTab.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 280));
 
@@ -885,7 +932,7 @@ public class ImportManagement extends javax.swing.JFrame {
             }
         });
         BillReturnTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        BillReturnTable.setCellSelectionEnabled(true);
+        BillReturnTable.setColumnSelectionAllowed(false);
         BillReturnTable.setGridColor(new java.awt.Color(0, 0, 0));
         BillReturnTable.setShowGrid(true);
         jScrollPane6.setViewportView(BillReturnTable);
@@ -1148,7 +1195,7 @@ public class ImportManagement extends javax.swing.JFrame {
         // Search Bill with Supplier ID
         resetBillShowTable();
         resetDetailBillTable();
-        DefaultTableModel billtable = (DefaultTableModel) ShowBillTable.getModel();
+        DefaultTableModel billtable = (DefaultTableModel) BillShowTable.getModel();
         String search = SuppliersID.getSelectedItem().toString();
         if (search.equals("All")) {
             loadAllBill();
@@ -1174,7 +1221,7 @@ public class ImportManagement extends javax.swing.JFrame {
             } catch (Exception e) {
                 System.out.println("No thing!");
             }
-            ShowBillTable.setModel(billtable);
+            BillShowTable.setModel(billtable);
         }
 
     }//GEN-LAST:event_SearchPurchaseBtnActionPerformed
@@ -1182,14 +1229,14 @@ public class ImportManagement extends javax.swing.JFrame {
     private void ReturnPurchaseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnPurchaseBtnActionPerformed
         // ReturnBill btn in Bill tab
         resetReturnBillTable();
-        DefaultTableModel billtable = (DefaultTableModel) ShowBillTable.getModel();
+        DefaultTableModel billtable = (DefaultTableModel) BillShowTable.getModel();
         PhieuNhapKho phieunhapkho = new PhieuNhapKho();
-        phieunhapkho.setMaPhieuNhap(billtable.getValueAt(ShowBillTable.getSelectedRow(), 0).toString());
-        phieunhapkho.setMaNhaCC(billtable.getValueAt(ShowBillTable.getSelectedRow(), 1).toString());
-        phieunhapkho.setMaTK(billtable.getValueAt(ShowBillTable.getSelectedRow(), 3).toString());
-        phieunhapkho.setNgayNhapKho(billtable.getValueAt(ShowBillTable.getSelectedRow(), 4).toString());
-        phieunhapkho.setNgayTaoPhieu(billtable.getValueAt(ShowBillTable.getSelectedRow(), 5).toString());
-        phieunhapkho.setTongTien(Double.parseDouble(billtable.getValueAt(ShowBillTable.getSelectedRow(), 5).toString()));
+        phieunhapkho.setMaPhieuNhap(billtable.getValueAt(BillShowTable.getSelectedRow(), 0).toString());
+        phieunhapkho.setMaNhaCC(billtable.getValueAt(BillShowTable.getSelectedRow(), 1).toString());
+        phieunhapkho.setMaTK(billtable.getValueAt(BillShowTable.getSelectedRow(), 3).toString());
+        phieunhapkho.setNgayNhapKho(billtable.getValueAt(BillShowTable.getSelectedRow(), 4).toString());
+        phieunhapkho.setNgayTaoPhieu(billtable.getValueAt(BillShowTable.getSelectedRow(), 5).toString());
+        phieunhapkho.setTongTien(Double.parseDouble(billtable.getValueAt(BillShowTable.getSelectedRow(), 5).toString()));
 
         PhieuNhapKho_BUS phieunhapkho_BUS = new PhieuNhapKho_BUS();
         phieunhapkho_BUS.updatePhieuNhapKho(phieunhapkho);
@@ -1226,6 +1273,12 @@ public class ImportManagement extends javax.swing.JFrame {
             ParentPanel.setSelectedIndex(0);
         }
     }//GEN-LAST:event_UpdateSupplierBtnActionPerformed
+
+    private void BillShowTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BillShowTableMouseClicked
+        // TODO add your handling code here:
+        resetDetailBillTable();
+        selectImportBillRow();
+    }//GEN-LAST:event_BillShowTableMouseClicked
 
     
 
@@ -1272,8 +1325,8 @@ public class ImportManagement extends javax.swing.JFrame {
     private javax.swing.JTextField AmountTxb;
     private javax.swing.JTextField AuthorSearchTxb;
     private javax.swing.JLabel BackBtn;
-    private javax.swing.JTable BillDetailTable;
     private javax.swing.JTable BillReturnTable;
+    private javax.swing.JTable BillShowTable;
     private javax.swing.JTable BillTable;
     private javax.swing.JButton CancelBillBtn;
     private javax.swing.JButton CancelPurchaseBtn;
@@ -1282,6 +1335,7 @@ public class ImportManagement extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser DateBox;
     private javax.swing.JButton DeleteBillBtn;
     private javax.swing.JButton DeleteBtn;
+    private javax.swing.JTable DetailBillTable;
     private javax.swing.JButton EditChangeBtn;
     private javax.swing.JRadioButton FilterRadio;
     private javax.swing.JButton IDBtn;
@@ -1303,7 +1357,6 @@ public class ImportManagement extends javax.swing.JFrame {
     private javax.swing.JTextField SearchTxb8;
     private javax.swing.JButton SelectBookBtn;
     private javax.swing.JButton SelectSupplierBtn1;
-    private javax.swing.JTable ShowBillTable;
     private javax.swing.JButton SubtractBtn;
     private javax.swing.JComboBox<String> SupplierNameCb;
     private javax.swing.JComboBox<String> SuppliersID;
@@ -1335,7 +1388,7 @@ public class ImportManagement extends javax.swing.JFrame {
 
     private void loadAllBill() {
         //Load All bill to  BillShowTable
-        DefaultTableModel table = (DefaultTableModel) ShowBillTable.getModel();
+        DefaultTableModel table = (DefaultTableModel) BillShowTable.getModel();
         ArrayList<PhieuNhapKho> arr = new ArrayList<PhieuNhapKho>();
         PhieuNhapKho_BUS phieunhapkho_BUS = new PhieuNhapKho_BUS();
         arr = phieunhapkho_BUS.danhsachPhieuNhapKho();
@@ -1356,7 +1409,7 @@ public class ImportManagement extends javax.swing.JFrame {
             } catch (Exception e) {
                 System.err.println("No thing!");
             }
-            ShowBillTable.setModel(table);
+            BillShowTable.setModel(table);
         }
     }
 

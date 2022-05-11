@@ -32,11 +32,11 @@ public class ChiTietPhieuNhap_DAL{
         }
         }
         
-        public ArrayList<ChiTietPhieuNhap> danhSachChiTietPhieuNhap()
+        public ArrayList<ChiTietPhieuNhap> danhSachChiTietPhieuNhap(String id)
     {
         connection = new DBConnection();
         ArrayList<ChiTietPhieuNhap> result = new ArrayList<ChiTietPhieuNhap>();
-        String query = "select * from ChiTietPhieuNhap ";
+        String query = "select * from ChiTietPhieuNhap where MaPhieuNhap = '" + id + "'";
         System.out.println(query);
         try{
             ResultSet rs = connection.ExcuteQueryGetTable(query);
