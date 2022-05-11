@@ -4,7 +4,6 @@
  */
 package GUI;
 
-import BUS.ChiTietHoaDon_BUS;
 import BUS.Sach_BUS;
 import BUS.NhaCungCap_BUS;
 import DTO.NhaCungCap;
@@ -251,7 +250,7 @@ public class ImportManagement extends javax.swing.JFrame {
         }
     }
     
-<<<<<<< HEAD
+
    public void resetBillTable() { //reset SelectBookTable to Null
         DefaultTableModel tableModel = (DefaultTableModel) BillTable.getModel();
         tableModel.setRowCount(0);
@@ -290,7 +289,7 @@ public class ImportManagement extends javax.swing.JFrame {
        String query = "select"
    }*/
 
-=======
+
     public void SelectRowSupplier()
     {
         DefaultTableModel tableModel = (DefaultTableModel) SearchSupplierTable.getModel();
@@ -302,7 +301,7 @@ public class ImportManagement extends javax.swing.JFrame {
             NameTxb.enable(false);
             
     }
->>>>>>> e24acee903d6e87d8ccc59eb1b029c772c5ae13a
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -926,7 +925,7 @@ public class ImportManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_SelectBookBtnActionPerformed
 
     private void BackBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackBtnMouseClicked
-<<<<<<< HEAD
+
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_BackBtnMouseClicked
@@ -956,10 +955,7 @@ public class ImportManagement extends javax.swing.JFrame {
             
     }//GEN-LAST:event_ConfirmBtnActionPerformed
 
-=======
-        // Return to Home
-        this.dispose(); 
-    }//GEN-LAST:event_BackBtnMouseClicked
+                                 
 
     private void SearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBtnActionPerformed
         // Search Supplier
@@ -1022,7 +1018,7 @@ public class ImportManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_SelectSupplierBtn1ActionPerformed
 
     
->>>>>>> e24acee903d6e87d8ccc59eb1b029c772c5ae13a
+
     /**
      * @param args the command line arguments
      */
