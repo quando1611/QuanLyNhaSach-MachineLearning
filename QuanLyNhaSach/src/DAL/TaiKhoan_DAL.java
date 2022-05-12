@@ -28,10 +28,12 @@ public class TaiKhoan_DAL {
             while (rs.next()) {                
                 TaiKhoan taikhoan = new TaiKhoan();
                 taikhoan.setMaTK(rs.getString("MaTK"));
-                taikhoan.setHoTen(rs.getString("HoTen"));
-                taikhoan.setDiaChi(rs.getString("DiaChi"));
-                taikhoan.setSDT(rs.getString("SDT"));
                 taikhoan.setEmail(rs.getString("Email"));
+                taikhoan.setMatKhau(rs.getString("MatKhau"));
+                taikhoan.setHoTen(rs.getString("HoTen"));
+                taikhoan.setMaPhanQuyen(rs.getString("MaPhanQuyen")); 
+                taikhoan.setDiaChi(rs.getString("DiaChi"));
+                taikhoan.setSDT(rs.getString("DienThoai"));
                 result.add(taikhoan);
             }
         }catch(SQLException e)
@@ -60,7 +62,7 @@ public class TaiKhoan_DAL {
     public boolean updateTaiKhoan(TaiKhoan taikhoan)
     {
         connection = new DBConnection();
-        String query = "update TaiKhoan set  DiaChi = '" + taikhoan.getDiaChi() + "', SDT = '" + taikhoan.getSDT() + "', Email = '" + taikhoan.getEmail() + "','" + "', MaPhanQuen = '" + taikhoan.getMaPhanQuyen() + "' where HoTen = '" + taikhoan.getHoTen() + "'";
+        String query = "update TaiKhoan set  DiaChi = '" + taikhoan.getDiaChi() + "', DienThoai = '" + taikhoan.getSDT() + "', Email = '" + taikhoan.getEmail() + "', MaPhanQuyen = '" + taikhoan.getMaPhanQuyen() + "' where MaTK = '" + taikhoan.getMaTK() + "'";
         System.err.println(query);
         try {
             ResultSet rs = connection.ExcuteQueryUpdateDB(query);
@@ -91,17 +93,19 @@ public class TaiKhoan_DAL {
     {
         connection = new DBConnection();
         ArrayList<TaiKhoan> result = new ArrayList<TaiKhoan>();
-        String query = "select * from TaiKhoan where HoTen like '%" + search + "%' or Email like '%" + search + "%' or SDT like '%" + search + "%'";
+        String query = "select * from TaiKhoan where HoTen like '%" + search + "%' or Email like '%" + search + "%' or DienThoai like '%" + search + "%'";
         System.out.println(query);
         try{
             ResultSet rs = connection.ExcuteQueryGetTable(query);
             while (rs.next()) {  
                 TaiKhoan taikhoan = new TaiKhoan();
                 taikhoan.setMaTK(rs.getString("MaTK"));
-                taikhoan.setHoTen(rs.getString("HoTen"));
-                taikhoan.setDiaChi(rs.getString("DiaChi"));
-                taikhoan.setSDT(rs.getString("SDT"));
                 taikhoan.setEmail(rs.getString("Email"));
+                taikhoan.setMatKhau(rs.getString("MatKhau"));
+                taikhoan.setHoTen(rs.getString("HoTen"));
+                taikhoan.setMaPhanQuyen(rs.getString("MaPhanQuyen")); 
+                taikhoan.setDiaChi(rs.getString("DiaChi"));
+                taikhoan.setSDT(rs.getString("DienThoai"));
                 result.add(taikhoan);
             }
     }catch(SQLException e)
@@ -114,17 +118,19 @@ public class TaiKhoan_DAL {
     public ArrayList<TaiKhoan> getAllAdmin() {
        connection = new DBConnection();
        ArrayList<TaiKhoan> result = new ArrayList<TaiKhoan>();
-       String query = "select * from TaiKhoan where MaPhanQuyen = 'admin'";
+       String query = "select * from TaiKhoan where MaPhanQuyen = 'Admin'";
        System.out.println(query);
        try{
             ResultSet rs = connection.ExcuteQueryGetTable(query);
             while (rs.next()) {                
                 TaiKhoan taikhoan = new TaiKhoan();
                 taikhoan.setMaTK(rs.getString("MaTK"));
-                taikhoan.setHoTen(rs.getString("HoTen"));
-                taikhoan.setDiaChi(rs.getString("DiaChi"));
-                taikhoan.setSDT(rs.getString("SDT"));
                 taikhoan.setEmail(rs.getString("Email"));
+                taikhoan.setMatKhau(rs.getString("MatKhau"));
+                taikhoan.setHoTen(rs.getString("HoTen"));
+                taikhoan.setMaPhanQuyen(rs.getString("MaPhanQuyen")); 
+                taikhoan.setDiaChi(rs.getString("DiaChi"));
+                taikhoan.setSDT(rs.getString("DienThoai"));
                 result.add(taikhoan);
             }
         }catch(SQLException e)
@@ -144,10 +150,12 @@ public class TaiKhoan_DAL {
             while (rs.next()) {                
                 TaiKhoan taikhoan = new TaiKhoan();
                 taikhoan.setMaTK(rs.getString("MaTK"));
-                taikhoan.setHoTen(rs.getString("HoTen"));
-                taikhoan.setDiaChi(rs.getString("DiaChi"));
-                taikhoan.setSDT(rs.getString("SDT"));
                 taikhoan.setEmail(rs.getString("Email"));
+                taikhoan.setMatKhau(rs.getString("MatKhau"));
+                taikhoan.setHoTen(rs.getString("HoTen"));
+                taikhoan.setMaPhanQuyen(rs.getString("MaPhanQuyen")); 
+                taikhoan.setDiaChi(rs.getString("DiaChi"));
+                taikhoan.setSDT(rs.getString("DienThoai"));
                 result.add(taikhoan);
             }
         }catch(SQLException e)

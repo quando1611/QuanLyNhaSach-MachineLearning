@@ -45,11 +45,12 @@ public class StaffManagement extends javax.swing.JFrame {
             {
                 taikhoan = arr.get(i);
                 String id = taikhoan.getMaTK();
+                String email = taikhoan.getEmail();
+                String matkhau = taikhoan.getMatKhau();
                 String hoten = taikhoan.getHoTen();
                 String diachi = taikhoan.getDiaChi();
                 String sdt = taikhoan.getSDT();
-                String email = taikhoan.getEmail();
-                Object[]row = {id, hoten, diachi, sdt, email};
+                Object[]row = {id, email, matkhau, hoten, diachi, sdt };
                 tableModel.addRow(row);
             }
         }catch (Exception e)
@@ -73,11 +74,12 @@ public class StaffManagement extends javax.swing.JFrame {
             {
                 taikhoan = arr.get(i);
                 String id = taikhoan.getMaTK();
+                String email = taikhoan.getEmail();
+                String matkhau = taikhoan.getMatKhau();
                 String hoten = taikhoan.getHoTen();
                 String diachi = taikhoan.getDiaChi();
                 String sdt = taikhoan.getSDT();
-                String email = taikhoan.getEmail();
-                Object[]row = {id, hoten, diachi, sdt, email};
+                Object[]row = {id, email, matkhau, hoten, diachi, sdt };
                 tableModel.addRow(row);
             }
         }catch (Exception e)
@@ -100,11 +102,12 @@ public class StaffManagement extends javax.swing.JFrame {
             {
                 taikhoan = arr.get(i);
                 String id = taikhoan.getMaTK();
+                String email = taikhoan.getEmail();
+                String matkhau = taikhoan.getMatKhau();
                 String hoten = taikhoan.getHoTen();
                 String diachi = taikhoan.getDiaChi();
                 String sdt = taikhoan.getSDT();
-                String email = taikhoan.getEmail();
-                Object[]row = {id, hoten, diachi, sdt, email};
+                Object[]row = {id, email, matkhau, hoten, diachi, sdt };
                 tableModel.addRow(row);
             }
         }catch (Exception e)
@@ -146,7 +149,6 @@ public class StaffManagement extends javax.swing.JFrame {
         NameText.setText("");
         AddressText.setText("");
         PhoneText.setText("");
-        
     }
     
     
@@ -172,13 +174,12 @@ public class StaffManagement extends javax.swing.JFrame {
         String address = tableModel.getValueAt(SearchTable.getSelectedRow(), 4).toString();
         String phone = tableModel.getValueAt(SearchTable.getSelectedRow(), 5).toString();
         //Set TextField
-        NameText.setText(name);
-        NameText.enable(false);
         EmailText.setText(email);
         PassText.setText(pass);
+        NameText.setText(name);
         AddressText.setText(address);
         PhoneText.setText(phone);
-        
+        RoleCb.setSelectedItem("Sale");
     }
        
     
@@ -228,6 +229,7 @@ public class StaffManagement extends javax.swing.JFrame {
         AddressText = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel2.setBackground(new java.awt.Color(153, 153, 200));
 
@@ -278,7 +280,7 @@ public class StaffManagement extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Name", "Address", "PhoneNumber", "Email", "Pass"
+                "ID", "Email", "Pass", "Name", "Address", "PhoneNumber"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -290,7 +292,6 @@ public class StaffManagement extends javax.swing.JFrame {
             }
         });
         SearchTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        SearchTable.setColumnSelectionAllowed(true);
         SearchTable.setGridColor(new java.awt.Color(0, 0, 0));
         SearchTable.setShowGrid(true);
         jScrollPane1.setViewportView(SearchTable);
@@ -419,7 +420,7 @@ public class StaffManagement extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel5.setText("Role :");
-        AddTab.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 430, -1, -1));
+        AddTab.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 400, -1, -1));
 
         AddCustomerBtn.setBackground(new java.awt.Color(153, 255, 153));
         AddCustomerBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -459,7 +460,7 @@ public class StaffManagement extends javax.swing.JFrame {
 
         AddTab.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 15, 3, 490));
 
-        AddTab.add(RoleCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 420, 240, 50));
+        AddTab.add(RoleCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 390, 240, 50));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel6.setText("Full Name :");
@@ -507,6 +508,7 @@ public class StaffManagement extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void SearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBtnActionPerformed
@@ -544,7 +546,7 @@ public class StaffManagement extends javax.swing.JFrame {
         }
         else
         {
-            taikhoan.setMaTK("C" + randomID());
+            taikhoan.setMaTK("A" + randomID());
             taikhoan.setEmail(EmailText.getText());
             taikhoan.setMatKhau(PassText.getText());
             taikhoan.setHoTen(NameText.getText());
@@ -556,6 +558,7 @@ public class StaffManagement extends javax.swing.JFrame {
         taikhoan_BUS.addTaiKhoan(taikhoan);
         JOptionPane.showMessageDialog(this, "Add Staff success!");
         reset();
+        ResetText();
         loadAllStaff();
         ParentPanel.setSelectedIndex(0);
     }//GEN-LAST:event_AddCustomerBtnActionPerformed
@@ -567,14 +570,16 @@ public class StaffManagement extends javax.swing.JFrame {
             taikhoan.setEmail(EmailText.getText());
             taikhoan.setMatKhau(PassText.getText());
             taikhoan.setHoTen(NameText.getText());
+            taikhoan.setMaPhanQuyen(RoleCb.getSelectedItem().toString());
             taikhoan.setDiaChi(AddressText.getText());
             taikhoan.setSDT(PhoneText.getText());
         TaiKhoan_BUS taikhoan_BUS = new TaiKhoan_BUS();
-        taikhoan_BUS.addTaiKhoan(taikhoan);
+        taikhoan_BUS.updateTaiKhoan(taikhoan);
         JOptionPane.showMessageDialog(this, "Update Staff success!");
         reset();
         ResetText();
         loadAllStaff();
+        StaffRadio.setSelected(true);
         ParentPanel.setSelectedIndex(0);
 
     }//GEN-LAST:event_UpdateCustomerBtnActionPerformed
@@ -587,7 +592,7 @@ public class StaffManagement extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Delete Staff success!");
         reset();
         ResetText();
-        loadAllStaff();
+        loadAllTaiKhoan();
     }//GEN-LAST:event_DeleteBtnActionPerformed
 
     private void NewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewButtonActionPerformed
@@ -616,6 +621,7 @@ public class StaffManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_BackBtnMouseClicked
 
     private void AllRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AllRadioActionPerformed
+
         // TODO add your handling code here:
         if(AllRadio.isSelected() == true)
         {

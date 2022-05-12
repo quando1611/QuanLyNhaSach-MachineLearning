@@ -35,7 +35,9 @@ MaTK varchar(10) primary key,
 Email varchar(100),
 MatKhau varchar(100),
 HoTen varchar(100),
-MaPhanQuyen varchar(10) --foreign key references PhanQuyen(MaPhanQuyen),
+MaPhanQuyen varchar(10), --foreign key references PhanQuyen(MaPhanQuyen),
+DiaChi varchar(100),
+DienThoai varchar(10),
 )
 
 create table NhaCungCap
