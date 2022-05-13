@@ -160,7 +160,6 @@ public class RevenueManagement extends javax.swing.JFrame {
             }
         });
         ViewTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        ViewTable.setColumnSelectionAllowed(false);
         ViewTable.setGridColor(new java.awt.Color(0, 0, 0));
         ViewTable.setShowGrid(true);
         jScrollPane2.setViewportView(ViewTable);
