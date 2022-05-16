@@ -19,6 +19,11 @@ public class PhieuNhapKho_BUS {
         return phieunhapkho_DAL.danhsachPhieuNhap();
     }
     
+    public ArrayList<PhieuNhapKho> danhsachPhieuNhapKhoByDate(String date)
+    {
+        return phieunhapkho_DAL.danhsachPhieuNhapByDate(date);
+    }
+    
     public boolean addPhieuNhapKho(PhieuNhapKho phieunhap)
     {
         return phieunhapkho_DAL.addPhieuNhapKho(phieunhap);

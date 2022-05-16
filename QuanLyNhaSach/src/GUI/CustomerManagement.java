@@ -461,13 +461,21 @@ public class CustomerManagement extends javax.swing.JFrame {
 
     private void EditChangeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditChangeBtnActionPerformed
         // Move to Add Tab and set Textfield's text to update Customer
-        SelectRow();
-        ParentPanel.setSelectedIndex(1);
+        try {
+            SelectRow();
+            AddCustomerBtn.setEnabled(false);
+            UpdateCustomerBtn.setEnabled(true);
+            ParentPanel.setSelectedIndex(1);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "No Customer have selected!");
+        }
     }//GEN-LAST:event_EditChangeBtnActionPerformed
 
     private void NewChangeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewChangeBtnActionPerformed
         // Move to Add Tab, no thing to set
         ParentPanel.setSelectedIndex(1);
+        UpdateCustomerBtn.setEnabled(false);
+        AddCustomerBtn.setEnabled(true);
     }//GEN-LAST:event_NewChangeBtnActionPerformed
 
     private void AddCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCustomerBtnActionPerformed
@@ -485,24 +493,25 @@ public class CustomerManagement extends javax.swing.JFrame {
             khachHang.setDienThoai(PhoneNumberTxb.getText());
             khachHang.setEmail(EmailTxb.getText());
             khachHang.setSoSPDaMua(ProductTxb.getText());
+            KhachHang_BUS khachHang_BUS = new KhachHang_BUS();
+            khachHang_BUS.addKhachHang(khachHang);
+            JOptionPane.showMessageDialog(this, "Add Customer success!");
+            reset();
+            loadAllCustomer();
+            ParentPanel.setSelectedIndex(0);
+            UpdateCustomerBtn.setEnabled(true);
         }
-        KhachHang_BUS khachHang_BUS = new KhachHang_BUS();
-        khachHang_BUS.addKhachHang(khachHang);
-        JOptionPane.showMessageDialog(this, "Add Customer success!");
-        reset();
-        loadAllCustomer();
-        ParentPanel.setSelectedIndex(0);
     }//GEN-LAST:event_AddCustomerBtnActionPerformed
 
     private void UpdateCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateCustomerBtnActionPerformed
         // Update Customer
         KhachHang khachHang = new KhachHang();
-            khachHang.setMaKH(valueMaKH);
-            khachHang.setTenKH(NameTxb.getText());
-            khachHang.setDiaChi(AddressTxb.getText());
-            khachHang.setDienThoai(PhoneNumberTxb.getText());
-            khachHang.setEmail(EmailTxb.getText());
-            khachHang.setSoSPDaMua(ProductTxb.getText());
+        khachHang.setMaKH(valueMaKH);
+        khachHang.setTenKH(NameTxb.getText());
+        khachHang.setDiaChi(AddressTxb.getText());
+        khachHang.setDienThoai(PhoneNumberTxb.getText());
+        khachHang.setEmail(EmailTxb.getText());
+        khachHang.setSoSPDaMua(ProductTxb.getText());
         KhachHang_BUS khachHang_BUS = new KhachHang_BUS();
         khachHang_BUS.updateKhachHang(khachHang);
         JOptionPane.showMessageDialog(this, "Update Customer success!");
@@ -510,17 +519,26 @@ public class CustomerManagement extends javax.swing.JFrame {
         resetText();
         loadAllCustomer();
         ParentPanel.setSelectedIndex(0);
+        AddCustomerBtn.setEnabled(true);
     }//GEN-LAST:event_UpdateCustomerBtnActionPerformed
 
     private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
         // Delete Customer
-        SelectRow();
-        KhachHang_BUS khachHang_BUS = new KhachHang_BUS();
-        khachHang_BUS.deleteKhachHang(valueMaKH);
-        JOptionPane.showMessageDialog(this, "Delete Customer success!");
-        reset();
-        resetText();
-        loadAllCustomer();
+        try
+        {
+            SelectRow();
+            KhachHang_BUS khachHang_BUS = new KhachHang_BUS();
+            khachHang_BUS.deleteKhachHang(valueMaKH);
+            JOptionPane.showMessageDialog(this, "Delete Customer success!");
+            reset();
+            resetText();
+            loadAllCustomer();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, "No Customer have selected!");
+        }
+        
     }//GEN-LAST:event_DeleteBtnActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed

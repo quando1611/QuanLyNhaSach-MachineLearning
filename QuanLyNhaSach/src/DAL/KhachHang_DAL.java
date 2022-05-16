@@ -98,6 +98,20 @@ public class KhachHang_DAL {
         }
     }
     
+     public boolean updateAmountProductKhachHang(String id, int amount)
+    {
+        connection = new DBConnection();
+        String query = "update KhachHang set SoSPDaMua = '" + amount + "' where TenKH = '" + id + "'" ;
+        System.err.println(query);
+        try {
+            ResultSet rs = connection.ExcuteQueryUpdateDB(query);
+            return true;
+        } catch (Exception e) {
+            System.err.println("Failed!");
+            return false;
+        }
+    }
+    
     public boolean deleteKhachHang(String maKH)
     {
         connection = new DBConnection();

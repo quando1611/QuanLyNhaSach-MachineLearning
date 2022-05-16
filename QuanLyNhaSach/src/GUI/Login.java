@@ -231,7 +231,7 @@ public class Login extends javax.swing.JFrame {
         if(CheckLogin(email, password))
         {
             System.out.println(role);
-            JOptionPane.showMessageDialog(this, "Login with ROLE : ADMIN!", "Successful",JOptionPane.OK_OPTION);
+            JOptionPane.showMessageDialog(this, "Login with ROLE : " + role, "Successful",JOptionPane.INFORMATION_MESSAGE);
             Home home = new Home();
             home.setData(role);
             home.show();

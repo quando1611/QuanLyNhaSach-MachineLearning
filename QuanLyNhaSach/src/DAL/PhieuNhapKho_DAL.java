@@ -34,6 +34,34 @@ public class PhieuNhapKho_DAL {
                 phieunhap.setMaTK(rs.getString("MaTK"));
                 phieunhap.setNgayTaoPhieu(rs.getString("NgayTaoPhieu"));
                 phieunhap.setNgayNhapKho(rs.getString("NgayNhapKho"));
+                phieunhap.setTongTien(Double.parseDouble(rs.getString("TongTien")));
+                result.add(phieunhap);
+            }
+        }catch (SQLException e)
+        {
+            System.out.println("Null table");
+        }
+        return result;
+    }
+    
+    public ArrayList<PhieuNhapKho> danhsachPhieuNhapByDate(String date)
+    {
+        connection = new DBConnection();
+        ArrayList<PhieuNhapKho> result = new ArrayList<PhieuNhapKho>();
+        String query = "select * from PhieuNhapKho where NgayTaoPhieu ='" + date + "'";
+        System.out.println(query);
+        try 
+        {
+            ResultSet rs = connection.ExcuteQueryGetTable(query);
+            while (rs.next())
+            {
+                PhieuNhapKho phieunhap = new PhieuNhapKho();
+                phieunhap.setMaPhieuNhap(rs.getString("MaPhieuNhap"));
+                phieunhap.setMaNhaCC(rs.getString("MaNCC"));
+                phieunhap.setMaTK(rs.getString("MaTK"));
+                phieunhap.setNgayTaoPhieu(rs.getString("NgayTaoPhieu"));
+                phieunhap.setNgayNhapKho(rs.getString("NgayNhapKho"));
+                phieunhap.setTongTien(Double.parseDouble(rs.getString("TongTien")));
                 result.add(phieunhap);
             }
         }catch (SQLException e)
@@ -55,6 +83,7 @@ public class PhieuNhapKho_DAL {
             return false;
         }
     }
+    
     public ArrayList<PhieuNhapKho> seacrhPhieuNhapKhoBySupplierID(String search)
     {
         connection = new DBConnection();
@@ -70,6 +99,7 @@ public class PhieuNhapKho_DAL {
                 phieunhap.setMaTK(rs.getString("MaTK"));
                 phieunhap.setNgayTaoPhieu(rs.getString("NgayTaoPhieu"));
                 phieunhap.setNgayNhapKho(rs.getString("NgayNhapKho"));
+                phieunhap.setTongTien(Double.parseDouble(rs.getString("TongTien")));
                 result.add(phieunhap);
             }
         }catch(SQLException e)

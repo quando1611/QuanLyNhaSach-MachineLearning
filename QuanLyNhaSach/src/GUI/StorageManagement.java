@@ -525,24 +525,36 @@ public class StorageManagement extends javax.swing.JFrame {
     private void NewChangeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewChangeBtnActionPerformed
         // TODO add your handling code here:
         ParentPanel.setSelectedIndex(1);
+        UpdateBookBtn.setEnabled(false);
+        AddBookBtn.setEnabled(true);
     }//GEN-LAST:event_NewChangeBtnActionPerformed
 
     private void EditChangeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditChangeBtnActionPerformed
         // TODO add your handling code here:
-        SelectRow();
-        ParentPanel.setSelectedIndex(1);
+        try {
+            SelectRow();
+            ParentPanel.setSelectedIndex(1);
+            UpdateBookBtn.setEnabled(true);
+            AddBookBtn.setEnabled(false);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "No Book have selected!");
+        }
     }//GEN-LAST:event_EditChangeBtnActionPerformed
 
     private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
         // TODO add your handling code here:
-        SelectRow();
-        Sach_BUS sach_BUS = new Sach_BUS();
-        sach_BUS.deleteSach(valueMaSach);
-        JOptionPane.showMessageDialog(this, "Delete Book success!");
-        resetData();
-        resetCbData();
-        resetText();
-        loadAllBook();
+        try {
+            SelectRow();
+            Sach_BUS sach_BUS = new Sach_BUS();
+            sach_BUS.deleteSach(valueMaSach);
+            JOptionPane.showMessageDialog(this, "Delete Book success!");
+            resetData();
+            resetCbData();
+            resetText();
+            loadAllBook();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "No Book have selected!");
+        }
     }//GEN-LAST:event_DeleteBtnActionPerformed
 
     private void AddBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBookBtnActionPerformed
@@ -584,6 +596,8 @@ public class StorageManagement extends javax.swing.JFrame {
         resetText();
         loadAllBook();
         ParentPanel.setSelectedIndex(0);
+        UpdateBookBtn.setEnabled(true);
+        
     }//GEN-LAST:event_AddBookBtnActionPerformed
 
     private void UpdateBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateBookBtnActionPerformed
@@ -617,6 +631,7 @@ public class StorageManagement extends javax.swing.JFrame {
         resetText();
         loadAllData();
         ParentPanel.setSelectedIndex(0);
+        AddBookBtn.setEnabled(true);
     }//GEN-LAST:event_UpdateBookBtnActionPerformed
 
     /**

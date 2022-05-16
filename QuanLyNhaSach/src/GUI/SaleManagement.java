@@ -644,6 +644,7 @@ public class SaleManagement extends javax.swing.JFrame {
         });
         CreateBillTab.add(CancelBillBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 510, 116, 51));
 
+        TotalTxb.setEnabled(false);
         TotalTxb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TotalTxbActionPerformed(evt);
@@ -656,6 +657,8 @@ public class SaleManagement extends javax.swing.JFrame {
 
         jLabel8.setText("Receive");
         CreateBillTab.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 430, 50, 30));
+
+        ReceiveTxb.setEnabled(false);
         CreateBillTab.add(ReceiveTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 420, 210, 50));
 
         DeleteRowBtn.setBackground(new java.awt.Color(255, 51, 102));
@@ -725,7 +728,7 @@ public class SaleManagement extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "CustomerID", "Date", "Total", "Recieve", "Status"
+                "ID", "CustomerID", "Date", "Total", "Receive", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -857,7 +860,11 @@ public class SaleManagement extends javax.swing.JFrame {
 
     private void SelectBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectBookBtnActionPerformed
         // Select Button in SearchBook Tab
-        SelectRow();
+        try {
+            SelectRow();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "No Row have selected!");
+        }
     }//GEN-LAST:event_SelectBookBtnActionPerformed
 
     private void SubtractBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubtractBtnActionPerformed
@@ -968,25 +975,29 @@ public class SaleManagement extends javax.swing.JFrame {
 
     private void DeleteRowBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteRowBtnActionPerformed
         // Delete row of selectBookTable
-        int deleteRow = SelectBookTable.getSelectedRow();
-        System.out.println("remove at index" + deleteRow);
-        selectarr.remove(deleteRow);
-        total = 0; //after delete -> calculate again from the start
-        DefaultTableModel selecttable = (DefaultTableModel) SelectBookTable.getModel();
-        resetSelectTable();
-        for (Sach sachFinal : selectarr) {
-            String idFinal = sachFinal.getMaSach();
-            String nameFinal = sachFinal.getTenSach();
-            String authorFinal = sachFinal.getTenTG();
-            String typeFinal = sachFinal.getTenTheLoai();
-            int amountFinal = sachFinal.getSoLuong();
-            double priceFinal = sachFinal.getGia();
-            Object[] row = {idFinal, nameFinal, amountFinal};
-            selecttable.addRow(row);
-            total += amountFinal * priceFinal;
+        try {
+            int deleteRow = SelectBookTable.getSelectedRow();
+            System.out.println("remove at index" + deleteRow);
+            selectarr.remove(deleteRow);
+            total = 0; //after delete -> calculate again from the start
+            DefaultTableModel selecttable = (DefaultTableModel) SelectBookTable.getModel();
+            resetSelectTable();
+            for (Sach sachFinal : selectarr) {
+                String idFinal = sachFinal.getMaSach();
+                String nameFinal = sachFinal.getTenSach();
+                String authorFinal = sachFinal.getTenTG();
+                String typeFinal = sachFinal.getTenTheLoai();
+                int amountFinal = sachFinal.getSoLuong();
+                double priceFinal = sachFinal.getGia();
+                Object[] row = {idFinal, nameFinal, amountFinal};
+                selecttable.addRow(row);
+                total += amountFinal * priceFinal;
+            }
+            SelectBookTable.setModel(selecttable);
+            TotalTxb.setText(Double.toString(total));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "No Row have selected!");
         }
-        SelectBookTable.setModel(selecttable);
-        TotalTxb.setText(Double.toString(total));
     }//GEN-LAST:event_DeleteRowBtnActionPerformed
 
     private void SearchBillBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBillBtnActionPerformed

@@ -8,6 +8,7 @@ import DTO.PublicClass;
 import java.awt.Panel;
 import javax.swing.JPanel;
 import GUI.*;
+import javax.swing.JOptionPane;
 /**
  *
  * @author 19522
@@ -94,7 +95,7 @@ public class Home extends javax.swing.JFrame {
                 ExitBtnMouseClicked(evt);
             }
         });
-        jPanel2.add(ExitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 10, -1, 82));
+        jPanel2.add(ExitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 0, -1, 82));
 
         RoleLb.setFont(new java.awt.Font("Impact", 0, 50)); // NOI18N
         RoleLb.setForeground(new java.awt.Color(255, 204, 0));
@@ -537,13 +538,24 @@ public class Home extends javax.swing.JFrame {
 
     private void StaffPnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StaffPnMouseClicked
         // TODO add your handling code here:
-        StaffManagement staffManagement = new StaffManagement();
-        staffManagement.show();
+        if(role.equals("Admin"))
+        {
+            StaffManagement staffManagement = new StaffManagement();
+            staffManagement.show();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "You don't have permission to use this feature...");
+        }
+        
+        
     }//GEN-LAST:event_StaffPnMouseClicked
 
     private void LogOutPnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogOutPnMouseClicked
         // TODO add your handling code here:
-        
+        Login login = new Login();
+        this.dispose();
+        login.show();
     }//GEN-LAST:event_LogOutPnMouseClicked
 
     

@@ -30,6 +30,11 @@ public class HoaDon_BUS {
         return hoaDon_DAL.danhSachHoaDonReturn();
     }
     
+    public ArrayList<HoaDon> danhSachHoaDonByDay(String date)
+    {
+        return hoaDon_DAL.danhSachHoaDonByDay(date);
+    }
+    
     public ArrayList<HoaDon> searchHoaDonWithKhachHangID(String search)
     {
         return hoaDon_DAL.seacrhHoaDonByKhachHangID(search);
@@ -49,5 +54,6 @@ public class HoaDon_BUS {
     {
         return hoaDon_DAL.deleteHoaDon(maHD);
     }
+    
     
 }

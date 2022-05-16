@@ -10,6 +10,6 @@ package DTO;
  */
 public class PublicClass {
     public static String StaffID;
-    public static double ImportPrice = 0.65;
+    public static double ImportPrice = 0.6;
     
 }

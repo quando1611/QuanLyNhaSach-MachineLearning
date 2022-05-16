@@ -209,7 +209,7 @@ public class StaffManagement extends javax.swing.JFrame {
         AllRadio = new javax.swing.JRadioButton();
         AdminRadio = new javax.swing.JRadioButton();
         StaffRadio = new javax.swing.JRadioButton();
-        NewButton = new javax.swing.JButton();
+        NewChangeButton = new javax.swing.JButton();
         AddTab = new javax.swing.JPanel();
         EmailText = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -218,9 +218,9 @@ public class StaffManagement extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         NameText = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        AddCustomerBtn = new javax.swing.JButton();
+        AddStaffBtn = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        UpdateCustomerBtn = new javax.swing.JButton();
+        UpdateStaffBtn = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         RoleCb = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
@@ -380,15 +380,15 @@ public class StaffManagement extends javax.swing.JFrame {
         });
         SearchTab.add(StaffRadio, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 10, -1, -1));
 
-        NewButton.setBackground(new java.awt.Color(153, 255, 153));
-        NewButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        NewButton.setText("NEW");
-        NewButton.addActionListener(new java.awt.event.ActionListener() {
+        NewChangeButton.setBackground(new java.awt.Color(153, 255, 153));
+        NewChangeButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        NewChangeButton.setText("NEW");
+        NewChangeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NewButtonActionPerformed(evt);
+                NewChangeButtonActionPerformed(evt);
             }
         });
-        SearchTab.add(NewButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 349, 116, 51));
+        SearchTab.add(NewChangeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 349, 116, 51));
 
         ParentPanel.addTab("Search Staff", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png")), SearchTab); // NOI18N
 
@@ -422,28 +422,28 @@ public class StaffManagement extends javax.swing.JFrame {
         jLabel5.setText("Role :");
         AddTab.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 400, -1, -1));
 
-        AddCustomerBtn.setBackground(new java.awt.Color(153, 255, 153));
-        AddCustomerBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        AddCustomerBtn.setText("ADD STAFF");
-        AddCustomerBtn.addActionListener(new java.awt.event.ActionListener() {
+        AddStaffBtn.setBackground(new java.awt.Color(153, 255, 153));
+        AddStaffBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        AddStaffBtn.setText("ADD STAFF");
+        AddStaffBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddCustomerBtnActionPerformed(evt);
+                AddStaffBtnActionPerformed(evt);
             }
         });
-        AddTab.add(AddCustomerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 480, 244, 51));
+        AddTab.add(AddStaffBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 480, 244, 51));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/istockphoto-1223671392-612x612-1.jpg"))); // NOI18N
         AddTab.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(116, 99, -1, -1));
 
-        UpdateCustomerBtn.setBackground(new java.awt.Color(255, 204, 204));
-        UpdateCustomerBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        UpdateCustomerBtn.setText("UPDATE STAFF");
-        UpdateCustomerBtn.addActionListener(new java.awt.event.ActionListener() {
+        UpdateStaffBtn.setBackground(new java.awt.Color(255, 204, 204));
+        UpdateStaffBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        UpdateStaffBtn.setText("UPDATE STAFF");
+        UpdateStaffBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UpdateCustomerBtnActionPerformed(evt);
+                UpdateStaffBtnActionPerformed(evt);
             }
         });
-        AddTab.add(UpdateCustomerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 480, 244, 51));
+        AddTab.add(UpdateStaffBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 480, 244, 51));
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -537,7 +537,7 @@ public class StaffManagement extends javax.swing.JFrame {
         SearchTable.setModel(tableModel);
     }//GEN-LAST:event_SearchBtnActionPerformed
 
-    private void AddCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCustomerBtnActionPerformed
+    private void AddStaffBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddStaffBtnActionPerformed
          // Add Staff
         TaiKhoan taikhoan = new TaiKhoan();
         if(NameText.getText().equals(""))
@@ -561,9 +561,10 @@ public class StaffManagement extends javax.swing.JFrame {
         ResetText();
         loadAllStaff();
         ParentPanel.setSelectedIndex(0);
-    }//GEN-LAST:event_AddCustomerBtnActionPerformed
+        UpdateStaffBtn.setEnabled(true);
+    }//GEN-LAST:event_AddStaffBtnActionPerformed
 
-    private void UpdateCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateCustomerBtnActionPerformed
+    private void UpdateStaffBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateStaffBtnActionPerformed
         // Update Staff
         TaiKhoan taikhoan = new TaiKhoan();
             taikhoan.setMaTK(valueMaTK);
@@ -581,29 +582,43 @@ public class StaffManagement extends javax.swing.JFrame {
         loadAllStaff();
         StaffRadio.setSelected(true);
         ParentPanel.setSelectedIndex(0);
+        AddStaffBtn.setEnabled(true);
 
-    }//GEN-LAST:event_UpdateCustomerBtnActionPerformed
+    }//GEN-LAST:event_UpdateStaffBtnActionPerformed
 
     private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
         //Delete Staff
-        SelectRow();
-        TaiKhoan_BUS taikhoan_BUS = new TaiKhoan_BUS();
-        taikhoan_BUS.deleteTaiKhoan(valueMaTK);
-        JOptionPane.showMessageDialog(this, "Delete Staff success!");
-        reset();
-        ResetText();
-        loadAllTaiKhoan();
+        try {
+            SelectRow();
+            TaiKhoan_BUS taikhoan_BUS = new TaiKhoan_BUS();
+            taikhoan_BUS.deleteTaiKhoan(valueMaTK);
+            JOptionPane.showMessageDialog(this, "Delete Staff success!");
+            reset();
+            ResetText();
+            loadAllTaiKhoan();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "No Staff have selected!");
+        }
     }//GEN-LAST:event_DeleteBtnActionPerformed
 
-    private void NewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewButtonActionPerformed
+    private void NewChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewChangeButtonActionPerformed
         // TODO add your handling code here:
         ParentPanel.setSelectedIndex(1);
-    }//GEN-LAST:event_NewButtonActionPerformed
+        AddStaffBtn.setEnabled(true);
+        UpdateStaffBtn.setEnabled(false);
+    }//GEN-LAST:event_NewChangeButtonActionPerformed
 
     private void EditChangeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditChangeBtnActionPerformed
         // TODO add your handling code here:
-        SelectRow();
-        ParentPanel.setSelectedIndex(1);
+        
+        try {
+            SelectRow();
+            AddStaffBtn.setEnabled(false);
+            UpdateStaffBtn.setEnabled(true);
+            ParentPanel.setSelectedIndex(1);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "No Staff have selected!");
+        }
     }//GEN-LAST:event_EditChangeBtnActionPerformed
 
     private void AdminRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdminRadioActionPerformed
@@ -687,7 +702,7 @@ public class StaffManagement extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddCustomerBtn;
+    private javax.swing.JButton AddStaffBtn;
     private javax.swing.JPanel AddTab;
     private javax.swing.JTextField AddressText;
     private javax.swing.JRadioButton AdminRadio;
@@ -698,7 +713,7 @@ public class StaffManagement extends javax.swing.JFrame {
     private javax.swing.JTextField EmailText;
     private javax.swing.ButtonGroup FilterStaffGroup;
     private javax.swing.JTextField NameText;
-    private javax.swing.JButton NewButton;
+    private javax.swing.JButton NewChangeButton;
     private javax.swing.JTabbedPane ParentPanel;
     private javax.swing.JTextField PassText;
     private javax.swing.JTextField PhoneText;
@@ -708,7 +723,7 @@ public class StaffManagement extends javax.swing.JFrame {
     private javax.swing.JTable SearchTable;
     private javax.swing.JTextField SearchTxb;
     private javax.swing.JRadioButton StaffRadio;
-    private javax.swing.JButton UpdateCustomerBtn;
+    private javax.swing.JButton UpdateStaffBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
