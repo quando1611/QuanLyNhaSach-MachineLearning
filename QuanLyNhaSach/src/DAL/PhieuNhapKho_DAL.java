@@ -30,10 +30,10 @@ public class PhieuNhapKho_DAL {
             {
                 PhieuNhapKho phieunhap = new PhieuNhapKho();
                 phieunhap.setMaPhieuNhap(rs.getString("MaPhieuNhap"));
-                phieunhap.setMaNhaCC(rs.getString("MaNCC"));
-                phieunhap.setMaTK(rs.getString("MaTK"));
-                phieunhap.setNgayTaoPhieu(rs.getString("NgayTaoPhieu"));
                 phieunhap.setNgayNhapKho(rs.getString("NgayNhapKho"));
+                phieunhap.setNgayTaoPhieu(rs.getString("NgayTaoPhieu"));
+                phieunhap.setMaTK(rs.getString("MaTK"));
+                phieunhap.setMaNhaCC(rs.getString("MaNCC"));
                 phieunhap.setTongTien(Double.parseDouble(rs.getString("TongTien")));
                 result.add(phieunhap);
             }
@@ -74,7 +74,7 @@ public class PhieuNhapKho_DAL {
     public boolean addPhieuNhapKho(PhieuNhapKho phieunhap)
     {
         connection = new DBConnection();
-        String query = "insert into PhieuNhapKho values('" + phieunhap.getMaPhieuNhap() + "', '" + phieunhap.getNgayTaoPhieu() + "', '" + phieunhap.getNgayNhapKho() + "', '" + phieunhap.getMaTK() + "', '" + phieunhap.getMaNhaCC() + "', '" + phieunhap.getTongTien() + "')";
+        String query = "insert into PhieuNhapKho values('" + phieunhap.getMaPhieuNhap() + "', '" + phieunhap.getNgayNhapKho()+ "', '" + phieunhap.getNgayTaoPhieu()+ "', '" + phieunhap.getMaTK() + "', '" + phieunhap.getMaNhaCC() + "', '" + phieunhap.getTongTien() + "')";
         try {
             ResultSet rs = connection.ExcuteQueryUpdateDB(query);
             return true;
@@ -88,17 +88,17 @@ public class PhieuNhapKho_DAL {
     {
         connection = new DBConnection();
         ArrayList<PhieuNhapKho> result = new ArrayList<PhieuNhapKho>();
-        String query = "select * from HoaDon where MaNCC like '%" + search + "%'";
+        String query = "select * from PhieuNhapKho where MaNCC like '%" + search + "%'" ;
         System.out.println(query);
         try{
             ResultSet rs = connection.ExcuteQueryGetTable(query);
             while (rs.next()) { 
                 PhieuNhapKho phieunhap = new PhieuNhapKho();
                 phieunhap.setMaPhieuNhap(rs.getString("MaPhieuNhap"));
-                phieunhap.setMaNhaCC(rs.getString("MaNCC"));
-                phieunhap.setMaTK(rs.getString("MaTK"));
-                phieunhap.setNgayTaoPhieu(rs.getString("NgayTaoPhieu"));
                 phieunhap.setNgayNhapKho(rs.getString("NgayNhapKho"));
+                phieunhap.setNgayTaoPhieu(rs.getString("NgayTaoPhieu"));
+                phieunhap.setMaTK(rs.getString("MaTK"));
+                phieunhap.setMaNhaCC(rs.getString("MaNCC"));
                 phieunhap.setTongTien(Double.parseDouble(rs.getString("TongTien")));
                 result.add(phieunhap);
             }
@@ -112,7 +112,7 @@ public class PhieuNhapKho_DAL {
     public boolean updatePhieuNhapKho(PhieuNhapKho phieuNhapKho)
     {
         connection = new DBConnection();
-        String query = "update PhieuNhapKho set MaPNK = '" + phieuNhapKho.getMaPhieuNhap()+ "', MaNCC = '" + phieuNhapKho.getMaNhaCC()+ "', NgayNhapKho = '" + phieuNhapKho.getNgayNhapKho()+ "', NgayTaoPhieu = '" + phieuNhapKho.getNgayTaoPhieu()+ "', TongTien = '" + phieuNhapKho.getTongTien()+ "'";
+        String query = "update PhieuNhapKho set MaPhieuNhap = '" + phieuNhapKho.getMaPhieuNhap()+ "', MaNCC = '" + phieuNhapKho.getMaNhaCC()+ "', NgayNhapKho = '" + phieuNhapKho.getNgayNhapKho()+ "', NgayTaoPhieu = '" + phieuNhapKho.getNgayTaoPhieu()+ "', TongTien = '" + phieuNhapKho.getTongTien()+ "'";
         System.err.println(query);
         try {
             ResultSet rs = connection.ExcuteQueryUpdateDB(query);

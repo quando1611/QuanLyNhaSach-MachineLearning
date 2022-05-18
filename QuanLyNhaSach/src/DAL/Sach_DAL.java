@@ -94,6 +94,56 @@ public class Sach_DAL {
         return result;
     }
     
+    public ArrayList<Sach> searchSachExist(String name, String type, String author)
+    {
+        connection = new DBConnection();
+        ArrayList<Sach> result = new ArrayList<Sach>();
+        String query = "select * from Sach where TenSach like '%" + name + "%' and TenTheLoai like '%"+ type + "%' and TenTacGia like '%" + author +"%'";
+        System.out.println(query);
+        try{
+            ResultSet rs = connection.ExcuteQueryGetTable(query);
+            while (rs.next()) {                
+                Sach sach = new Sach();
+                sach.setMaSach(rs.getString("MaSach"));
+                sach.setTenSach(rs.getString("TenSach"));
+                sach.setTenTG(rs.getString("TenTacGia"));
+                sach.setTenTheLoai(rs.getString("TenTheLoai"));
+                sach.setSoLuong(rs.getInt("SoLuong"));
+                sach.setGia(rs.getFloat("Gia"));
+                result.add(sach);
+            }
+        }catch(SQLException e)
+        {
+            System.out.println("Null Table!");
+        }
+        return result;
+    }
+    
+    public ArrayList<Sach> searchSachExistNoUpdate(String name, String type, String author, int Amount, float Price)
+    {
+        connection = new DBConnection();
+        ArrayList<Sach> result = new ArrayList<Sach>();
+        String query = "select * from Sach where TenSach like '%" + name + "%' and TenTheLoai like '%"+ type + "%' and TenTacGia like '%" + author +"%' and SoLuong = '" + Amount + "' and Gia = '"+ Price + "'";
+        System.out.println(query);
+        try{
+            ResultSet rs = connection.ExcuteQueryGetTable(query);
+            while (rs.next()) {                
+                Sach sach = new Sach();
+                sach.setMaSach(rs.getString("MaSach"));
+                sach.setTenSach(rs.getString("TenSach"));
+                sach.setTenTG(rs.getString("TenTacGia"));
+                sach.setTenTheLoai(rs.getString("TenTheLoai"));
+                sach.setSoLuong(rs.getInt("SoLuong"));
+                sach.setGia(rs.getFloat("Gia"));
+                result.add(sach);
+            }
+        }catch(SQLException e)
+        {
+            System.out.println("Null Table!");
+        }
+        return result;
+    }
+    
     //Add
     public boolean addSach(Sach sach)
     {
@@ -113,7 +163,7 @@ public class Sach_DAL {
     public boolean updateSach(Sach sach)
     {
         connection = new DBConnection();
-        String query = "update Sach set TenTacGia = '" + sach.getTenTG() + "', TenTheLoai = '" + sach.getTenTheLoai() + "', SoLuong = '" + sach.getSoLuong() + "', Gia = '" + sach.getGia() + "' where TenSach ='" +sach.getTenSach() + "'";
+        String query = "update Sach set TenSach = '" + sach.getTenSach() + "', TenTacGia = '" + sach.getTenTG() + "', TenTheLoai = '" + sach.getTenTheLoai() + "', SoLuong = '" + sach.getSoLuong() + "', Gia = '" + sach.getGia() + "' where MaSach ='" +sach.getMaSach()+ "'";
         System.err.println(query);
         try {
             ResultSet rs = connection.ExcuteQueryUpdateDB(query);

@@ -408,6 +408,11 @@ public class StaffManagement extends javax.swing.JFrame {
 
         PhoneText.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         PhoneText.setToolTipText("");
+        PhoneText.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                PhoneTextKeyTyped(evt);
+            }
+        });
         AddTab.add(PhoneText, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 310, 430, 52));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -416,6 +421,11 @@ public class StaffManagement extends javax.swing.JFrame {
 
         NameText.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         NameText.setToolTipText("");
+        NameText.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                NameTextKeyTyped(evt);
+            }
+        });
         AddTab.add(NameText, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 170, 470, 52));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -665,6 +675,26 @@ public class StaffManagement extends javax.swing.JFrame {
     private void DeleteBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBtnMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_DeleteBtnMouseClicked
+
+    private void NameTextKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NameTextKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        
+        if(Character.isDigit(c))
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_NameTextKeyTyped
+
+    private void PhoneTextKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PhoneTextKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        
+        if(!Character.isDigit(c))
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_PhoneTextKeyTyped
 
     /**
      * @param args the command line arguments

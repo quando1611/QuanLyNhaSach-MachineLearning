@@ -166,7 +166,6 @@ public class StorageManagement extends javax.swing.JFrame {
             String price = tableModel.getValueAt(SearchBookTable.getSelectedRow(), 5).toString();
             //Set TextField
             NameTxb.setText(name);
-            NameTxb.enable(false);
             AuthorTxb.setText(author);
             TypeSelectCb.setSelectedItem(type);
             AmountTxb.setText(String.valueOf(amount));
@@ -560,78 +559,110 @@ public class StorageManagement extends javax.swing.JFrame {
     private void AddBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBookBtnActionPerformed
         // TODO add your handling code here:
         Sach sach = new Sach();
+        String theloaiString;
+        //getTheLoai
+            if(TypeTxb.getText().equals(""))
+            {
+                if(TypeSelectCb.getSelectedItem().toString().equals("All"))
+                {
+                    sach.setTenTheLoai("");
+                    theloaiString = "";
+                }
+                else
+                {
+                    sach.setTenTheLoai(TypeSelectCb.getSelectedItem().toString());
+                    theloaiString = TypeSelectCb.getSelectedItem().toString();
+                }
+            }
+            else
+            {
+                sach.setTenTheLoai(TypeTxb.getText());
+                theloaiString = TypeTxb.getText();
+            }
+        Sach_BUS sach_BUS = new Sach_BUS();
+        ArrayList<Sach> existarr = new ArrayList<Sach>();
+        existarr = sach_BUS.searchSachExist(NameTxb.getText(), theloaiString , AuthorTxb.getText());
         if(NameTxb.getText().equals(""))
         {
             JOptionPane.showMessageDialog(this, "Please fill atleast the name of book...");
+        }
+        else if(existarr.size()>0)
+        {
+            JOptionPane.showMessageDialog(this, "Already Exist...");
         }
         else
         {
             sach.setMaSach("b" + randomID());
             sach.setTenSach(NameTxb.getText());
             sach.setTenTG(AuthorTxb.getText());
-            if(TypeTxb.getText().equals(""))
-            {
-                if(TypeSelectCb.getSelectedItem().toString().equals("All"))
-                {
-                    sach.setTenTheLoai("");
-                }
-                else
-                {
-                    sach.setTenTheLoai(TypeSelectCb.getSelectedItem().toString());
-                }
-            }
-            else
-            {
-                sach.setTenTheLoai(TypeTxb.getText());
-                
-            }
             sach.setSoLuong(Integer.parseInt(AmountTxb.getText()));
             sach.setGia(Float.parseFloat(PriceTxb.getText()));
+            sach_BUS.addSach(sach);
+            JOptionPane.showMessageDialog(this, "Add Book success!");
+            resetData();
+            resetCbData();
+            resetText();
+            loadAllBook();
+            ParentPanel.setSelectedIndex(0);
+            UpdateBookBtn.setEnabled(true);
         }
-        Sach_BUS sach_BUS = new Sach_BUS();
-        sach_BUS.addSach(sach);
-        JOptionPane.showMessageDialog(this, "Add Book success!");
-        resetData();
-        resetCbData();
-        resetText();
-        loadAllBook();
-        ParentPanel.setSelectedIndex(0);
-        UpdateBookBtn.setEnabled(true);
+        
+        
         
     }//GEN-LAST:event_AddBookBtnActionPerformed
 
     private void UpdateBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateBookBtnActionPerformed
         // TODO add your handling code here:
         Sach sach = new Sach();
-            sach.setMaSach(valueMaSach);
-            sach.setTenSach(NameTxb.getText());
-            sach.setTenTG(AuthorTxb.getText());
+        String theloaiString;
+        //getTheLoai
             if(TypeTxb.getText().equals(""))
             {
                 if(TypeSelectCb.getSelectedItem().toString().equals("All"))
                 {
                     sach.setTenTheLoai("");
+                    theloaiString = "";
                 }
                 else
                 {
                     sach.setTenTheLoai(TypeSelectCb.getSelectedItem().toString());
+                    theloaiString = TypeSelectCb.getSelectedItem().toString();
                 }
             }
             else
             {
                 sach.setTenTheLoai(TypeTxb.getText());
+                theloaiString = TypeTxb.getText();
             }
-            sach.setSoLuong(Integer.parseInt(AmountTxb.getText()));
-            sach.setGia(Float.parseFloat(PriceTxb.getText()));
             Sach_BUS sach_BUS = new Sach_BUS();
-            sach_BUS.updateSach(sach);
-        JOptionPane.showMessageDialog(this, "Update Book success!");
-        resetData();
-        resetCbData();
-        resetText();
-        loadAllData();
-        ParentPanel.setSelectedIndex(0);
-        AddBookBtn.setEnabled(true);
+            ArrayList<Sach> existarr = new ArrayList<Sach>();
+            existarr = sach_BUS.searchSachExistNoUpdate(NameTxb.getText(), theloaiString , AuthorTxb.getText(), Integer.parseInt(AmountTxb.getText()), Float.parseFloat(PriceTxb.getText()));
+            
+            if(NameTxb.getText().equals(""))
+            {
+                JOptionPane.showMessageDialog(this, "Please fill atleast the name of book...");
+            }
+            else if(existarr.size()>0)
+            {
+                JOptionPane.showMessageDialog(this, "No Update...");
+            }
+            else
+            {
+                sach.setMaSach(valueMaSach);
+                sach.setTenSach(NameTxb.getText());
+                sach.setTenTG(AuthorTxb.getText());
+                sach.setSoLuong(Integer.parseInt(AmountTxb.getText()));
+                sach.setGia(Float.parseFloat(PriceTxb.getText()));
+                sach_BUS.updateSach(sach);
+                JOptionPane.showMessageDialog(this, "Update Book success!");
+                resetData();
+                resetCbData();
+                resetText();
+                loadAllData();
+                ParentPanel.setSelectedIndex(0);
+                AddBookBtn.setEnabled(true);
+            }
+            
     }//GEN-LAST:event_UpdateBookBtnActionPerformed
 
     /**

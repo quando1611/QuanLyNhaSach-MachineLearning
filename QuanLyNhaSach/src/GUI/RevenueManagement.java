@@ -205,7 +205,17 @@ public class RevenueManagement extends javax.swing.JFrame {
         jScrollPane6 = new javax.swing.JScrollPane();
         ImportBillShowTable = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
-        UpdateTab = new javax.swing.JPanel();
+        MonthlyRevenue = new javax.swing.JPanel();
+        jProgressBar1 = new javax.swing.JProgressBar();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        ImportTotal = new javax.swing.JLabel();
+        SaleTotal1 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        Revenue = new javax.swing.JLabel();
         ViewTab = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         ViewTable = new javax.swing.JTable();
@@ -426,8 +436,53 @@ public class RevenueManagement extends javax.swing.JFrame {
 
         ParentPanel.addTab("Import Report", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_Plus_+_35px.png")), AddTab); // NOI18N
 
-        UpdateTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        ParentPanel.addTab("Monthly Revenue", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_restart_35px.png")), UpdateTab); // NOI18N
+        MonthlyRevenue.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        MonthlyRevenue.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 180, 630, 40));
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel15.setText("REVENUE");
+        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, -1, -1));
+
+        MonthlyRevenue.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 520, 50));
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 102, 102));
+        jLabel11.setText("IMPORT");
+        jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, -1, -1));
+
+        MonthlyRevenue.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 520, 50));
+
+        ImportTotal.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        ImportTotal.setForeground(new java.awt.Color(255, 102, 102));
+        ImportTotal.setText("IMPORT");
+        MonthlyRevenue.add(ImportTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 370, -1, -1));
+
+        SaleTotal1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        SaleTotal1.setForeground(new java.awt.Color(0, 153, 0));
+        SaleTotal1.setText("SALE");
+        MonthlyRevenue.add(SaleTotal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, -1, -1));
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(0, 204, 51));
+        jLabel14.setText("SALE");
+        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        MonthlyRevenue.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 520, 50));
+
+        Revenue.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        Revenue.setText("REVENUE");
+        MonthlyRevenue.add(Revenue, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 500, -1, -1));
+
+        ParentPanel.addTab("Monthly Revenue", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_restart_35px.png")), MonthlyRevenue); // NOI18N
 
         jScrollPane2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -674,23 +729,33 @@ public class RevenueManagement extends javax.swing.JFrame {
     private javax.swing.JButton DeleteBtn1;
     private javax.swing.JTable ImportBillShowTable;
     private javax.swing.JTextArea ImportPrintPreview;
+    private javax.swing.JLabel ImportTotal;
+    private javax.swing.JPanel MonthlyRevenue;
     private javax.swing.JTabbedPane ParentPanel;
     private javax.swing.JButton PreviewBtn;
     private javax.swing.JButton PreviewImportBtn;
     private javax.swing.JButton PrintBtn;
     private javax.swing.JButton PrintImportBtn;
     private javax.swing.JTextArea PrintPreview;
+    private javax.swing.JLabel Revenue;
+    private javax.swing.JLabel SaleTotal1;
     private javax.swing.JButton SearchBtn;
     private javax.swing.JButton SearchBtn1;
     private javax.swing.JPanel SearchTab;
-    private javax.swing.JPanel UpdateTab;
     private javax.swing.JPanel ViewTab;
     private javax.swing.JTable ViewTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

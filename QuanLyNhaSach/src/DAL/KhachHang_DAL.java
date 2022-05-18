@@ -49,7 +49,7 @@ public class KhachHang_DAL {
     {
         connection = new DBConnection();
         ArrayList<KhachHang> result = new ArrayList<KhachHang>();
-        String query = "select * from KhachHang where MaKH like '%" + search + "%' or TenKH like '%" + search+ "%'";
+        String query = "select * from KhachHang where MaKH like '%" + search + "%' or TenKH like '%" + search+ "%' or DienThoai like '%" + search +"%' or Email like '%" + search + "%'";
         System.out.println(query);
         try{
             ResultSet rs = connection.ExcuteQueryGetTable(query);
@@ -70,6 +70,57 @@ public class KhachHang_DAL {
         return result;
     }
     
+    public ArrayList<KhachHang> searchKhachHangExist(String name , String phone )
+    {
+        connection = new DBConnection();
+        ArrayList<KhachHang> result = new ArrayList<KhachHang>();
+        String query = "select * from KhachHang where TenKH like '%" + name + "%' and DienThoai like '%" + phone +"%'";
+        System.out.println(query);
+        try{
+            ResultSet rs = connection.ExcuteQueryGetTable(query);
+            while (rs.next()) {                
+                KhachHang khachHang = new KhachHang();
+                khachHang.setMaKH(rs.getString("MaKH"));
+                khachHang.setTenKH(rs.getString("TenKH"));
+                khachHang.setDiaChi(rs.getString("DiaChi"));
+                khachHang.setDienThoai(rs.getString("DienThoai"));
+                khachHang.setEmail(rs.getString("Email"));
+                khachHang.setSoSPDaMua(rs.getString("SoSPDaMua"));
+                result.add(khachHang);
+            }
+        }catch(SQLException e)
+        {
+            System.out.println("Null Table!");
+        }
+        return result;
+    }
+    
+    public ArrayList<KhachHang> searchKhachHangExistNoUpdate(String name , String Address, String phone, String Email, String SoSPDaMua )
+    {
+        connection = new DBConnection();
+        ArrayList<KhachHang> result = new ArrayList<KhachHang>();
+        String query = "select * from KhachHang where TenKH like '%" + name + "%' and DienThoai like '%" + phone + "%' and DiaChi like '%" + Address + "%' and Email like '%" + Email + "%' and SoSPDaMua = '" + SoSPDaMua + "'";
+        System.out.println(query);
+        try{
+            ResultSet rs = connection.ExcuteQueryGetTable(query);
+            while (rs.next()) {                
+                KhachHang khachHang = new KhachHang();
+                khachHang.setMaKH(rs.getString("MaKH"));
+                khachHang.setTenKH(rs.getString("TenKH"));
+                khachHang.setDiaChi(rs.getString("DiaChi"));
+                khachHang.setDienThoai(rs.getString("DienThoai"));
+                khachHang.setEmail(rs.getString("Email"));
+                khachHang.setSoSPDaMua(rs.getString("SoSPDaMua"));
+                result.add(khachHang);
+            }
+        }catch(SQLException e)
+        {
+            System.out.println("Null Table!");
+        }
+        return result;
+    }
+    
+    
     public boolean addKhachHang(KhachHang khachHang)
     {
         connection = new DBConnection();
@@ -87,7 +138,7 @@ public class KhachHang_DAL {
     public boolean updateKhachHang(KhachHang khachHang)
     {
         connection = new DBConnection();
-        String query = "update KhachHang set DiaChi = '" + khachHang.getDiaChi() + "', DienThoai = '" +khachHang.getDienThoai() +"', Email = '" +khachHang.getEmail() +"', SoSPDaMua = '" + khachHang.getSoSPDaMua() + "' where TenKH = '" +khachHang.getTenKH() + "'" ;
+        String query = "update KhachHang set TenKH = '" + khachHang.getTenKH() + "', DiaChi = '" + khachHang.getDiaChi() + "', DienThoai = '" +khachHang.getDienThoai() +"', Email = '" +khachHang.getEmail() +"', SoSPDaMua = '" + khachHang.getSoSPDaMua() + "' where MaKH = '" +khachHang.getMaKH() + "'" ;
         System.err.println(query);
         try {
             ResultSet rs = connection.ExcuteQueryUpdateDB(query);
@@ -101,7 +152,7 @@ public class KhachHang_DAL {
      public boolean updateAmountProductKhachHang(String id, int amount)
     {
         connection = new DBConnection();
-        String query = "update KhachHang set SoSPDaMua = '" + amount + "' where TenKH = '" + id + "'" ;
+        String query = "update KhachHang set SoSPDaMua = SoSPDaMua + " + amount + " where TenKH = '" + id + "'" ;
         System.err.println(query);
         try {
             ResultSet rs = connection.ExcuteQueryUpdateDB(query);

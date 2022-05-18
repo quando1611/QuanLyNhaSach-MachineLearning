@@ -539,6 +539,11 @@ public class SaleManagement extends javax.swing.JFrame {
         AmountTxb.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         AmountTxb.setText("0");
         AmountTxb.setToolTipText("Search Here....");
+        AmountTxb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                AmountTxbKeyTyped(evt);
+            }
+        });
         SearchTab.add(AmountTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 440, 70, 50));
 
         TypeCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
@@ -658,7 +663,11 @@ public class SaleManagement extends javax.swing.JFrame {
         jLabel8.setText("Receive");
         CreateBillTab.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 430, 50, 30));
 
-        ReceiveTxb.setEnabled(false);
+        ReceiveTxb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                ReceiveTxbKeyTyped(evt);
+            }
+        });
         CreateBillTab.add(ReceiveTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 420, 210, 50));
 
         DeleteRowBtn.setBackground(new java.awt.Color(255, 51, 102));
@@ -938,6 +947,15 @@ public class SaleManagement extends javax.swing.JFrame {
                 chitiet.setSoLuongMua(sach.getSoLuong());
                 ChiTietHoaDon_BUS chiTietHoaDon_BUS = new ChiTietHoaDon_BUS();
                 chiTietHoaDon_BUS.addChiTietHoaDon(chitiet);
+                //add amount of book have boought into account 
+                    String IDBuyBook = getCustomerID(CustomerID.getSelectedItem().toString());
+                    KhachHang khachHangBuyBook = new KhachHang();
+                    KhachHang_BUS khachHang_BUS = new KhachHang_BUS();
+                    ArrayList<KhachHang> khachHangBuy = new ArrayList<KhachHang>();
+                    khachHangBuy = khachHang_BUS.seacrhKhachHang(IDBuyBook);
+                    khachHangBuyBook = khachHangBuy.get(0);
+                    khachHangBuyBook.setSoSPDaMua(Integer.toString(Integer.parseInt(khachHangBuyBook.getSoSPDaMua()) + sach.getSoLuong()));
+                    khachHang_BUS.updateKhachHang(khachHangBuyBook);
                 //GetOldAmount and update new amount for Sach
                 Sach sachInStorage = new Sach();
                 int amountOld = 0;
@@ -1063,6 +1081,26 @@ public class SaleManagement extends javax.swing.JFrame {
     private void TotalTxbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TotalTxbActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TotalTxbActionPerformed
+
+    private void AmountTxbKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AmountTxbKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        
+        if(!Character.isDigit(c))
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_AmountTxbKeyTyped
+
+    private void ReceiveTxbKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ReceiveTxbKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        
+        if(!Character.isDigit(c))
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_ReceiveTxbKeyTyped
 
     /**
      * @param args the command line arguments

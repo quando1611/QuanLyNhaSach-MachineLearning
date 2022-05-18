@@ -24,6 +24,16 @@ public class Sach_BUS {
         return sach_DAL.searchSach(name, type, author);
     }
     
+    public ArrayList<Sach> searchSachExist(String name, String type, String author)
+    {
+        return sach_DAL.searchSachExist(name, type, author);
+    }
+    
+    public ArrayList<Sach> searchSachExistNoUpdate(String name, String type, String author, int Amount, float Price)
+    {
+        return sach_DAL.searchSachExistNoUpdate(name, type, author, Amount, Price);
+    }
+    
     public ArrayList<Sach> searchSachbyID(String id)
     {
         return sach_DAL.searchSachbyID(id);

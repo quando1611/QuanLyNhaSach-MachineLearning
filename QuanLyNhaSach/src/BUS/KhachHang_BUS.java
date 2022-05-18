@@ -24,6 +24,16 @@ public class KhachHang_BUS {
         return khachHang_DAL.searchKhachHang(search); 
     }
     
+    public ArrayList<KhachHang> seacrhKhachHangExist(String name, String phone)
+    {
+        return khachHang_DAL.searchKhachHangExist(name,phone); 
+    }
+    
+    public ArrayList<KhachHang> seacrhKhachHangExistNoUpdate(String name, String address, String phone, String email, String SoSPDaMua)
+    {
+        return khachHang_DAL.searchKhachHangExistNoUpdate(name,address,phone,email,SoSPDaMua); 
+    }
+    
     public boolean addKhachHang(KhachHang khachHang)
     {
         return khachHang_DAL.addKhachHang(khachHang);
@@ -32,6 +42,11 @@ public class KhachHang_BUS {
     public boolean updateKhachHang(KhachHang khachHang)
     {
         return khachHang_DAL.updateKhachHang(khachHang);
+    }
+    
+    public boolean updateAmountProductKhachHang(String idString, int amount)
+    {
+        return khachHang_DAL.updateAmountProductKhachHang(idString, amount);
     }
     
     public boolean deleteKhachHang(String maKH)

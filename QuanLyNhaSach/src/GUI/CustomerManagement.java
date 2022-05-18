@@ -97,7 +97,6 @@ public class CustomerManagement extends javax.swing.JFrame {
             String soSP = tableModel.getValueAt(SearchCustomerTable.getSelectedRow(), 5).toString();
             //Set TextField
             NameTxb.setText(name);
-            NameTxb.enable(false);
             AddressTxb.setText(address);
             PhoneNumberTxb.setText(phone);
             EmailTxb.setText(email);
@@ -307,6 +306,11 @@ public class CustomerManagement extends javax.swing.JFrame {
 
         NameTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         NameTxb.setToolTipText("");
+        NameTxb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                NameTxbKeyTyped(evt);
+            }
+        });
         AddTab.add(NameTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 20, 431, 52));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -327,6 +331,11 @@ public class CustomerManagement extends javax.swing.JFrame {
 
         PhoneNumberTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         PhoneNumberTxb.setToolTipText("");
+        PhoneNumberTxb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                PhoneNumberTxbKeyTyped(evt);
+            }
+        });
         AddTab.add(PhoneNumberTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 210, 259, 52));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -366,6 +375,11 @@ public class CustomerManagement extends javax.swing.JFrame {
 
         ProductTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ProductTxb.setToolTipText("");
+        ProductTxb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                ProductTxbKeyTyped(evt);
+            }
+        });
         AddTab.add(ProductTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 400, 110, 52));
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
@@ -481,9 +495,16 @@ public class CustomerManagement extends javax.swing.JFrame {
     private void AddCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCustomerBtnActionPerformed
         // Add Customer
         KhachHang khachHang = new KhachHang();
+        ArrayList<KhachHang> existarr = new ArrayList<KhachHang>();
+        KhachHang_BUS khachHang_BUS = new KhachHang_BUS();
+        existarr = khachHang_BUS.seacrhKhachHangExist(NameTxb.getText(), PhoneNumberTxb.getText());
         if(NameTxb.getText().equals(""))
         {
             JOptionPane.showMessageDialog(this, "Please fill atleast the name of customer...");
+        }
+        else if(existarr.size()>0)
+        {
+            JOptionPane.showMessageDialog(this, "Already exist this customer...");
         }
         else
         {
@@ -493,7 +514,6 @@ public class CustomerManagement extends javax.swing.JFrame {
             khachHang.setDienThoai(PhoneNumberTxb.getText());
             khachHang.setEmail(EmailTxb.getText());
             khachHang.setSoSPDaMua(ProductTxb.getText());
-            KhachHang_BUS khachHang_BUS = new KhachHang_BUS();
             khachHang_BUS.addKhachHang(khachHang);
             JOptionPane.showMessageDialog(this, "Add Customer success!");
             reset();
@@ -506,20 +526,34 @@ public class CustomerManagement extends javax.swing.JFrame {
     private void UpdateCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateCustomerBtnActionPerformed
         // Update Customer
         KhachHang khachHang = new KhachHang();
-        khachHang.setMaKH(valueMaKH);
-        khachHang.setTenKH(NameTxb.getText());
-        khachHang.setDiaChi(AddressTxb.getText());
-        khachHang.setDienThoai(PhoneNumberTxb.getText());
-        khachHang.setEmail(EmailTxb.getText());
-        khachHang.setSoSPDaMua(ProductTxb.getText());
+        ArrayList<KhachHang> existarr = new ArrayList<KhachHang>();
         KhachHang_BUS khachHang_BUS = new KhachHang_BUS();
-        khachHang_BUS.updateKhachHang(khachHang);
-        JOptionPane.showMessageDialog(this, "Update Customer success!");
-        reset();
-        resetText();
-        loadAllCustomer();
-        ParentPanel.setSelectedIndex(0);
-        AddCustomerBtn.setEnabled(true);
+        existarr = khachHang_BUS.seacrhKhachHangExistNoUpdate(NameTxb.getText(), AddressTxb.getText(), PhoneNumberTxb.getText(), EmailTxb.getText(), ProductTxb.getText());
+        if(NameTxb.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(this, "Please fill atleast the name of customer...");
+        }
+        else if(existarr.size() > 0)
+        {
+            JOptionPane.showMessageDialog(this, "No Update...");
+        }
+        else
+        {
+            khachHang.setMaKH(valueMaKH);
+            khachHang.setTenKH(NameTxb.getText());
+            khachHang.setDiaChi(AddressTxb.getText());
+            khachHang.setDienThoai(PhoneNumberTxb.getText());
+            khachHang.setEmail(EmailTxb.getText());
+            khachHang.setSoSPDaMua(ProductTxb.getText());
+            khachHang_BUS.updateKhachHang(khachHang);
+            JOptionPane.showMessageDialog(this, "Update Customer success!");
+            reset();
+            resetText();
+            loadAllCustomer();
+            ParentPanel.setSelectedIndex(0);
+            AddCustomerBtn.setEnabled(true);
+        }
+        
     }//GEN-LAST:event_UpdateCustomerBtnActionPerformed
 
     private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
@@ -548,6 +582,36 @@ public class CustomerManagement extends javax.swing.JFrame {
     private void DeleteBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBtnMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_DeleteBtnMouseClicked
+
+    private void NameTxbKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NameTxbKeyTyped
+        // NameTxb only Text
+        char c = evt.getKeyChar();
+        
+        if(Character.isDigit(c))
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_NameTxbKeyTyped
+
+    private void PhoneNumberTxbKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PhoneNumberTxbKeyTyped
+        // PhoneTxb Number only
+        char c = evt.getKeyChar();
+        
+        if(!Character.isDigit(c))
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_PhoneNumberTxbKeyTyped
+
+    private void ProductTxbKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ProductTxbKeyTyped
+        // ProductAmountTxb Number only
+        char c = evt.getKeyChar();
+        
+        if(!Character.isDigit(c))
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_ProductTxbKeyTyped
 
     /**
      * @param args the command line arguments
