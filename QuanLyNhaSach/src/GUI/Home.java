@@ -29,6 +29,7 @@ public class Home extends javax.swing.JFrame {
     public Home() {
         initComponents();
         home1 = this;
+        WelcomeLb.setText("Welcome Back,               " + PublicClass.name);
     }
 
     /**
@@ -553,9 +554,17 @@ public class Home extends javax.swing.JFrame {
 
     private void LogOutPnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogOutPnMouseClicked
         // TODO add your handling code here:
-        Login login = new Login();
-        this.dispose();
-        login.show();
+        int response = JOptionPane.showConfirmDialog(this, "Do you want to continue?", "Confirm",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (response == JOptionPane.YES_OPTION) {
+            System.out.println("Yes!");
+                Login login = new Login();
+                this.dispose();
+                login.show();
+          } else if (response == JOptionPane.NO_OPTION) {
+            System.out.println("No!");
+          } else if (response == JOptionPane.CLOSED_OPTION) {
+            System.out.println("Cancel!");
+          }
     }//GEN-LAST:event_LogOutPnMouseClicked
 
     

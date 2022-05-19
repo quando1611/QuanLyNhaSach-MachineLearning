@@ -7,6 +7,7 @@ package GUI;
 import BUS.*;
 import DTO.*;
 import DAL.*;
+import java.security.interfaces.RSAKey;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -37,10 +38,13 @@ public class RevenueManagement extends javax.swing.JFrame {
     private String maTK;
     private String maNCC;
     private double totalImport;
-    
+    //SaleBill
+    private String IDSaleBill;
     public RevenueManagement() {
         initComponents();
         loadCurrentDate();
+        loadSaleBill();
+        LoadStaffIDCb();
     }
     
      public String getBookName(String id) {      //Get bookname by ID
@@ -79,6 +83,13 @@ public class RevenueManagement extends javax.swing.JFrame {
         ImportBillShowTable.setModel(tableModel);
     }
     
+    public void resetSaleBill()
+    {
+        DefaultTableModel tableModel = (DefaultTableModel) SaleBillTable.getModel();
+        tableModel.setRowCount(0);
+        SaleBillTable.setModel(tableModel);
+    }
+    
     public void resetText()
     {
         
@@ -89,16 +100,32 @@ public class RevenueManagement extends javax.swing.JFrame {
         Calendar today = Calendar.getInstance();
         DateBox.setCalendar(today);
         DateImportBox.setCalendar(today);
+        DateSaleBillBox.setCalendar(today);
     }
     
-    public void loadAllBillInDay()
+    private void LoadStaffIDCb()
+    {
+        connection = new DBConnection();
+        String query = "select * from TaiKhoan";
+        try {
+            ResultSet rs = connection.ExcuteQueryGetTable(query);
+            while (rs.next()) {
+                String id = rs.getString("MaTK");
+                StaffIDCb.addItem(id);
+            }
+        } catch (Exception e) {
+            System.err.println("No thing!");
+        }
+    }
+    
+    private void loadAllBillInDay()
     {
         //Load All bill to  BillShowTable
         DefaultTableModel table = (DefaultTableModel) BillShowTable.getModel();
         String date = ((JTextField) DateBox.getDateEditor().getUiComponent()).getText();
         ArrayList<HoaDon> arr = new ArrayList<HoaDon>();
         HoaDon_BUS hoaDon_BUS = new HoaDon_BUS();
-        arr = hoaDon_BUS.danhSachHoaDonByDay(date);
+        arr = hoaDon_BUS.danhSachHoaDonCompletebyDate(date);
         HoaDon hoaDon = new HoaDon();
         {
             try {
@@ -147,7 +174,57 @@ public class RevenueManagement extends javax.swing.JFrame {
             ImportBillShowTable.setModel(table);
     }
     
-    public void selectBillRow()
+    public void loadSaleBill()
+    {
+        try {
+                String date = ((JTextField) DateSaleBillBox.getDateEditor().getUiComponent()).getText(); //Get String from DatePicker - JDateChooser
+                DefaultTableModel tableModel = (DefaultTableModel) SaleBillTable.getModel();
+                PhieuThuTien phieuthutien = new PhieuThuTien();
+                PhieuThuTien_BUS bus = new PhieuThuTien_BUS();
+                ArrayList<PhieuThuTien> arr = new ArrayList<PhieuThuTien>();
+                if(OnlyStaffRadio.isSelected() == true)
+                {
+                    if(StaffIDCb.getSelectedItem().toString().equals("All"))
+                    {
+                        arr = bus.getAllPhieuThuTien();
+                    }
+                    else
+                    {
+                        arr = bus.getAllPhieuThuTienByStaffID(StaffIDCb.getSelectedItem().toString());
+                    }
+                }
+                else if (BothRadio.isSelected() == true)
+                {
+                    if(StaffIDCb.getSelectedItem().toString().equals("All"))
+                    {
+                        arr = bus.getAllPhieuThuTienByStaffIDAndDate("",date);
+                    }
+                    else
+                    {
+                        arr = bus.getAllPhieuThuTienByStaffIDAndDate(StaffIDCb.getSelectedItem().toString(),date);
+                    }
+                }
+                try {
+                    for(int i=0; i < arr.size(); i++)
+                    {
+                        phieuthutien = arr.get(i);
+                        String id = phieuthutien.getMaPhieuThu();
+                        String khachid = phieuthutien.getMaKH();
+                        String ngaythu = phieuthutien.getNgaythu();
+                        float tienthu = phieuthutien.getSoTienThu();
+                        String staff = phieuthutien.getMaTaiKhoan();
+                        Object[] row = {id, khachid, ngaythu, tienthu, staff};
+                        tableModel.addRow(row);
+                    }
+                } catch (Exception e) {
+                }
+                SaleBillTable.setModel(tableModel);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Haven't choose Day!");
+        }
+    }
+    
+    private void selectBillRow()
     {
         DefaultTableModel selecttable = (DefaultTableModel) BillShowTable.getModel();
         IDBill = selecttable.getValueAt(BillShowTable.getSelectedRow(), 0).toString();
@@ -157,7 +234,7 @@ public class RevenueManagement extends javax.swing.JFrame {
         receive = Double.parseDouble(selecttable.getValueAt(BillShowTable.getSelectedRow(), 4).toString());
     }
     
-    public void selectImportBillRow()
+    private void selectImportBillRow()
     {
         DefaultTableModel selecttable = (DefaultTableModel) ImportBillShowTable.getModel();
         IDimportBill = selecttable.getValueAt(BillShowTable.getSelectedRow(), 0).toString();
@@ -166,6 +243,12 @@ public class RevenueManagement extends javax.swing.JFrame {
         maTK = selecttable.getValueAt(BillShowTable.getSelectedRow(), 3).toString();
         maNCC = selecttable.getValueAt(BillShowTable.getSelectedRow(), 4).toString();
         totalImport = Double.parseDouble(selecttable.getValueAt(BillShowTable.getSelectedRow(), 5).toString());
+    }
+    
+    private void selectSaleBillRow()
+    {
+        DefaultTableModel selecttable = (DefaultTableModel) SaleBillTable.getModel();
+        IDSaleBill = selecttable.getValueAt(SaleBillTable.getSelectedRow(), 0).toString();
     }
     
     
@@ -178,12 +261,13 @@ public class RevenueManagement extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         BackBtn = new javax.swing.JLabel();
         ParentPanel = new javax.swing.JTabbedPane();
-        SearchTab = new javax.swing.JPanel();
+        DailyTurnOver = new javax.swing.JPanel();
         SearchBtn = new javax.swing.JButton();
         DateBox = new com.toedter.calendar.JDateChooser();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -194,7 +278,7 @@ public class RevenueManagement extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         PrintPreview = new javax.swing.JTextArea();
         jLabel10 = new javax.swing.JLabel();
-        AddTab = new javax.swing.JPanel();
+        ImportReportTab = new javax.swing.JPanel();
         DateImportBox = new com.toedter.calendar.JDateChooser();
         SearchBtn1 = new javax.swing.JButton();
         PreviewImportBtn = new javax.swing.JButton();
@@ -206,19 +290,30 @@ public class RevenueManagement extends javax.swing.JFrame {
         ImportBillShowTable = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         MonthlyRevenue = new javax.swing.JPanel();
-        jProgressBar1 = new javax.swing.JProgressBar();
         jPanel3 = new javax.swing.JPanel();
-        jLabel15 = new javax.swing.JLabel();
+        RevenueCal = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        ImportTotal = new javax.swing.JLabel();
-        SaleTotal1 = new javax.swing.JLabel();
+        ImportTotalLb = new javax.swing.JLabel();
+        SaleTotalLb = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        Revenue = new javax.swing.JLabel();
-        ViewTab = new javax.swing.JPanel();
+        RevenueLb = new javax.swing.JLabel();
+        SearchBtn2 = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        RevenuePrintPreview = new javax.swing.JTextArea();
+        MonthCb = new javax.swing.JComboBox<>();
+        YearTxb = new javax.swing.JTextField();
+        PrintImportBtn1 = new javax.swing.JButton();
+        StaffBillTab = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        ViewTable = new javax.swing.JTable();
+        SaleBillTable = new javax.swing.JTable();
+        DateSaleBillBox = new com.toedter.calendar.JDateChooser();
+        SearchBtn3 = new javax.swing.JButton();
+        StaffIDCb = new javax.swing.JComboBox<>();
+        BothRadio = new javax.swing.JRadioButton();
+        OnlyStaffRadio = new javax.swing.JRadioButton();
+        DeleteBtn2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -263,7 +358,7 @@ public class RevenueManagement extends javax.swing.JFrame {
 
         ParentPanel.setBackground(new java.awt.Color(204, 204, 255));
 
-        SearchTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        DailyTurnOver.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         SearchBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png"))); // NOI18N
         SearchBtn.setToolTipText("Search");
@@ -272,10 +367,10 @@ public class RevenueManagement extends javax.swing.JFrame {
                 SearchBtnActionPerformed(evt);
             }
         });
-        SearchTab.add(SearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 60, 40));
+        DailyTurnOver.add(SearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 60, 40));
 
         DateBox.setDateFormatString("yyyy-MM-dd");
-        SearchTab.add(DateBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 280, 40));
+        DailyTurnOver.add(DateBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 280, 40));
 
         jScrollPane5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -305,7 +400,7 @@ public class RevenueManagement extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(BillShowTable);
 
-        SearchTab.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 800, 430));
+        DailyTurnOver.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 800, 430));
 
         DeleteBtn.setBackground(new java.awt.Color(153, 255, 153));
         DeleteBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -315,7 +410,7 @@ public class RevenueManagement extends javax.swing.JFrame {
                 DeleteBtnActionPerformed(evt);
             }
         });
-        SearchTab.add(DeleteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 530, 116, 51));
+        DailyTurnOver.add(DeleteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 530, 116, 51));
 
         PreviewBtn.setBackground(new java.awt.Color(153, 255, 153));
         PreviewBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -325,7 +420,7 @@ public class RevenueManagement extends javax.swing.JFrame {
                 PreviewBtnActionPerformed(evt);
             }
         });
-        SearchTab.add(PreviewBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 530, 116, 51));
+        DailyTurnOver.add(PreviewBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 530, 116, 51));
 
         PrintBtn.setBackground(new java.awt.Color(153, 255, 153));
         PrintBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -335,25 +430,25 @@ public class RevenueManagement extends javax.swing.JFrame {
                 PrintBtnActionPerformed(evt);
             }
         });
-        SearchTab.add(PrintBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 530, 116, 51));
+        DailyTurnOver.add(PrintBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 530, 116, 51));
 
         PrintPreview.setColumns(20);
         PrintPreview.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         PrintPreview.setRows(5);
         jScrollPane1.setViewportView(PrintPreview);
 
-        SearchTab.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 80, 410, 500));
+        DailyTurnOver.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 80, 410, 500));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel10.setText("Preview Before Print");
-        SearchTab.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 30, -1, -1));
+        DailyTurnOver.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 30, -1, -1));
 
-        ParentPanel.addTab("Daily Turnover", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png")), SearchTab); // NOI18N
+        ParentPanel.addTab("Daily Turnover", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png")), DailyTurnOver); // NOI18N
 
-        AddTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        ImportReportTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         DateImportBox.setDateFormatString("yyyy-MM-dd");
-        AddTab.add(DateImportBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 280, 40));
+        ImportReportTab.add(DateImportBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 280, 40));
 
         SearchBtn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png"))); // NOI18N
         SearchBtn1.setToolTipText("Search");
@@ -362,7 +457,7 @@ public class RevenueManagement extends javax.swing.JFrame {
                 SearchBtn1ActionPerformed(evt);
             }
         });
-        AddTab.add(SearchBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 60, 40));
+        ImportReportTab.add(SearchBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 60, 40));
 
         PreviewImportBtn.setBackground(new java.awt.Color(153, 255, 153));
         PreviewImportBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -372,7 +467,7 @@ public class RevenueManagement extends javax.swing.JFrame {
                 PreviewImportBtnActionPerformed(evt);
             }
         });
-        AddTab.add(PreviewImportBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 530, 116, 51));
+        ImportReportTab.add(PreviewImportBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 530, 116, 51));
 
         PrintImportBtn.setBackground(new java.awt.Color(153, 255, 153));
         PrintImportBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -382,7 +477,7 @@ public class RevenueManagement extends javax.swing.JFrame {
                 PrintImportBtnActionPerformed(evt);
             }
         });
-        AddTab.add(PrintImportBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 530, 116, 51));
+        ImportReportTab.add(PrintImportBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 530, 116, 51));
 
         DeleteBtn1.setBackground(new java.awt.Color(153, 255, 153));
         DeleteBtn1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -392,13 +487,14 @@ public class RevenueManagement extends javax.swing.JFrame {
                 DeleteBtn1ActionPerformed(evt);
             }
         });
-        AddTab.add(DeleteBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 530, 116, 51));
+        ImportReportTab.add(DeleteBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 530, 116, 51));
 
         ImportPrintPreview.setColumns(20);
+        ImportPrintPreview.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         ImportPrintPreview.setRows(5);
         jScrollPane3.setViewportView(ImportPrintPreview);
 
-        AddTab.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 80, 410, 500));
+        ImportReportTab.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 80, 410, 500));
 
         jScrollPane6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -428,25 +524,24 @@ public class RevenueManagement extends javax.swing.JFrame {
         });
         jScrollPane6.setViewportView(ImportBillShowTable);
 
-        AddTab.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 800, 430));
+        ImportReportTab.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 800, 430));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel9.setText("Preview Before Print");
-        AddTab.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 30, -1, -1));
+        ImportReportTab.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 30, -1, -1));
 
-        ParentPanel.addTab("Import Report", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_Plus_+_35px.png")), AddTab); // NOI18N
+        ParentPanel.addTab("Import Report", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_Plus_+_35px.png")), ImportReportTab); // NOI18N
 
         MonthlyRevenue.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        MonthlyRevenue.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 180, 630, 40));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel15.setText("REVENUE");
-        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, -1, -1));
+        RevenueCal.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        RevenueCal.setText("REVENUE");
+        jPanel3.add(RevenueCal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        MonthlyRevenue.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 520, 50));
+        MonthlyRevenue.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 520, 50));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -454,19 +549,19 @@ public class RevenueManagement extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 102, 102));
         jLabel11.setText("IMPORT");
-        jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, -1, -1));
+        jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        MonthlyRevenue.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 520, 50));
+        MonthlyRevenue.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 520, 50));
 
-        ImportTotal.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        ImportTotal.setForeground(new java.awt.Color(255, 102, 102));
-        ImportTotal.setText("IMPORT");
-        MonthlyRevenue.add(ImportTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 370, -1, -1));
+        ImportTotalLb.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        ImportTotalLb.setForeground(new java.awt.Color(255, 102, 102));
+        ImportTotalLb.setText("IMPORT");
+        MonthlyRevenue.add(ImportTotalLb, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 360, -1, -1));
 
-        SaleTotal1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        SaleTotal1.setForeground(new java.awt.Color(0, 153, 0));
-        SaleTotal1.setText("SALE");
-        MonthlyRevenue.add(SaleTotal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, -1, -1));
+        SaleTotalLb.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        SaleTotalLb.setForeground(new java.awt.Color(0, 153, 0));
+        SaleTotalLb.setText("SALE");
+        MonthlyRevenue.add(SaleTotalLb, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, -1, -1));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -476,22 +571,58 @@ public class RevenueManagement extends javax.swing.JFrame {
         jLabel14.setText("SALE");
         jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        MonthlyRevenue.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 520, 50));
+        MonthlyRevenue.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 520, 50));
 
-        Revenue.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        Revenue.setText("REVENUE");
-        MonthlyRevenue.add(Revenue, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 500, -1, -1));
+        RevenueLb.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        RevenueLb.setText("REVENUE");
+        MonthlyRevenue.add(RevenueLb, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 520, -1, -1));
+
+        SearchBtn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png"))); // NOI18N
+        SearchBtn2.setToolTipText("Search");
+        SearchBtn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchBtn2ActionPerformed(evt);
+            }
+        });
+        MonthlyRevenue.add(SearchBtn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, 60, 40));
+
+        RevenuePrintPreview.setColumns(20);
+        RevenuePrintPreview.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        RevenuePrintPreview.setRows(5);
+        jScrollPane4.setViewportView(RevenuePrintPreview);
+
+        MonthlyRevenue.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 30, 690, 480));
+
+        MonthCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        MonthlyRevenue.add(MonthCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 50, 40));
+
+        YearTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        YearTxb.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        YearTxb.setToolTipText("Search Here....");
+        MonthlyRevenue.add(YearTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 110, 42));
+
+        PrintImportBtn1.setBackground(new java.awt.Color(153, 255, 153));
+        PrintImportBtn1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        PrintImportBtn1.setText("PRINT");
+        PrintImportBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PrintImportBtn1ActionPerformed(evt);
+            }
+        });
+        MonthlyRevenue.add(PrintImportBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 530, 116, 51));
 
         ParentPanel.addTab("Monthly Revenue", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_restart_35px.png")), MonthlyRevenue); // NOI18N
 
+        StaffBillTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jScrollPane2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        ViewTable.setModel(new javax.swing.table.DefaultTableModel(
+        SaleBillTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Name", "Address", "PhoneNumber", "Email"
+                "ID", "MaKhachHang", "NgayThu", "SoTienThu", "MaTaiKhoan"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -502,27 +633,56 @@ public class RevenueManagement extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        ViewTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        ViewTable.setGridColor(new java.awt.Color(0, 0, 0));
-        ViewTable.setShowGrid(true);
-        jScrollPane2.setViewportView(ViewTable);
-        ViewTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        SaleBillTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        SaleBillTable.setGridColor(new java.awt.Color(0, 0, 0));
+        SaleBillTable.setShowGrid(true);
+        SaleBillTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SaleBillTableMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(SaleBillTable);
+        SaleBillTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
-        javax.swing.GroupLayout ViewTabLayout = new javax.swing.GroupLayout(ViewTab);
-        ViewTab.setLayout(ViewTabLayout);
-        ViewTabLayout.setHorizontalGroup(
-            ViewTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ViewTabLayout.createSequentialGroup()
-                .addGap(165, 165, 165)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 916, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(194, Short.MAX_VALUE))
-        );
-        ViewTabLayout.setVerticalGroup(
-            ViewTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
-        );
+        StaffBillTab.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 916, 430));
 
-        ParentPanel.addTab("Staff KPI", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_eye_35px.png")), ViewTab); // NOI18N
+        DateSaleBillBox.setDateFormatString("yyyy-MM-dd");
+        StaffBillTab.add(DateSaleBillBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 60, 310, 40));
+
+        SearchBtn3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png"))); // NOI18N
+        SearchBtn3.setToolTipText("Search");
+        SearchBtn3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchBtn3ActionPerformed(evt);
+            }
+        });
+        StaffBillTab.add(SearchBtn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 60, 60, 40));
+
+        StaffIDCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
+        StaffBillTab.add(StaffIDCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, 310, 40));
+
+        buttonGroup1.add(BothRadio);
+        BothRadio.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        BothRadio.setText("StaffAndDate");
+        StaffBillTab.add(BothRadio, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 20, -1, -1));
+
+        buttonGroup1.add(OnlyStaffRadio);
+        OnlyStaffRadio.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        OnlyStaffRadio.setSelected(true);
+        OnlyStaffRadio.setText("OnlyStaff");
+        StaffBillTab.add(OnlyStaffRadio, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, -1, -1));
+
+        DeleteBtn2.setBackground(new java.awt.Color(153, 255, 153));
+        DeleteBtn2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        DeleteBtn2.setText("DELETE");
+        DeleteBtn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteBtn2ActionPerformed(evt);
+            }
+        });
+        StaffBillTab.add(DeleteBtn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 500, 116, 51));
+
+        ParentPanel.addTab("Staff Bill", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_eye_35px.png")), StaffBillTab); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -641,7 +801,6 @@ public class RevenueManagement extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             selectImportBillRow();
-            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "No Row have selected!");
         }
@@ -684,6 +843,136 @@ public class RevenueManagement extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_BackBtnMouseClicked
 
+    private void SearchBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBtn2ActionPerformed
+        // TODO add your handling code here:
+        try {
+                String month = MonthCb.getSelectedItem().toString();
+                String year = YearTxb.getText();
+                double saleTotal = loadRevenue_Sale(month, year);
+                double importTotal = loadRevenue_Import(month, year);
+                calculateRevenue(saleTotal, importTotal);
+                RevenueCal.setText("REVENUE     ~     " + ((saleTotal-importTotal)/(saleTotal+importTotal)*100 ) + " %"); 
+
+
+                //Print Preview
+                RevenuePrintPreview.setText("******************************************************************************************************************\n");
+                RevenuePrintPreview.setText( RevenuePrintPreview.getText() + "**                                                              BOOK-KEEPER STORE                                                                    **\n");
+                RevenuePrintPreview.setText( RevenuePrintPreview.getText() + "******************************************************************************************************************\n");
+                RevenuePrintPreview.setText( RevenuePrintPreview.getText() + "                                                                        - REVENUE -\n");
+                RevenuePrintPreview.setText( RevenuePrintPreview.getText() + "                                                      __Month : " + month +"                   Year : " + year + "__\n");
+                RevenuePrintPreview.setText( RevenuePrintPreview.getText() + "                                                      Address : KTX Khu B - ĐHQG TPHCM\n");
+                RevenuePrintPreview.setText( RevenuePrintPreview.getText() + "           Phone :     0345304407                                                                             Web :  fb.com/12345\n");
+                RevenuePrintPreview.setText( RevenuePrintPreview.getText() + "------------------------------------------------------------------------------------------------------------------\n");
+                RevenuePrintPreview.setText( RevenuePrintPreview.getText() + "\n");
+                RevenuePrintPreview.setText( RevenuePrintPreview.getText() + "                                   SALE                                                                                IMPORT\n");
+                RevenuePrintPreview.setText( RevenuePrintPreview.getText() + "                         "+ saleTotal +"                                                            " + importTotal + "\n");
+
+                RevenuePrintPreview.setText( RevenuePrintPreview.getText() + "                                                                      ---------------------\n");
+                RevenuePrintPreview.setText( RevenuePrintPreview.getText() + "                                                                               INTEREST\n");
+                RevenuePrintPreview.setText( RevenuePrintPreview.getText() + "                                                                       " + (saleTotal - importTotal) + "\n");
+                RevenuePrintPreview.setText( RevenuePrintPreview.getText() + "------------------------------------------------------------------------------------------------------------------\n");
+                RevenuePrintPreview.setText( RevenuePrintPreview.getText() + "\n");
+                RevenuePrintPreview.setText( RevenuePrintPreview.getText() + "            - In this month, we get the revenue ~ " +(((saleTotal-importTotal)/(saleTotal+importTotal))*100) + " %\n");
+                RevenuePrintPreview.setText( RevenuePrintPreview.getText() + "\n");
+                RevenuePrintPreview.setText( RevenuePrintPreview.getText() + "------------------------------------------------------------------------------------------------------------------\n");
+                RevenuePrintPreview.setText( RevenuePrintPreview.getText() + "\n");
+                RevenuePrintPreview.setText( RevenuePrintPreview.getText() + "------------------------------------------------------------------------------------------------------------------\n");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Fill the YearTextbox!");
+        }
+    }//GEN-LAST:event_SearchBtn2ActionPerformed
+
+    private void SearchBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBtn3ActionPerformed
+        // TODO add your handling code here:
+        resetSaleBill();
+        loadSaleBill();
+    }//GEN-LAST:event_SearchBtn3ActionPerformed
+
+    private void PrintImportBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintImportBtn1ActionPerformed
+        // TODO add your handling code here:
+        try {
+            RevenuePrintPreview.print();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "No Information!");
+        }
+    }//GEN-LAST:event_PrintImportBtn1ActionPerformed
+
+    private void DeleteBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtn2ActionPerformed
+        // TODO add your handling code here:
+        try {
+            PhieuThuTien_BUS bus = new PhieuThuTien_BUS();
+            bus.deletePhieuThuTien(IDSaleBill);
+            JOptionPane.showMessageDialog(this, "Delete SaleBill success!");
+            resetSaleBill();
+            loadSaleBill();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "No Row have selected!");
+            
+        }
+    }//GEN-LAST:event_DeleteBtn2ActionPerformed
+
+    private void SaleBillTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SaleBillTableMouseClicked
+        // TODO add your handling code here:
+        selectSaleBillRow();
+    }//GEN-LAST:event_SaleBillTableMouseClicked
+
+    
+    //
+    //Calculate Revenue in #Monthly Revenue Tab
+    private double loadRevenue_Sale(String month, String year)
+    {
+        double saleTotal = 0;
+        ArrayList<HoaDon> arr = new ArrayList<HoaDon>();
+        HoaDon_BUS hoaDon_BUS = new HoaDon_BUS();
+        arr = hoaDon_BUS.danhSachHoaDonCompletebyMonth(month, year);
+        HoaDon hoaDon = new HoaDon();
+        {
+            try {
+                for (int i = 0; i < arr.size(); i++) {
+                    hoaDon = arr.get(i);
+                    saleTotal +=hoaDon.getTongTien();
+                }
+            } catch (Exception e) {
+                System.err.println("No thing!");
+            }
+        }
+        SaleTotalLb.setText(Double.toString(saleTotal));
+        return saleTotal;
+    }
+    
+     private double loadRevenue_Import(String month, String year)
+    {
+        double importTotal = 0;
+        ArrayList<PhieuNhapKho> arr = new ArrayList<PhieuNhapKho>();
+        PhieuNhapKho_BUS phieunhapkho_BUS = new PhieuNhapKho_BUS();
+        arr = phieunhapkho_BUS.danhsachPhieuNhapKhoByMonth(month, year);
+        PhieuNhapKho phieunhapkho = new PhieuNhapKho();
+        {
+            try {
+                for (int i = 0; i < arr.size(); i++) {
+                    phieunhapkho = arr.get(i);
+                    importTotal +=phieunhapkho.getTongTien();
+                }
+            } catch (Exception e) {
+                System.err.println("No thing!");
+            }
+        }
+        ImportTotalLb.setText(Double.toString(importTotal)); 
+        return importTotal;
+    }
+     
+     private void calculateRevenue(double saleTotal, double importTotal)
+     {
+         
+         RevenueLb.setText(Double.toString(saleTotal - importTotal));
+     }
+     
+    
+    
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -718,47 +1007,63 @@ public class RevenueManagement extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel AddTab;
     private javax.swing.JLabel BackBtn;
     private javax.swing.JTable BillShowTable;
+    private javax.swing.JRadioButton BothRadio;
+    private javax.swing.JPanel DailyTurnOver;
     private com.toedter.calendar.JDateChooser DateBox;
     private com.toedter.calendar.JDateChooser DateImportBox;
+    private com.toedter.calendar.JDateChooser DateSaleBillBox;
     private javax.swing.JButton DeleteBtn;
     private javax.swing.JButton DeleteBtn1;
+    private javax.swing.JButton DeleteBtn2;
     private javax.swing.JTable ImportBillShowTable;
     private javax.swing.JTextArea ImportPrintPreview;
-    private javax.swing.JLabel ImportTotal;
+    private javax.swing.JPanel ImportReportTab;
+    private javax.swing.JLabel ImportTotalLb;
+    private javax.swing.JComboBox<String> MonthCb;
     private javax.swing.JPanel MonthlyRevenue;
+    private javax.swing.JRadioButton OnlyStaffRadio;
     private javax.swing.JTabbedPane ParentPanel;
     private javax.swing.JButton PreviewBtn;
     private javax.swing.JButton PreviewImportBtn;
     private javax.swing.JButton PrintBtn;
     private javax.swing.JButton PrintImportBtn;
+    private javax.swing.JButton PrintImportBtn1;
     private javax.swing.JTextArea PrintPreview;
-    private javax.swing.JLabel Revenue;
-    private javax.swing.JLabel SaleTotal1;
+    private javax.swing.JLabel RevenueCal;
+    private javax.swing.JLabel RevenueLb;
+    private javax.swing.JTextArea RevenuePrintPreview;
+    private javax.swing.JTable SaleBillTable;
+    private javax.swing.JLabel SaleTotalLb;
     private javax.swing.JButton SearchBtn;
     private javax.swing.JButton SearchBtn1;
-    private javax.swing.JPanel SearchTab;
-    private javax.swing.JPanel ViewTab;
-    private javax.swing.JTable ViewTable;
+    private javax.swing.JButton SearchBtn2;
+    private javax.swing.JButton SearchBtn3;
+    private javax.swing.JPanel StaffBillTab;
+    private javax.swing.JComboBox<String> StaffIDCb;
+    private javax.swing.JTextField YearTxb;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     // End of variables declaration//GEN-END:variables

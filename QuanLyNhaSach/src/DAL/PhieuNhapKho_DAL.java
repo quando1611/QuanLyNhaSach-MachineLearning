@@ -71,6 +71,33 @@ public class PhieuNhapKho_DAL {
         return result;
     }
     
+     public ArrayList<PhieuNhapKho> danhsachPhieuNhapByMonth(String month, String year)
+    {
+        connection = new DBConnection();
+        ArrayList<PhieuNhapKho> result = new ArrayList<PhieuNhapKho>();
+        String query = "select * from PhieuNhapKho where MONTH(NgayTaoPhieu) ='" + month + "' and YEAR(NgayTaoPhieu) = '" + year + "'";
+        System.out.println(query);
+        try 
+        {
+            ResultSet rs = connection.ExcuteQueryGetTable(query);
+            while (rs.next())
+            {
+                PhieuNhapKho phieunhap = new PhieuNhapKho();
+                phieunhap.setMaPhieuNhap(rs.getString("MaPhieuNhap"));
+                phieunhap.setMaNhaCC(rs.getString("MaNCC"));
+                phieunhap.setMaTK(rs.getString("MaTK"));
+                phieunhap.setNgayTaoPhieu(rs.getString("NgayTaoPhieu"));
+                phieunhap.setNgayNhapKho(rs.getString("NgayNhapKho"));
+                phieunhap.setTongTien(Double.parseDouble(rs.getString("TongTien")));
+                result.add(phieunhap);
+            }
+        }catch (SQLException e)
+        {
+            System.out.println("Null table");
+        }
+        return result;
+    }
+    
     public boolean addPhieuNhapKho(PhieuNhapKho phieunhap)
     {
         connection = new DBConnection();

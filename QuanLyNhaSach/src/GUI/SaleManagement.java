@@ -32,7 +32,7 @@ public class SaleManagement extends javax.swing.JFrame {
     private boolean exist = false; //check exist from ArrayList selectarr below
     private String billID = ""; //generate billID with btn IDGenerate
     private ArrayList<Sach> selectarr = new ArrayList<Sach>(); //select arraylist for book selected
-
+    private String phieuthutienID = "";
     /**
      * Creates new form SaleManagement
      */
@@ -80,7 +80,7 @@ public class SaleManagement extends javax.swing.JFrame {
         DefaultTableModel table = (DefaultTableModel) BillShowTable.getModel();
         ArrayList<HoaDon> arr = new ArrayList<HoaDon>();
         HoaDon_BUS hoaDon_BUS = new HoaDon_BUS();
-        arr = hoaDon_BUS.danhSachHoaDon();
+        arr = hoaDon_BUS.danhSachHoaDonComplete();
         HoaDon hoaDon = new HoaDon();
         {
             try {
@@ -547,7 +547,7 @@ public class SaleManagement extends javax.swing.JFrame {
         SearchTab.add(AmountTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 440, 70, 50));
 
         TypeCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
-        SearchTab.add(TypeCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(1055, 116, 200, 45));
+        SearchTab.add(TypeCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 120, 200, 45));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Type");
@@ -559,7 +559,7 @@ public class SaleManagement extends javax.swing.JFrame {
 
         AuthorSearchTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         AuthorSearchTxb.setToolTipText("Search Here....");
-        SearchTab.add(AuthorSearchTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 180, 210, 42));
+        SearchTab.add(AuthorSearchTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 180, 200, 42));
 
         jScrollPane1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -625,6 +625,7 @@ public class SaleManagement extends javax.swing.JFrame {
         jLabel2.setText("Bill ID");
         CreateBillTab.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, -1, -1));
 
+        IDBill.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         IDBill.setEnabled(false);
         CreateBillTab.add(IDBill, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 160, 30));
 
@@ -649,6 +650,7 @@ public class SaleManagement extends javax.swing.JFrame {
         });
         CreateBillTab.add(CancelBillBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 510, 116, 51));
 
+        TotalTxb.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         TotalTxb.setEnabled(false);
         TotalTxb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -663,6 +665,7 @@ public class SaleManagement extends javax.swing.JFrame {
         jLabel8.setText("Receive");
         CreateBillTab.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 430, 50, 30));
 
+        ReceiveTxb.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         ReceiveTxb.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 ReceiveTxbKeyTyped(evt);
@@ -749,7 +752,6 @@ public class SaleManagement extends javax.swing.JFrame {
             }
         });
         BillShowTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        BillShowTable.setColumnSelectionAllowed(true);
         BillShowTable.setGridColor(new java.awt.Color(0, 0, 0));
         BillShowTable.setShowGrid(true);
         BillShowTable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -905,6 +907,7 @@ public class SaleManagement extends javax.swing.JFrame {
     private void IDGenerateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDGenerateBtnActionPerformed
         //ID Generate Btn in CreateBill Tab
         billID = "B" + randomID();
+        phieuthutienID = "M" + randomID();
         IDBill.setText(billID);
     }//GEN-LAST:event_IDGenerateBtnActionPerformed
 
@@ -973,6 +976,16 @@ public class SaleManagement extends javax.swing.JFrame {
                     sach.setSoLuong(amountOld - sach.getSoLuong());
                     sach_BUS.updateSach(sach);
             }
+            //
+            //Start Create PhieuThuTien
+            PhieuThuTien phieuthutien = new PhieuThuTien();
+            phieuthutien.setMaPhieuThu(phieuthutienID);
+            phieuthutien.setMaKH(getCustomerID(CustomerID.getSelectedItem().toString()));
+            phieuthutien.setNgaythu(date);
+            phieuthutien.setSoTienThu((float)total);
+            phieuthutien.setMaTaiKhoan(PublicClass.StaffID);
+            PhieuThuTien_BUS phieuThuTien_BUS = new PhieuThuTien_BUS();
+            phieuThuTien_BUS.addPhieuThuTien(phieuthutien);
             System.err.println("Success!");
         }
         resetSelectTableAfterConfirm();
@@ -1066,8 +1079,12 @@ public class SaleManagement extends javax.swing.JFrame {
         hoaDon.setTinhTrang("Return");
         HoaDon_BUS hoaDon_BUS = new HoaDon_BUS();
         hoaDon_BUS.updateHoaDon(hoaDon);
+        resetReturnBillTable();
         loadReturnBill();
+        resetBillShowTable();
+        loadAllBill();
         ParentPanel.setSelectedIndex(3);
+        JOptionPane.showMessageDialog(this, "Return Successful!");
     }//GEN-LAST:event_ReturnBillBtnActionPerformed
 
     private void FilterRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FilterRadioActionPerformed

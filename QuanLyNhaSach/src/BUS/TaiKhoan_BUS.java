@@ -50,4 +50,9 @@ public class TaiKhoan_BUS {
         return taikhoan_DAL.deleteTaiKhoan(maTK);
     }
     
+    public ArrayList<TaiKhoan> checkExist(String email, String name, String diachi, String SDT )
+    {
+        return taikhoan_DAL.checkExist(email, name, diachi, SDT);
+    }
+    
 }

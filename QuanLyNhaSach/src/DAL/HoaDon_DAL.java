@@ -117,6 +117,56 @@ public class HoaDon_DAL {
         return result;
     }
     
+    public ArrayList<HoaDon> danhSachHoaDonCompleteByDate(String date)
+    {
+        connection = new DBConnection();
+        ArrayList<HoaDon> result = new ArrayList<HoaDon>();
+        String query = "select * from HoaDon where TinhTrang = 'Complete' and NgayLap = '" + date + "'";
+        System.out.println(query);
+        try{
+            ResultSet rs = connection.ExcuteQueryGetTable(query);
+            while (rs.next()) {                
+                HoaDon hoaDon = new HoaDon();
+                hoaDon.setMaHoaDon(rs.getString("MaHoaDon"));
+                hoaDon.setMaKH(rs.getString("MaKH"));
+                hoaDon.setNgayNhap(rs.getString("NgayLap"));
+                hoaDon.setTongTien(Float.parseFloat(rs.getString("TongTien")));
+                hoaDon.setTienTra(Float.parseFloat(rs.getString("TienTra")));
+                hoaDon.setTinhTrang(rs.getString("TinhTrang"));
+                result.add(hoaDon);
+            }
+        }catch(SQLException e)
+        {
+            System.out.println("Null Table!");
+        }
+        return result;
+    }
+    
+    public ArrayList<HoaDon> danhSachHoaDonCompleteByMonth(String month,String year)
+    {
+        connection = new DBConnection();
+        ArrayList<HoaDon> result = new ArrayList<HoaDon>();
+        String query = "select * from HoaDon where TinhTrang = 'Complete' and MONTH(NgayLap) = '" + month + "' and YEAR(NgayLap) = '" + year + "'";
+        System.out.println(query);
+        try{
+            ResultSet rs = connection.ExcuteQueryGetTable(query);
+            while (rs.next()) {                
+                HoaDon hoaDon = new HoaDon();
+                hoaDon.setMaHoaDon(rs.getString("MaHoaDon"));
+                hoaDon.setMaKH(rs.getString("MaKH"));
+                hoaDon.setNgayNhap(rs.getString("NgayLap"));
+                hoaDon.setTongTien(Float.parseFloat(rs.getString("TongTien")));
+                hoaDon.setTienTra(Float.parseFloat(rs.getString("TienTra")));
+                hoaDon.setTinhTrang(rs.getString("TinhTrang"));
+                result.add(hoaDon);
+            }
+        }catch(SQLException e)
+        {
+            System.out.println("Null Table!");
+        }
+        return result;
+    }
+    
     public ArrayList<HoaDon> seacrhHoaDonByKhachHangID(String search)
     {
         connection = new DBConnection();

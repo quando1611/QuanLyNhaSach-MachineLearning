@@ -165,4 +165,30 @@ public class TaiKhoan_DAL {
         return result;
     }
     
+    public ArrayList<TaiKhoan> checkExist(String email, String hoten, String diachi, String SDT)
+    {
+        connection = new DBConnection();
+        ArrayList<TaiKhoan> result = new ArrayList<TaiKhoan>();
+        String query = "select * from TaiKhoan where HoTen = '" + hoten + "' and Email = '" + email + "' and DienThoai = '" + SDT + "' and DiaChi = '" + diachi + "'";
+        System.out.println(query);
+        try{
+            ResultSet rs = connection.ExcuteQueryGetTable(query);
+            while (rs.next()) {  
+                TaiKhoan taikhoan = new TaiKhoan();
+                taikhoan.setMaTK(rs.getString("MaTK"));
+                taikhoan.setEmail(rs.getString("Email"));
+                taikhoan.setMatKhau(rs.getString("MatKhau"));
+                taikhoan.setHoTen(rs.getString("HoTen"));
+                taikhoan.setMaPhanQuyen(rs.getString("MaPhanQuyen")); 
+                taikhoan.setDiaChi(rs.getString("DiaChi"));
+                taikhoan.setSDT(rs.getString("DienThoai"));
+                result.add(taikhoan);
+            }
+    }catch(SQLException e)
+    {
+        System.out.println("Null Table");
+    }
+        return result;
+    }
+    
 }

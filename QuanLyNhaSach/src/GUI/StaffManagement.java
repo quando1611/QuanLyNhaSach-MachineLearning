@@ -168,9 +168,9 @@ public class StaffManagement extends javax.swing.JFrame {
         //Get data from table
         DefaultTableModel tableModel = (DefaultTableModel) SearchTable.getModel();
         valueMaTK = tableModel.getValueAt(SearchTable.getSelectedRow(), 0).toString();
-        String name = tableModel.getValueAt(SearchTable.getSelectedRow(), 1).toString();
-        String email = tableModel.getValueAt(SearchTable.getSelectedRow(), 2).toString();
-        String pass = tableModel.getValueAt(SearchTable.getSelectedRow(), 3).toString();
+        String email = tableModel.getValueAt(SearchTable.getSelectedRow(), 1).toString();
+        String pass = tableModel.getValueAt(SearchTable.getSelectedRow(), 2).toString();
+        String name = tableModel.getValueAt(SearchTable.getSelectedRow(), 3).toString(); 
         String address = tableModel.getValueAt(SearchTable.getSelectedRow(), 4).toString();
         String phone = tableModel.getValueAt(SearchTable.getSelectedRow(), 5).toString();
         //Set TextField
@@ -550,9 +550,16 @@ public class StaffManagement extends javax.swing.JFrame {
     private void AddStaffBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddStaffBtnActionPerformed
          // Add Staff
         TaiKhoan taikhoan = new TaiKhoan();
+        ArrayList<TaiKhoan> existarr = new ArrayList<TaiKhoan>();
+        TaiKhoan_BUS taikhoan_BUS = new TaiKhoan_BUS();
+        existarr = taikhoan_BUS.checkExist(EmailText.getText(), NameText.getText(), AddressText.getText(), PhoneText.getText());
         if(NameText.getText().equals(""))
         {
             JOptionPane.showMessageDialog(this, "Please fill atleast the name of staff...");
+        }
+        else if(existarr.size() >0)
+        {
+            JOptionPane.showMessageDialog(this, "Already exist this staff/admin...");
         }
         else
         {
@@ -563,36 +570,49 @@ public class StaffManagement extends javax.swing.JFrame {
             taikhoan.setDiaChi(AddressText.getText());
             taikhoan.setSDT(PhoneText.getText());
             taikhoan.setMaPhanQuyen(RoleCb.getSelectedItem().toString());
+            taikhoan_BUS.addTaiKhoan(taikhoan);
+            JOptionPane.showMessageDialog(this, "Add Staff success!");
+            reset();
+            ResetText();
+            loadAllStaff();
+            ParentPanel.setSelectedIndex(0);
+            UpdateStaffBtn.setEnabled(true);
         }
-        TaiKhoan_BUS taikhoan_BUS = new TaiKhoan_BUS();
-        taikhoan_BUS.addTaiKhoan(taikhoan);
-        JOptionPane.showMessageDialog(this, "Add Staff success!");
-        reset();
-        ResetText();
-        loadAllStaff();
-        ParentPanel.setSelectedIndex(0);
-        UpdateStaffBtn.setEnabled(true);
+        
     }//GEN-LAST:event_AddStaffBtnActionPerformed
 
     private void UpdateStaffBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateStaffBtnActionPerformed
         // Update Staff
-        TaiKhoan taikhoan = new TaiKhoan();
-            taikhoan.setMaTK(valueMaTK);
-            taikhoan.setEmail(EmailText.getText());
-            taikhoan.setMatKhau(PassText.getText());
-            taikhoan.setHoTen(NameText.getText());
-            taikhoan.setMaPhanQuyen(RoleCb.getSelectedItem().toString());
-            taikhoan.setDiaChi(AddressText.getText());
-            taikhoan.setSDT(PhoneText.getText());
-        TaiKhoan_BUS taikhoan_BUS = new TaiKhoan_BUS();
-        taikhoan_BUS.updateTaiKhoan(taikhoan);
-        JOptionPane.showMessageDialog(this, "Update Staff success!");
-        reset();
-        ResetText();
-        loadAllStaff();
-        StaffRadio.setSelected(true);
-        ParentPanel.setSelectedIndex(0);
-        AddStaffBtn.setEnabled(true);
+            TaiKhoan taikhoan = new TaiKhoan();
+            ArrayList<TaiKhoan> existarr = new ArrayList<TaiKhoan>();
+            TaiKhoan_BUS taikhoan_BUS = new TaiKhoan_BUS();
+            existarr = taikhoan_BUS.checkExist(EmailText.getText(), NameText.getText(), AddressText.getText(), PhoneText.getText());
+            if(NameText.getText().equals(""))
+            {
+                JOptionPane.showMessageDialog(this, "Please fill atleast the name of staff...");
+            }
+            else if(existarr.size() > 0)
+            {
+                JOptionPane.showMessageDialog(this, "Already exist this staff/admin...");
+            }
+            else
+            {
+                taikhoan.setMaTK(valueMaTK);
+                taikhoan.setEmail(EmailText.getText());
+                taikhoan.setMatKhau(PassText.getText());
+                taikhoan.setHoTen(NameText.getText());
+                taikhoan.setMaPhanQuyen(RoleCb.getSelectedItem().toString());
+                taikhoan.setDiaChi(AddressText.getText());
+                taikhoan.setSDT(PhoneText.getText());
+                taikhoan_BUS.updateTaiKhoan(taikhoan);
+                JOptionPane.showMessageDialog(this, "Update Staff success!");
+                reset();
+                ResetText();
+                loadAllStaff();
+                StaffRadio.setSelected(true);
+                ParentPanel.setSelectedIndex(0);
+                AddStaffBtn.setEnabled(true);
+            }
 
     }//GEN-LAST:event_UpdateStaffBtnActionPerformed
 

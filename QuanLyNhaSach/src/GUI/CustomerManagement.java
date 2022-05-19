@@ -374,6 +374,7 @@ public class CustomerManagement extends javax.swing.JFrame {
         AddTab.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 410, -1, -1));
 
         ProductTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ProductTxb.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         ProductTxb.setToolTipText("");
         ProductTxb.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -567,6 +568,7 @@ public class CustomerManagement extends javax.swing.JFrame {
             reset();
             resetText();
             loadAllCustomer();
+            JOptionPane.showMessageDialog(this, "Successful!");
         }
         catch(Exception e)
         {

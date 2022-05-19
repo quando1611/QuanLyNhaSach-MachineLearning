@@ -396,6 +396,7 @@ public class StorageManagement extends javax.swing.JFrame {
         AddTab.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 310, -1, -1));
 
         TypeTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        TypeTxb.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         TypeTxb.setToolTipText("");
         AddTab.add(TypeTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 210, 210, 50));
 
@@ -405,7 +406,7 @@ public class StorageManagement extends javax.swing.JFrame {
 
         PriceTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         PriceTxb.setToolTipText("");
-        AddTab.add(PriceTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 370, 370, 50));
+        AddTab.add(PriceTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 370, 200, 50));
 
         AddBookBtn.setBackground(new java.awt.Color(153, 255, 153));
         AddBookBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N

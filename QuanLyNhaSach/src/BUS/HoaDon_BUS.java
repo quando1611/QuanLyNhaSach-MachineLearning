@@ -35,6 +35,16 @@ public class HoaDon_BUS {
         return hoaDon_DAL.danhSachHoaDonByDay(date);
     }
     
+    public ArrayList<HoaDon> danhSachHoaDonCompletebyDate(String date)
+    {
+        return hoaDon_DAL.danhSachHoaDonCompleteByDate(date);
+    }
+    
+    public ArrayList<HoaDon> danhSachHoaDonCompletebyMonth(String month, String year)
+    {
+        return hoaDon_DAL.danhSachHoaDonCompleteByMonth(month, year);
+    }
+    
     public ArrayList<HoaDon> searchHoaDonWithKhachHangID(String search)
     {
         return hoaDon_DAL.seacrhHoaDonByKhachHangID(search);

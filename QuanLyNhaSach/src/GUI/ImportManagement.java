@@ -1024,7 +1024,6 @@ public class ImportManagement extends javax.swing.JFrame {
         // TODO add your handling code here:
         PhieuNhapKho nhap = new PhieuNhapKho();
         String date = ((JTextField) DateBox.getDateEditor().getUiComponent()).getText();
-        
         System.err.println(date);
         if(ImportBillText.getText().equals(""))
         {
@@ -1067,7 +1066,8 @@ public class ImportManagement extends javax.swing.JFrame {
                     sach.setGia(price);
                     sach_BUS.updateSach(sach);
             }
-            System.err.println("Succeed!");
+            System.out.println("Succeed!");
+            JOptionPane.showMessageDialog(this, "Successful!");
         }
         resetBillTableAfterConfirm();
         resetSearchBookTable();
@@ -1121,10 +1121,10 @@ public class ImportManagement extends javax.swing.JFrame {
             SelectRowSupplier();
             NhaCungCap_BUS nhacungcap_BUS = new NhaCungCap_BUS();
             nhacungcap_BUS.deleteNhaCungCap(valueMaNCC);
-            JOptionPane.showMessageDialog(this, "Delete Supplier success!");
             resetSupplier();
             resetText();
             loadAllSupplier();
+            JOptionPane.showMessageDialog(this, "Delete Supplier success!");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "No Supplier have selected!");
         }
@@ -1145,7 +1145,7 @@ public class ImportManagement extends javax.swing.JFrame {
         }
         NhaCungCap_BUS nhacungcap_BUS = new NhaCungCap_BUS();
         nhacungcap_BUS.addNhaCungCap(nhacungcap);
-        JOptionPane.showMessageDialog(this, "Add Customer success!");
+        JOptionPane.showMessageDialog(this, "Add Supplier success!");
         resetSupplier();
         loadAllSupplier();
         ParentPanel.setSelectedIndex(0);

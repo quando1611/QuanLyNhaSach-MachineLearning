@@ -111,6 +111,7 @@ public class Login extends javax.swing.JFrame {
         EmailTxb.setBackground(new java.awt.Color(144, 193, 223));
         EmailTxb.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         EmailTxb.setForeground(new java.awt.Color(255, 255, 255));
+        EmailTxb.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         EmailTxb.setText("admin@gmail.com");
         EmailTxb.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         EmailTxb.setPreferredSize(new java.awt.Dimension(74, 26));
@@ -118,6 +119,7 @@ public class Login extends javax.swing.JFrame {
 
         PasswordTxb.setBackground(new java.awt.Color(144, 193, 223));
         PasswordTxb.setForeground(new java.awt.Color(255, 255, 255));
+        PasswordTxb.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         PasswordTxb.setText("admin");
         PasswordTxb.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel5.add(PasswordTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 281, 50));
@@ -252,8 +254,9 @@ public class Login extends javax.swing.JFrame {
             if (rs.next()) {
                 result = true;
                 role = rs.getString("MaPhanQuyen");
+                PublicClass.role = rs.getString("MaPhanQuyen");
                 PublicClass.StaffID = rs.getString("MaTK");
-                
+                PublicClass.name = rs.getString("HoTen");
             }
         }catch (SQLException ex) {
             System.out.println("lỗi đăng nhập");
