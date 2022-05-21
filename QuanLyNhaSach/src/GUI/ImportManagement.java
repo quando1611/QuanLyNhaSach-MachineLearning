@@ -841,7 +841,7 @@ public class ImportManagement extends javax.swing.JFrame {
         });
         CreateBillTab.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 170, -1, -1));
 
-        ParentPanel.addTab("Create Bill", CreateBillTab);
+        ParentPanel.addTab("Create Bill", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_bill_35px_1.png")), CreateBillTab); // NOI18N
 
         PurchasedBillTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -924,7 +924,7 @@ public class ImportManagement extends javax.swing.JFrame {
         jLabel9.setText("Detail");
         PurchasedBillTab.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 290, -1, -1));
 
-        ParentPanel.addTab("Purchased Bills", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_Plus_+_35px.png")), PurchasedBillTab); // NOI18N
+        ParentPanel.addTab("Purchased Bills", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_initiate_money_transfer_35px_1.png")), PurchasedBillTab); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

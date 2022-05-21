@@ -443,7 +443,7 @@ public class RevenueManagement extends javax.swing.JFrame {
         jLabel10.setText("Preview Before Print");
         DailyTurnOver.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 30, -1, -1));
 
-        ParentPanel.addTab("Daily Turnover", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png")), DailyTurnOver); // NOI18N
+        ParentPanel.addTab("Daily Turnover", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_today_35px.png")), DailyTurnOver); // NOI18N
 
         ImportReportTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -530,7 +530,7 @@ public class RevenueManagement extends javax.swing.JFrame {
         jLabel9.setText("Preview Before Print");
         ImportReportTab.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 30, -1, -1));
 
-        ParentPanel.addTab("Import Report", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_Plus_+_35px.png")), ImportReportTab); // NOI18N
+        ParentPanel.addTab("Import Report", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_add_list_35px.png")), ImportReportTab); // NOI18N
 
         MonthlyRevenue.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -599,6 +599,11 @@ public class RevenueManagement extends javax.swing.JFrame {
         YearTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         YearTxb.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         YearTxb.setToolTipText("Search Here....");
+        YearTxb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                YearTxbKeyTyped(evt);
+            }
+        });
         MonthlyRevenue.add(YearTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 110, 42));
 
         PrintImportBtn1.setBackground(new java.awt.Color(153, 255, 153));
@@ -611,7 +616,7 @@ public class RevenueManagement extends javax.swing.JFrame {
         });
         MonthlyRevenue.add(PrintImportBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 530, 116, 51));
 
-        ParentPanel.addTab("Monthly Revenue", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_restart_35px.png")), MonthlyRevenue); // NOI18N
+        ParentPanel.addTab("Monthly Revenue", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_schedule_35px.png")), MonthlyRevenue); // NOI18N
 
         StaffBillTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -682,7 +687,7 @@ public class RevenueManagement extends javax.swing.JFrame {
         });
         StaffBillTab.add(DeleteBtn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 500, 116, 51));
 
-        ParentPanel.addTab("Staff Bill", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_eye_35px.png")), StaffBillTab); // NOI18N
+        ParentPanel.addTab("Staff Bill", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_staff_35px.png")), StaffBillTab); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -915,6 +920,16 @@ public class RevenueManagement extends javax.swing.JFrame {
         // TODO add your handling code here:
         selectSaleBillRow();
     }//GEN-LAST:event_SaleBillTableMouseClicked
+
+    private void YearTxbKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_YearTxbKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        
+        if(!Character.isDigit(c))
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_YearTxbKeyTyped
 
     
     //

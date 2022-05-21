@@ -136,7 +136,7 @@
                   <JTabbedPaneConstraints tabName="Daily Turnover">
                     <Property name="tabTitle" type="java.lang.String" value="Daily Turnover"/>
                     <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/GUI/Component/Minisize/icons8_search_35px.png"/>
+                      <Image iconType="3" name="/GUI/Component/Minisize/icons8_today_35px.png"/>
                     </Property>
                   </JTabbedPaneConstraints>
                 </Constraint>
@@ -353,7 +353,7 @@
                   <JTabbedPaneConstraints tabName="Import Report">
                     <Property name="tabTitle" type="java.lang.String" value="Import Report"/>
                     <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/GUI/Component/Minisize/icons8_Plus_+_35px.png"/>
+                      <Image iconType="3" name="/GUI/Component/Minisize/icons8_add_list_35px.png"/>
                     </Property>
                   </JTabbedPaneConstraints>
                 </Constraint>
@@ -570,7 +570,7 @@
                   <JTabbedPaneConstraints tabName="Monthly Revenue">
                     <Property name="tabTitle" type="java.lang.String" value="Monthly Revenue"/>
                     <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/GUI/Component/Minisize/icons8_restart_35px.png"/>
+                      <Image iconType="3" name="/GUI/Component/Minisize/icons8_schedule_35px.png"/>
                     </Property>
                   </JTabbedPaneConstraints>
                 </Constraint>
@@ -799,6 +799,9 @@
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="toolTipText" type="java.lang.String" value="Search Here...."/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="YearTxbKeyTyped"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="220" y="30" width="110" height="42"/>
@@ -832,7 +835,7 @@
                   <JTabbedPaneConstraints tabName="Staff Bill">
                     <Property name="tabTitle" type="java.lang.String" value="Staff Bill"/>
                     <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/GUI/Component/Minisize/icons8_eye_35px.png"/>
+                      <Image iconType="3" name="/GUI/Component/Minisize/icons8_staff_35px.png"/>
                     </Property>
                   </JTabbedPaneConstraints>
                 </Constraint>
