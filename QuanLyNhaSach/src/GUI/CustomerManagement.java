@@ -125,9 +125,6 @@ public class CustomerManagement extends javax.swing.JFrame {
         SearchBtn = new javax.swing.JButton();
         DeleteBtn = new javax.swing.JButton();
         EditChangeBtn = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
         NewChangeBtn = new javax.swing.JButton();
         AddTab = new javax.swing.JPanel();
         NameTxb = new javax.swing.JTextField();
@@ -222,7 +219,7 @@ public class CustomerManagement extends javax.swing.JFrame {
         SearchTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         SearchTxb.setText("Search here ...");
         SearchTxb.setToolTipText("Search Here....");
-        SearchTab.add(SearchTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(953, 115, 310, 42));
+        SearchTab.add(SearchTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 10, 310, 42));
 
         SearchBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png"))); // NOI18N
         SearchBtn.setToolTipText("Search");
@@ -231,7 +228,7 @@ public class CustomerManagement extends javax.swing.JFrame {
                 SearchBtnActionPerformed(evt);
             }
         });
-        SearchTab.add(SearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1067, 170, -1, 52));
+        SearchTab.add(SearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 70, -1, 52));
 
         DeleteBtn.setBackground(new java.awt.Color(255, 51, 102));
         DeleteBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -262,28 +259,6 @@ public class CustomerManagement extends javax.swing.JFrame {
             }
         });
         SearchTab.add(EditChangeBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 380, 116, 51));
-
-        CustomerTypeGroup.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jRadioButton1.setSelected(true);
-        jRadioButton1.setText("All");
-        SearchTab.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(953, 9, -1, -1));
-
-        CustomerTypeGroup.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jRadioButton2.setText("Familiar customers");
-        jRadioButton2.setToolTipText("");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
-            }
-        });
-        SearchTab.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(953, 43, -1, -1));
-
-        CustomerTypeGroup.add(jRadioButton3);
-        jRadioButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jRadioButton3.setText("Loyal customers");
-        SearchTab.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(953, 77, -1, -1));
 
         NewChangeBtn.setBackground(new java.awt.Color(153, 255, 153));
         NewChangeBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -577,10 +552,6 @@ public class CustomerManagement extends javax.swing.JFrame {
         
     }//GEN-LAST:event_DeleteBtnActionPerformed
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
-
     private void DeleteBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBtnMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_DeleteBtnMouseClicked
@@ -679,9 +650,6 @@ public class CustomerManagement extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

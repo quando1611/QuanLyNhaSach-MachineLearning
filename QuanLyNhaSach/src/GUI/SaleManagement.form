@@ -428,6 +428,9 @@
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                   <JTabbedPaneConstraints tabName="Create Bill">
                     <Property name="tabTitle" type="java.lang.String" value="Create Bill"/>
+                    <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/GUI/Component/Minisize/icons8_bill_35px_1.png"/>
+                    </Property>
                   </JTabbedPaneConstraints>
                 </Constraint>
               </Constraints>
@@ -564,7 +567,7 @@
                 <Component class="javax.swing.JButton" name="CancelBillBtn">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="66" green="33" red="ff" type="rgb"/>
+                      <Color blue="cc" green="cc" red="ff" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="14" style="1"/>
@@ -649,7 +652,7 @@
                 <Component class="javax.swing.JButton" name="ConfirmBillBtn">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="66" green="33" red="ff" type="rgb"/>
+                      <Color blue="99" green="ff" red="99" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="14" style="1"/>
@@ -692,7 +695,7 @@
                   <JTabbedPaneConstraints tabName="Purchased Bills">
                     <Property name="tabTitle" type="java.lang.String" value="Purchased Bills"/>
                     <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/GUI/Component/Minisize/icons8_Plus_+_35px.png"/>
+                      <Image iconType="3" name="/GUI/Component/Minisize/icons8_initiate_money_transfer_35px_1.png"/>
                     </Property>
                   </JTabbedPaneConstraints>
                 </Constraint>
@@ -927,7 +930,7 @@
                   <JTabbedPaneConstraints tabName="Return Bills">
                     <Property name="tabTitle" type="java.lang.String" value="Return Bills"/>
                     <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/GUI/Component/Minisize/icons8_eye_35px.png"/>
+                      <Image iconType="3" name="/GUI/Component/Minisize/icons8_restart_35px.png"/>
                     </Property>
                   </JTabbedPaneConstraints>
                 </Constraint>

@@ -237,12 +237,12 @@ public class RevenueManagement extends javax.swing.JFrame {
     private void selectImportBillRow()
     {
         DefaultTableModel selecttable = (DefaultTableModel) ImportBillShowTable.getModel();
-        IDimportBill = selecttable.getValueAt(BillShowTable.getSelectedRow(), 0).toString();
-        createDate = selecttable.getValueAt(BillShowTable.getSelectedRow(), 1).toString();
-        importDate = selecttable.getValueAt(BillShowTable.getSelectedRow(), 2).toString();
-        maTK = selecttable.getValueAt(BillShowTable.getSelectedRow(), 3).toString();
-        maNCC = selecttable.getValueAt(BillShowTable.getSelectedRow(), 4).toString();
-        totalImport = Double.parseDouble(selecttable.getValueAt(BillShowTable.getSelectedRow(), 5).toString());
+        IDimportBill = selecttable.getValueAt(ImportBillShowTable.getSelectedRow(), 0).toString();
+        createDate = selecttable.getValueAt(ImportBillShowTable.getSelectedRow(), 1).toString();
+        importDate = selecttable.getValueAt(ImportBillShowTable.getSelectedRow(), 2).toString();
+        maTK = selecttable.getValueAt(ImportBillShowTable.getSelectedRow(), 3).toString();
+        maNCC = selecttable.getValueAt(ImportBillShowTable.getSelectedRow(), 4).toString();
+        totalImport = Double.parseDouble(selecttable.getValueAt(ImportBillShowTable.getSelectedRow(), 5).toString());
     }
     
     private void selectSaleBillRow()
@@ -402,7 +402,7 @@ public class RevenueManagement extends javax.swing.JFrame {
 
         DailyTurnOver.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 800, 430));
 
-        DeleteBtn.setBackground(new java.awt.Color(153, 255, 153));
+        DeleteBtn.setBackground(new java.awt.Color(255, 51, 102));
         DeleteBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         DeleteBtn.setText("DELETE");
         DeleteBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -422,7 +422,7 @@ public class RevenueManagement extends javax.swing.JFrame {
         });
         DailyTurnOver.add(PreviewBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 530, 116, 51));
 
-        PrintBtn.setBackground(new java.awt.Color(153, 255, 153));
+        PrintBtn.setBackground(new java.awt.Color(255, 204, 204));
         PrintBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         PrintBtn.setText("PRINT");
         PrintBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -469,7 +469,7 @@ public class RevenueManagement extends javax.swing.JFrame {
         });
         ImportReportTab.add(PreviewImportBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 530, 116, 51));
 
-        PrintImportBtn.setBackground(new java.awt.Color(153, 255, 153));
+        PrintImportBtn.setBackground(new java.awt.Color(255, 204, 204));
         PrintImportBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         PrintImportBtn.setText("PRINT");
         PrintImportBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -479,7 +479,7 @@ public class RevenueManagement extends javax.swing.JFrame {
         });
         ImportReportTab.add(PrintImportBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 530, 116, 51));
 
-        DeleteBtn1.setBackground(new java.awt.Color(153, 255, 153));
+        DeleteBtn1.setBackground(new java.awt.Color(255, 51, 102));
         DeleteBtn1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         DeleteBtn1.setText("DELETE");
         DeleteBtn1.addActionListener(new java.awt.event.ActionListener() {
@@ -606,7 +606,7 @@ public class RevenueManagement extends javax.swing.JFrame {
         });
         MonthlyRevenue.add(YearTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 110, 42));
 
-        PrintImportBtn1.setBackground(new java.awt.Color(153, 255, 153));
+        PrintImportBtn1.setBackground(new java.awt.Color(255, 204, 204));
         PrintImportBtn1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         PrintImportBtn1.setText("PRINT");
         PrintImportBtn1.addActionListener(new java.awt.event.ActionListener() {
@@ -677,7 +677,7 @@ public class RevenueManagement extends javax.swing.JFrame {
         OnlyStaffRadio.setText("OnlyStaff");
         StaffBillTab.add(OnlyStaffRadio, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, -1, -1));
 
-        DeleteBtn2.setBackground(new java.awt.Color(153, 255, 153));
+        DeleteBtn2.setBackground(new java.awt.Color(255, 51, 102));
         DeleteBtn2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         DeleteBtn2.setText("DELETE");
         DeleteBtn2.addActionListener(new java.awt.event.ActionListener() {
@@ -806,6 +806,33 @@ public class RevenueManagement extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             selectImportBillRow();
+            ArrayList<ChiTietPhieuNhap> arr = new ArrayList<ChiTietPhieuNhap>();
+            ChiTietPhieuNhap_BUS chiTietPhieuNhap_BUS = new ChiTietPhieuNhap_BUS();
+            arr = chiTietPhieuNhap_BUS.danhsachChiTietPhieuNhap(IDimportBill);
+            ChiTietPhieuNhap phieunhap = new ChiTietPhieuNhap();
+            ImportPrintPreview.setText("                                 BOOK-KEEPER STORE\n");
+            ImportPrintPreview.setText(ImportPrintPreview.getText() + "                                __for a bright feature__  \n");
+            ImportPrintPreview.setText(ImportPrintPreview.getText() + "-----------------------------------------------------------------\n");
+            ImportPrintPreview.setText(ImportPrintPreview.getText() + "                                    -IMPORT BOOK-                                 \n");
+            ImportPrintPreview.setText(ImportPrintPreview.getText() + "                                 Address : KTX Khu B \n");
+            ImportPrintPreview.setText(ImportPrintPreview.getText() + "                                      - ĐHQG TPHCM\n");
+            ImportPrintPreview.setText(ImportPrintPreview.getText() + "  Phone :     0345304407                   Web :  fb.com/12345    \n");
+            ImportPrintPreview.setText(ImportPrintPreview.getText() + "-----------------------------------------------------------------\n");
+            for(int i = 0; i< arr.size();i++)
+            {
+                phieunhap = arr.get(i);
+                String bookID = phieunhap.getMaSach();
+                String bookName = getBookName(bookID);
+                int amount = phieunhap.getSoLuong();
+                ImportPrintPreview.setText(ImportPrintPreview.getText() + "                      " + bookName + "      x " + amount + "\n");
+            }
+            ImportPrintPreview.setText(ImportPrintPreview.getText() + "                      ------------  ------------                " + "\n");
+            ImportPrintPreview.setText(ImportPrintPreview.getText() + "\n");
+            ImportPrintPreview.setText(ImportPrintPreview.getText() + "                      Total :          " + totalImport + "\n");
+            ImportPrintPreview.setText(ImportPrintPreview.getText() + "\n");
+            ImportPrintPreview.setText(ImportPrintPreview.getText() + "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n");
+            ImportPrintPreview.setText(ImportPrintPreview.getText() + "* *                      PLEASE KEEP THIS BILL!!!                * *\n");
+            ImportPrintPreview.setText(ImportPrintPreview.getText() + "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "No Row have selected!");
         }

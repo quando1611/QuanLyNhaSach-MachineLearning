@@ -640,7 +640,7 @@ public class SaleManagement extends javax.swing.JFrame {
         jLabel4.setText("Customer ID");
         CreateBillTab.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, -1, -1));
 
-        CancelBillBtn.setBackground(new java.awt.Color(255, 51, 102));
+        CancelBillBtn.setBackground(new java.awt.Color(255, 204, 204));
         CancelBillBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         CancelBillBtn.setText("CANCEL");
         CancelBillBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -683,7 +683,7 @@ public class SaleManagement extends javax.swing.JFrame {
         });
         CreateBillTab.add(DeleteRowBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 360, 116, 51));
 
-        ConfirmBillBtn.setBackground(new java.awt.Color(255, 51, 102));
+        ConfirmBillBtn.setBackground(new java.awt.Color(153, 255, 153));
         ConfirmBillBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         ConfirmBillBtn.setText("CONFIRM");
         ConfirmBillBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -703,7 +703,7 @@ public class SaleManagement extends javax.swing.JFrame {
         });
         CreateBillTab.add(IDGenerateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, 120, 30));
 
-        ParentPanel.addTab("Create Bill", CreateBillTab);
+        ParentPanel.addTab("Create Bill", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_bill_35px_1.png")), CreateBillTab); // NOI18N
 
         PurchasedBillTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -794,7 +794,7 @@ public class SaleManagement extends javax.swing.JFrame {
         });
         PurchasedBillTab.add(SearchBillBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 100, -1, 52));
 
-        ParentPanel.addTab("Purchased Bills", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_Plus_+_35px.png")), PurchasedBillTab); // NOI18N
+        ParentPanel.addTab("Purchased Bills", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_initiate_money_transfer_35px_1.png")), PurchasedBillTab); // NOI18N
 
         ReturnTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -824,7 +824,7 @@ public class SaleManagement extends javax.swing.JFrame {
 
         ReturnTab.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 1120, 590));
 
-        ParentPanel.addTab("Return Bills", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_eye_35px.png")), ReturnTab); // NOI18N
+        ParentPanel.addTab("Return Bills", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_restart_35px.png")), ReturnTab); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

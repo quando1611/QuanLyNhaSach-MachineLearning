@@ -29,7 +29,7 @@ public class Home extends javax.swing.JFrame {
     public Home() {
         initComponents();
         home1 = this;
-        WelcomeLb.setText("Welcome Back,               " + PublicClass.name);
+        WelcomeLb.setText("Welcome Back, " + PublicClass.name);
     }
 
     /**
