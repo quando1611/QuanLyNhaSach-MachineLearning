@@ -849,7 +849,24 @@ public class RevenueManagement extends javax.swing.JFrame {
 
     private void DeleteBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtn1ActionPerformed
         // TODO add your handling code here:
-        
+        try {
+            selectImportBillRow();
+            if(IDimportBill.equals(""))
+            {
+                System.out.println("Nothing to delete!");
+            }
+            else
+            {
+                ChiTietPhieuNhap_BUS chiTietPhieuNhap_BUS = new ChiTietPhieuNhap_BUS();
+                chiTietPhieuNhap_BUS.deleteChiTietPhieuNhap(IDimportBill);
+                PhieuNhapKho_BUS phieuNhapKho_BUS = new PhieuNhapKho_BUS();
+                phieuNhapKho_BUS.deleteHoaDon(IDimportBill);
+                reset();
+                loadAllImportBillInDay();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "No Row have selected!");
+        }
     }//GEN-LAST:event_DeleteBtn1ActionPerformed
 
     private void ImportBillShowTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImportBillShowTableMouseClicked
