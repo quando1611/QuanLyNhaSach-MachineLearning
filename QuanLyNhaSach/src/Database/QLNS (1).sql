@@ -108,7 +108,7 @@ alter table PhieuThuTien add constraint FK_PhieuThuTien_TaiKhoan foreign key(MaT
 
 alter table HoaDon add constraint FK_HoaDon_KhachHang foreign key(MaKH) references KhachHang(MaKH)
 
-alter table ChiTietHoaDon add constraint FK_ChiTietHoaDon_HoaDon foreign key(MaHD) references HoaDon(MaHD)
+alter table ChiTietHoaDon add constraint FK_ChiTietHoaDon_HoaDon foreign key(MaHD) references HoaDon(MaHoaDon)
 alter table ChiTietHoaDon add constraint FK_ChiTietHoaDon_Sach foreign key(MaSach) references Sach(MaSach)
 
 --ALTER TABLE HoaDon (use to add when create CSDL previous)
@@ -120,7 +120,7 @@ INSERT INTO PhanQuyen VALUES('Admin','Admin')
 INSERT INTO PhanQuyen VALUES('Sale','SaleStaff')
 
 	--TaiKhoan
-INSERT INTO TaiKhoan VALUES('admin1', 'admin@gmail.com', 'admin', 'Tran Thanh Trung', 'Admin')
+INSERT INTO TaiKhoan VALUES('admin1', 'admin@gmail.com', 'admin', 'Tran Thanh Trung', 'Admin', 'Binh Duong', '01234')
 
 	--KhachHang
 INSERT INTO KhachHang VALUES('1', 'Trung', 'KTX Khu B', '0345304407', 'trung@gmail.com', 0)
