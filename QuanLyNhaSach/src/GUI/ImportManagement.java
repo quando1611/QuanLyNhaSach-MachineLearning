@@ -1102,7 +1102,7 @@ public class ImportManagement extends javax.swing.JFrame {
             UpdateSupplierBtn.setEnabled(true);
             AddSupplierBtn.setEnabled(false);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "No Supplier have selected!");
+            JOptionPane.showMessageDialog(this, "No Supplier have been selected!");
         }
     }//GEN-LAST:event_EditChangeBtnActionPerformed
 
@@ -1115,9 +1115,9 @@ public class ImportManagement extends javax.swing.JFrame {
             resetSupplier();
             resetText();
             loadAllSupplier();
-            JOptionPane.showMessageDialog(this, "Delete Supplier success!");
+            JOptionPane.showMessageDialog(this, "Delete Supplier successfully!");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "No Supplier have selected!");
+            JOptionPane.showMessageDialog(this, "No Supplier have been selected!");
         }
     }//GEN-LAST:event_DeleteBtnActionPerformed
 
@@ -1126,7 +1126,7 @@ public class ImportManagement extends javax.swing.JFrame {
         NhaCungCap nhacungcap = new NhaCungCap();
         if(NameSupplierTxb.getText().equals(""))
         {
-            JOptionPane.showMessageDialog(this, "Please fill atleast the name of supplier...");
+            JOptionPane.showMessageDialog(this, "Please fill atleast the name of the supplier...");
         }
         else
         {
@@ -1136,7 +1136,7 @@ public class ImportManagement extends javax.swing.JFrame {
         }
         NhaCungCap_BUS nhacungcap_BUS = new NhaCungCap_BUS();
         nhacungcap_BUS.addNhaCungCap(nhacungcap);
-        JOptionPane.showMessageDialog(this, "Add Supplier success!");
+        JOptionPane.showMessageDialog(this, "Add Supplier successfully!");
         resetSupplier();
         loadAllSupplier();
         ParentPanel.setSelectedIndex(0);
@@ -1185,7 +1185,7 @@ public class ImportManagement extends javax.swing.JFrame {
             BillTable.setModel(selecttable);
             TotalText.setText(Double.toString(total));
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "No Row have selected!");
+            JOptionPane.showMessageDialog(this, "No Row have been selected!");
         }
     }//GEN-LAST:event_DeleteBillBtnActionPerformed
 
@@ -1228,7 +1228,7 @@ public class ImportManagement extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(NameSupplierTxb.getText().equals(""))
         {
-            JOptionPane.showMessageDialog(this, "Please fill atleast the name of supplier...");
+            JOptionPane.showMessageDialog(this, "Please fill atleast the name of the supplier...");
         }
         else
         {
@@ -1237,7 +1237,7 @@ public class ImportManagement extends javax.swing.JFrame {
             nhacungcap.setTenNhaCC(NameSupplierTxb.getText());
             NhaCungCap_BUS nhaCungCap_BUS = new NhaCungCap_BUS();
             nhaCungCap_BUS.updateNhaCungCap(nhacungcap);
-            JOptionPane.showMessageDialog(this, "Update Supplier success!");
+            JOptionPane.showMessageDialog(this, "Update Supplier successfully!");
             resetText();
             resetSupplier();
             loadAllSupplier();

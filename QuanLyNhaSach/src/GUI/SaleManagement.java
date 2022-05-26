@@ -986,7 +986,7 @@ public class SaleManagement extends javax.swing.JFrame {
             phieuthutien.setMaTaiKhoan(PublicClass.StaffID);
             PhieuThuTien_BUS phieuThuTien_BUS = new PhieuThuTien_BUS();
             phieuThuTien_BUS.addPhieuThuTien(phieuthutien);
-            System.err.println("Success!");
+            System.err.println("Succeed!");
         }
         resetSelectTableAfterConfirm();
         resetSearchData();
@@ -1027,7 +1027,7 @@ public class SaleManagement extends javax.swing.JFrame {
             SelectBookTable.setModel(selecttable);
             TotalTxb.setText(Double.toString(total));
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "No Row have selected!");
+            JOptionPane.showMessageDialog(this, "No Row have been selected!");
         }
     }//GEN-LAST:event_DeleteRowBtnActionPerformed
 
@@ -1084,7 +1084,7 @@ public class SaleManagement extends javax.swing.JFrame {
         resetBillShowTable();
         loadAllBill();
         ParentPanel.setSelectedIndex(3);
-        JOptionPane.showMessageDialog(this, "Return Successful!");
+        JOptionPane.showMessageDialog(this, "Return Successfully!");
     }//GEN-LAST:event_ReturnBillBtnActionPerformed
 
     private void FilterRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FilterRadioActionPerformed

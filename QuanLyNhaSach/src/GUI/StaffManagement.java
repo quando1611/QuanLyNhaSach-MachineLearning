@@ -331,7 +331,7 @@ public class StaffManagement extends javax.swing.JFrame {
                 DeleteBtnActionPerformed(evt);
             }
         });
-        SearchTab.add(DeleteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 528, 116, 51));
+        SearchTab.add(DeleteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 510, 116, 51));
 
         EditChangeBtn.setBackground(new java.awt.Color(255, 204, 204));
         EditChangeBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -542,7 +542,7 @@ public class StaffManagement extends javax.swing.JFrame {
                 tableModel.addRow(row);        
             }
         }catch (Exception e) {
-            System.err.println("No thing!");
+            System.err.println("Not thing!");
         }
         SearchTable.setModel(tableModel);
     }//GEN-LAST:event_SearchBtnActionPerformed
@@ -555,7 +555,7 @@ public class StaffManagement extends javax.swing.JFrame {
         existarr = taikhoan_BUS.checkExist(EmailText.getText(), NameText.getText(), AddressText.getText(), PhoneText.getText());
         if(NameText.getText().equals(""))
         {
-            JOptionPane.showMessageDialog(this, "Please fill atleast the name of staff...");
+            JOptionPane.showMessageDialog(this, "Please fill atleast the name of the staff...");
         }
         else if(existarr.size() >0)
         {
@@ -571,7 +571,7 @@ public class StaffManagement extends javax.swing.JFrame {
             taikhoan.setSDT(PhoneText.getText());
             taikhoan.setMaPhanQuyen(RoleCb.getSelectedItem().toString());
             taikhoan_BUS.addTaiKhoan(taikhoan);
-            JOptionPane.showMessageDialog(this, "Add Staff success!");
+            JOptionPane.showMessageDialog(this, "Add Staff successfully!");
             reset();
             ResetText();
             loadAllStaff();
@@ -593,7 +593,7 @@ public class StaffManagement extends javax.swing.JFrame {
             }
             else if(existarr.size() > 0)
             {
-                JOptionPane.showMessageDialog(this, "Already exist this staff/admin...");
+                JOptionPane.showMessageDialog(this, "Already existed this staff/admin...");
             }
             else
             {
@@ -605,7 +605,7 @@ public class StaffManagement extends javax.swing.JFrame {
                 taikhoan.setDiaChi(AddressText.getText());
                 taikhoan.setSDT(PhoneText.getText());
                 taikhoan_BUS.updateTaiKhoan(taikhoan);
-                JOptionPane.showMessageDialog(this, "Update Staff success!");
+                JOptionPane.showMessageDialog(this, "Update Staff successfully!");
                 reset();
                 ResetText();
                 loadAllStaff();
@@ -622,12 +622,12 @@ public class StaffManagement extends javax.swing.JFrame {
             SelectRow();
             TaiKhoan_BUS taikhoan_BUS = new TaiKhoan_BUS();
             taikhoan_BUS.deleteTaiKhoan(valueMaTK);
-            JOptionPane.showMessageDialog(this, "Delete Staff success!");
+            JOptionPane.showMessageDialog(this, "Delete Staff successfully!");
             reset();
             ResetText();
             loadAllTaiKhoan();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "No Staff have selected!");
+            JOptionPane.showMessageDialog(this, "No Staff have been selected!");
         }
     }//GEN-LAST:event_DeleteBtnActionPerformed
 
@@ -647,7 +647,7 @@ public class StaffManagement extends javax.swing.JFrame {
             UpdateStaffBtn.setEnabled(true);
             ParentPanel.setSelectedIndex(1);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "No Staff have selected!");
+            JOptionPane.showMessageDialog(this, "No Staff have been selected!");
         }
     }//GEN-LAST:event_EditChangeBtnActionPerformed
 

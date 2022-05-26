@@ -457,7 +457,7 @@ public class CustomerManagement extends javax.swing.JFrame {
             UpdateCustomerBtn.setEnabled(true);
             ParentPanel.setSelectedIndex(1);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "No Customer have selected!");
+            JOptionPane.showMessageDialog(this, "No Customer have been selected!");
         }
     }//GEN-LAST:event_EditChangeBtnActionPerformed
 
@@ -476,11 +476,11 @@ public class CustomerManagement extends javax.swing.JFrame {
         existarr = khachHang_BUS.seacrhKhachHangExist(NameTxb.getText(), PhoneNumberTxb.getText());
         if(NameTxb.getText().equals(""))
         {
-            JOptionPane.showMessageDialog(this, "Please fill atleast the name of customer...");
+            JOptionPane.showMessageDialog(this, "Please fill atleast the name of the customer...");
         }
         else if(existarr.size()>0)
         {
-            JOptionPane.showMessageDialog(this, "Already exist this customer...");
+            JOptionPane.showMessageDialog(this, "Already existed this customer...");
         }
         else
         {
@@ -491,7 +491,7 @@ public class CustomerManagement extends javax.swing.JFrame {
             khachHang.setEmail(EmailTxb.getText());
             khachHang.setSoSPDaMua(ProductTxb.getText());
             khachHang_BUS.addKhachHang(khachHang);
-            JOptionPane.showMessageDialog(this, "Add Customer success!");
+            JOptionPane.showMessageDialog(this, "Add Customer successfully!");
             reset();
             loadAllCustomer();
             ParentPanel.setSelectedIndex(0);
@@ -522,7 +522,7 @@ public class CustomerManagement extends javax.swing.JFrame {
             khachHang.setEmail(EmailTxb.getText());
             khachHang.setSoSPDaMua(ProductTxb.getText());
             khachHang_BUS.updateKhachHang(khachHang);
-            JOptionPane.showMessageDialog(this, "Update Customer success!");
+            JOptionPane.showMessageDialog(this, "Update Customer successfully!");
             reset();
             resetText();
             loadAllCustomer();
@@ -539,7 +539,7 @@ public class CustomerManagement extends javax.swing.JFrame {
             SelectRow();
             KhachHang_BUS khachHang_BUS = new KhachHang_BUS();
             khachHang_BUS.deleteKhachHang(valueMaKH);
-            JOptionPane.showMessageDialog(this, "Delete Customer success!");
+            JOptionPane.showMessageDialog(this, "Delete Customer successfully!");
             reset();
             resetText();
             loadAllCustomer();
@@ -547,7 +547,7 @@ public class CustomerManagement extends javax.swing.JFrame {
         }
         catch(Exception e)
         {
-            JOptionPane.showMessageDialog(this, "No Customer have selected!");
+            JOptionPane.showMessageDialog(this, "No Customer have been selected!");
         }
         
     }//GEN-LAST:event_DeleteBtnActionPerformed
