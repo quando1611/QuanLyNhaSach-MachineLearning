@@ -465,7 +465,6 @@ public class ImportManagement extends javax.swing.JFrame {
         IDBtn = new javax.swing.JButton();
         ConfirmBillBtn = new javax.swing.JButton();
         DeleteBillBtn = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         PurchasedBillTab = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         DetailBillTable = new javax.swing.JTable();
@@ -832,14 +831,6 @@ public class ImportManagement extends javax.swing.JFrame {
             }
         });
         CreateBillTab.add(DeleteBillBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 350, 116, 51));
-
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        CreateBillTab.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 170, -1, -1));
 
         ParentPanel.addTab("Create Bill", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_bill_35px_1.png")), CreateBillTab); // NOI18N
 
@@ -1261,11 +1252,6 @@ public class ImportManagement extends javax.swing.JFrame {
         selectImportBillRow();
     }//GEN-LAST:event_BillShowTableMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        System.out.println(total);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void AmountTxbKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AmountTxbKeyTyped
         // AmountTxb Number only
         char c = evt.getKeyChar();
@@ -1356,7 +1342,6 @@ public class ImportManagement extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> TypeCb;
     private javax.swing.JButton UpdateSupplierBtn;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
