@@ -793,7 +793,7 @@ public class ImportManagement extends javax.swing.JFrame {
                 CancelBillBtnActionPerformed(evt);
             }
         });
-        CreateBillTab.add(CancelBillBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 490, 116, 51));
+        CreateBillTab.add(CancelBillBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 470, 116, 51));
 
         TotalText.setEditable(false);
         TotalText.setText("0.0");
@@ -820,7 +820,7 @@ public class ImportManagement extends javax.swing.JFrame {
                 ConfirmBillBtnActionPerformed(evt);
             }
         });
-        CreateBillTab.add(ConfirmBillBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 490, 116, 51));
+        CreateBillTab.add(ConfirmBillBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 470, 116, 51));
 
         DeleteBillBtn.setBackground(new java.awt.Color(255, 51, 102));
         DeleteBillBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
