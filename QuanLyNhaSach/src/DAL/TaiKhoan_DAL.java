@@ -115,6 +115,7 @@ public class TaiKhoan_DAL {
         return result;
     }
     
+    //Get TaiKhoan with Role = Admin
     public ArrayList<TaiKhoan> getAllAdmin() {
        connection = new DBConnection();
        ArrayList<TaiKhoan> result = new ArrayList<TaiKhoan>();
@@ -140,6 +141,7 @@ public class TaiKhoan_DAL {
         return result;
     }
     
+    //Get TaiKhoan with Role = Staff
     public ArrayList<TaiKhoan> getAllStaff() {
        connection = new DBConnection();
        ArrayList<TaiKhoan> result = new ArrayList<TaiKhoan>();
@@ -165,6 +167,7 @@ public class TaiKhoan_DAL {
         return result;
     }
     
+    //Check TaiKhoan exist for create new/update TaiKhoan
     public ArrayList<TaiKhoan> checkExist(String email, String hoten, String diachi, String SDT)
     {
         connection = new DBConnection();

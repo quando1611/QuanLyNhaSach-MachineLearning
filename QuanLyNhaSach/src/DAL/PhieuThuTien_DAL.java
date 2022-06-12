@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class PhieuThuTien_DAL {
     DBConnection connection;
     
+    //Get ALl PhieuThuTien
     public ArrayList<PhieuThuTien> getAllPhieuThuTien()
     {
         connection = new DBConnection();
@@ -40,6 +41,7 @@ public class PhieuThuTien_DAL {
         return result;
     }
     
+    //GetAllPhieuThuTien with StaffID
     public ArrayList<PhieuThuTien> getAllPhieuThuTienbyStaffID(String staffID)
     {
         connection = new DBConnection();
@@ -64,6 +66,7 @@ public class PhieuThuTien_DAL {
         return result;
     }
     
+    //GetAllPhieuThuTien with StaffID & Date
     public ArrayList<PhieuThuTien> getAllPhieuThuTienbyStaffIDAndDate(String staffID, String date)
     {
         connection = new DBConnection();
@@ -88,6 +91,7 @@ public class PhieuThuTien_DAL {
         return result;
     }
     
+    //Add PhieuThuTien
     public boolean addPhieuThuTien(PhieuThuTien phieuThuTien)
     {
         connection = new DBConnection();
@@ -102,6 +106,7 @@ public class PhieuThuTien_DAL {
         }
     }
     
+    //Delete PhieuThuTien
      public boolean deletePhieuThuTien(String phieuthutienID)
     {
         connection = new DBConnection();

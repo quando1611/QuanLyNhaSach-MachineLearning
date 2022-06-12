@@ -31,7 +31,7 @@ public class StaffManagement extends javax.swing.JFrame {
         loadRoleCbData();
     }
     
-    //Load all Staff from the begining
+    //Load all Account wwith All role
     public void loadAllTaiKhoan()
     {
         DefaultTableModel tableModel = (DefaultTableModel) SearchTable.getModel();
@@ -61,6 +61,7 @@ public class StaffManagement extends javax.swing.JFrame {
         
     }
     
+    //load All role Admin Account
     public void loadAllAdmin()
     {
         DefaultTableModel tableModel = (DefaultTableModel) SearchTable.getModel();
@@ -89,6 +90,7 @@ public class StaffManagement extends javax.swing.JFrame {
         SearchTable.setModel(tableModel);
     }
     
+    //load All role Staff Account
     public void loadAllStaff()
     {
         DefaultTableModel tableModel = (DefaultTableModel) SearchTable.getModel();
@@ -117,6 +119,7 @@ public class StaffManagement extends javax.swing.JFrame {
         SearchTable.setModel(tableModel);
     }
     
+    //Load Role COmbobox Data
     public void loadRoleCbData()
     {
         connection = new DBConnection();
@@ -141,7 +144,7 @@ public class StaffManagement extends javax.swing.JFrame {
         SearchTable.setModel(tableModel);
     }
     
-    public void ResetText()
+    public void ResetText() //reset Text affter done function
     {
         SearchTxb.setText("");
         EmailText.setText("");
@@ -163,7 +166,7 @@ public class StaffManagement extends javax.swing.JFrame {
         return id;
     }
     
-    public void SelectRow()
+    public void SelectRow() //function get information wwhen select row from table
     {
         //Get data from table
         DefaultTableModel tableModel = (DefaultTableModel) SearchTable.getModel();
@@ -522,6 +525,7 @@ public class StaffManagement extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBtnActionPerformed
+        //Search Staff
         reset();
         String search = SearchTxb.getText();
         DefaultTableModel tableModel = (DefaultTableModel) SearchTable.getModel();
@@ -553,11 +557,11 @@ public class StaffManagement extends javax.swing.JFrame {
         ArrayList<TaiKhoan> existarr = new ArrayList<TaiKhoan>();
         TaiKhoan_BUS taikhoan_BUS = new TaiKhoan_BUS();
         existarr = taikhoan_BUS.checkExist(EmailText.getText(), NameText.getText(), AddressText.getText(), PhoneText.getText());
-        if(NameText.getText().equals(""))
+        if(NameText.getText().equals("")) //Check Null
         {
             JOptionPane.showMessageDialog(this, "Please fill atleast the name of the staff...");
         }
-        else if(existarr.size() >0)
+        else if(existarr.size() >0) //Check Staff exist already
         {
             JOptionPane.showMessageDialog(this, "Already exist this staff/admin...");
         }
@@ -587,11 +591,11 @@ public class StaffManagement extends javax.swing.JFrame {
             ArrayList<TaiKhoan> existarr = new ArrayList<TaiKhoan>();
             TaiKhoan_BUS taikhoan_BUS = new TaiKhoan_BUS();
             existarr = taikhoan_BUS.checkExist(EmailText.getText(), NameText.getText(), AddressText.getText(), PhoneText.getText());
-            if(NameText.getText().equals(""))
+            if(NameText.getText().equals("")) //check Null
             {
                 JOptionPane.showMessageDialog(this, "Please fill atleast the name of staff...");
             }
-            else if(existarr.size() > 0)
+            else if(existarr.size() > 0) //Check exist staff already
             {
                 JOptionPane.showMessageDialog(this, "Already existed this staff/admin...");
             }
@@ -632,15 +636,14 @@ public class StaffManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_DeleteBtnActionPerformed
 
     private void NewChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewChangeButtonActionPerformed
-        // TODO add your handling code here:
+        // Move to panel Add Staff with function Add
         ParentPanel.setSelectedIndex(1);
         AddStaffBtn.setEnabled(true);
         UpdateStaffBtn.setEnabled(false);
     }//GEN-LAST:event_NewChangeButtonActionPerformed
 
     private void EditChangeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditChangeBtnActionPerformed
-        // TODO add your handling code here:
-        
+        // Move to panel Add Staff with function Edit
         try {
             SelectRow();
             AddStaffBtn.setEnabled(false);
@@ -652,7 +655,7 @@ public class StaffManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_EditChangeBtnActionPerformed
 
     private void AdminRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdminRadioActionPerformed
-        // TODO add your handling code here: 
+        // Search Admin Radio 
         if(AdminRadio.isSelected() == true);
         {
             reset();
@@ -667,7 +670,7 @@ public class StaffManagement extends javax.swing.JFrame {
 
     private void AllRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AllRadioActionPerformed
 
-        // TODO add your handling code here:
+        // Search All Radio
         if(AllRadio.isSelected() == true)
         {
             reset();
@@ -676,7 +679,7 @@ public class StaffManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_AllRadioActionPerformed
 
     private void StaffRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StaffRadioActionPerformed
-        // TODO add your handling code here:
+        // Search Staff Radio
         if(StaffRadio.isSelected() == true)
         {
             reset();
@@ -697,7 +700,7 @@ public class StaffManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_DeleteBtnMouseClicked
 
     private void NameTextKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NameTextKeyTyped
-        // TODO add your handling code here:
+        // NameTxb only Text
         char c = evt.getKeyChar();
         
         if(Character.isDigit(c))
@@ -707,7 +710,7 @@ public class StaffManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_NameTextKeyTyped
 
     private void PhoneTextKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PhoneTextKeyTyped
-        // TODO add your handling code here:
+        // PhoneTxb only Number
         char c = evt.getKeyChar();
         
         if(!Character.isDigit(c))

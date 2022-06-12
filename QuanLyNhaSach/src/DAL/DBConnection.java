@@ -19,6 +19,7 @@ public class DBConnection {
     String connectionString = "jdbc:sqlserver://localhost:1433;databaseName=QLNS;user=sa;password=sa;";
     Connection conn;
     public DBConnection(){
+        //Get COnnection
         try {
              conn = DriverManager.getConnection(connectionString);
         } catch (SQLException e) 

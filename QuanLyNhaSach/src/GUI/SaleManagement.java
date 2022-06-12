@@ -923,7 +923,7 @@ public class SaleManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_CancelBillBtnActionPerformed
 
     private void ConfirmBillBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmBillBtnActionPerformed
-        // TODO add your handling code here:
+        // Confirm Bill
         HoaDon hoaDon = new HoaDon();
         String date = ((JTextField) DatePicker.getDateEditor().getUiComponent()).getText(); //Get String from DatePicker - JDateChooser
         System.err.println(date);

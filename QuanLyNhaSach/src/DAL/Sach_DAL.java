@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class Sach_DAL {
     DBConnection connection;
     
-    //All
+    //Get All Sach
     public ArrayList<Sach> getAllSach()
     {
         connection = new DBConnection();
@@ -43,6 +43,7 @@ public class Sach_DAL {
         return result;
     }
     
+    //Search Sach by ID
     public ArrayList<Sach> searchSachbyID(String ID)
     {
         connection = new DBConnection();
@@ -68,7 +69,7 @@ public class Sach_DAL {
         return result;
     }
     
-    //Search with Filter
+    //Search Sach with Filter
     public ArrayList<Sach> searchSach(String name, String type, String author)
     {
         connection = new DBConnection();
@@ -94,6 +95,7 @@ public class Sach_DAL {
         return result;
     }
     
+    //Check Sach Exist for cretae new
     public ArrayList<Sach> searchSachExist(String name, String type, String author)
     {
         connection = new DBConnection();
@@ -119,6 +121,7 @@ public class Sach_DAL {
         return result;
     }
     
+    //Check Sach Exist for Update
     public ArrayList<Sach> searchSachExistNoUpdate(String name, String type, String author, int Amount, float Price)
     {
         connection = new DBConnection();
@@ -144,7 +147,7 @@ public class Sach_DAL {
         return result;
     }
     
-    //Add
+    //Add Sach
     public boolean addSach(Sach sach)
     {
         connection = new DBConnection();
@@ -159,7 +162,7 @@ public class Sach_DAL {
         }
     }
     
-    //Update
+    //Update Sach
     public boolean updateSach(Sach sach)
     {
         connection = new DBConnection();
@@ -174,7 +177,7 @@ public class Sach_DAL {
         }
     }
     
-    //Delete
+    //Delete Sach
     public boolean deleteSach(String maSach)
     {
         connection = new DBConnection();

@@ -19,6 +19,7 @@ public class ChiTietHoaDon_DAL {
     
     DBConnection connection;
     
+    //Add chitietHoaDOn
     public boolean addChiTietHoaDon(ChiTietHoaDon chitiet)
     {
         connection = new DBConnection();
@@ -33,6 +34,7 @@ public class ChiTietHoaDon_DAL {
         }
     }
     
+    //Get CHiTioetHoaDOn
     public ArrayList<ChiTietHoaDon> danhSachChiTietHoaDon(String maHD)
     {
         connection = new DBConnection();
@@ -55,6 +57,7 @@ public class ChiTietHoaDon_DAL {
         return result;
     }
     
+    //Delete CHiTietHoaDon
     public boolean deleteChiTietHoaDon(String maHD)
     {
        

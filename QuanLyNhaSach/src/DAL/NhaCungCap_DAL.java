@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
 public class NhaCungCap_DAL {
    DBConnection connection;
     
-    //All
+    //Get All NCC
     public ArrayList<NhaCungCap> getAllNhaCungCap()
     {
         connection = new DBConnection();
@@ -40,7 +40,7 @@ public class NhaCungCap_DAL {
         return result;
     }
     
-    //Search
+    //Search NCC
     public ArrayList<NhaCungCap> searchNhaCungCap(String search)
     {
         connection = new DBConnection();
@@ -62,6 +62,7 @@ public class NhaCungCap_DAL {
         return result;
     }
     
+    //Add NCC
     public boolean addNhaCungCap(NhaCungCap nhacungcap)
     {
         connection = new DBConnection();
@@ -76,6 +77,7 @@ public class NhaCungCap_DAL {
         }
     }
     
+    //Update NCC
     public boolean updateNhaCungCap(NhaCungCap nhacungcap)
     {
         connection = new DBConnection();
@@ -90,6 +92,7 @@ public class NhaCungCap_DAL {
         }
     }
     
+    //Delete NCC
     public boolean deleteNhaCungCap(String maNhaCC)
     {
         connection = new DBConnection();

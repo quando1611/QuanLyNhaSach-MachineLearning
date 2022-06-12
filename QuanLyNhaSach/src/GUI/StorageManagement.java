@@ -32,7 +32,7 @@ public class StorageManagement extends javax.swing.JFrame {
         loadAllData();
     }
     
-    public void loadAllData()
+    public void loadAllData() //load All Data from beginning and when update/add s.t
     {
         loadAllBook();
         loadTypeCbData();
@@ -40,6 +40,7 @@ public class StorageManagement extends javax.swing.JFrame {
     //Get all data from Sach
     public void loadAllBook()
     {
+        //Load All Book
         DefaultTableModel table = (DefaultTableModel)SearchBookTable.getModel();
         ArrayList<Sach> arr = new ArrayList<Sach>();
         Sach_BUS sach_BUS= new Sach_BUS();
@@ -66,6 +67,7 @@ public class StorageManagement extends javax.swing.JFrame {
     
     public void loadTypeCbData()
     {
+        //Load TypeComboBox Data
         connection = new DBConnection();
         String query = "select TenTheLoai from Sach";
         try {
@@ -84,6 +86,7 @@ public class StorageManagement extends javax.swing.JFrame {
     
     public void seacrhBookWithFilter()
     {
+        //Search Book wwith FIlter
         resetData();
         String name = SearchTxb.getText();
         String type = TypeCb.getSelectedItem().toString();
@@ -154,7 +157,7 @@ public class StorageManagement extends javax.swing.JFrame {
         return id;
     }
     
-    public void SelectRow()
+    public void SelectRow() //function get information wwhen select row from table
     {
         DefaultTableModel tableModel = (DefaultTableModel) SearchBookTable.getModel();
             //Get Data from Table
@@ -508,13 +511,13 @@ public class StorageManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_BackBtnMouseClicked
 
     private void SearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBtnActionPerformed
-        // TODO add your handling code here:
-        if(AllRadio.isSelected() == true)
+        // Search function
+        if(AllRadio.isSelected() == true) //Search All
         {
             resetData();
             loadAllData();
         }
-        else if(FilterRadio.isSelected() == true)
+        else if(FilterRadio.isSelected() == true) //Search wwith Filter
         {
             seacrhBookWithFilter();
             resetCbData();
@@ -523,14 +526,14 @@ public class StorageManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_SearchBtnActionPerformed
 
     private void NewChangeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewChangeBtnActionPerformed
-        // TODO add your handling code here:
+        // Move to panel Add Book wwith function Add
         ParentPanel.setSelectedIndex(1);
         UpdateBookBtn.setEnabled(false);
         AddBookBtn.setEnabled(true);
     }//GEN-LAST:event_NewChangeBtnActionPerformed
 
     private void EditChangeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditChangeBtnActionPerformed
-        // TODO add your handling code here:
+        // Move to panel Add Book wwith function Edit
         try {
             SelectRow();
             ParentPanel.setSelectedIndex(1);
@@ -542,7 +545,7 @@ public class StorageManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_EditChangeBtnActionPerformed
 
     private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
-        // TODO add your handling code here:
+        // Delete
         try {
             SelectRow();
             Sach_BUS sach_BUS = new Sach_BUS();
@@ -558,11 +561,11 @@ public class StorageManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_DeleteBtnActionPerformed
 
     private void AddBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBookBtnActionPerformed
-        // TODO add your handling code here:
+        // Add Book
         Sach sach = new Sach();
         String theloaiString;
         //getTheLoai
-            if(TypeTxb.getText().equals(""))
+            if(TypeTxb.getText().equals("")) //Check Null
             {
                 if(TypeSelectCb.getSelectedItem().toString().equals("All"))
                 {
@@ -613,11 +616,11 @@ public class StorageManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_AddBookBtnActionPerformed
 
     private void UpdateBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateBookBtnActionPerformed
-        // TODO add your handling code here:
+        // Update Book
         Sach sach = new Sach();
         String theloaiString;
         //getTheLoai
-            if(TypeTxb.getText().equals(""))
+            if(TypeTxb.getText().equals("")) //Check Null
             {
                 if(TypeSelectCb.getSelectedItem().toString().equals("All"))
                 {

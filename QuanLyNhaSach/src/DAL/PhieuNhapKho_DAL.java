@@ -17,6 +17,7 @@ public class PhieuNhapKho_DAL {
     
     DBConnection connection;
     
+    //get All PhieuNhap
     public ArrayList<PhieuNhapKho> danhsachPhieuNhap()
     {
         connection = new DBConnection();
@@ -44,6 +45,7 @@ public class PhieuNhapKho_DAL {
         return result;
     }
     
+    //Get All PhieuNhap with date
     public ArrayList<PhieuNhapKho> danhsachPhieuNhapByDate(String date)
     {
         connection = new DBConnection();
@@ -71,6 +73,7 @@ public class PhieuNhapKho_DAL {
         return result;
     }
     
+    //Get All phieu nhap by month
      public ArrayList<PhieuNhapKho> danhsachPhieuNhapByMonth(String month, String year)
     {
         connection = new DBConnection();
@@ -98,6 +101,7 @@ public class PhieuNhapKho_DAL {
         return result;
     }
     
+     //Add Phieu Nhap
     public boolean addPhieuNhapKho(PhieuNhapKho phieunhap)
     {
         connection = new DBConnection();
@@ -111,6 +115,7 @@ public class PhieuNhapKho_DAL {
         }
     }
     
+    //Search PhieuNhap with Supplier ID
     public ArrayList<PhieuNhapKho> seacrhPhieuNhapKhoBySupplierID(String search)
     {
         connection = new DBConnection();
@@ -136,6 +141,7 @@ public class PhieuNhapKho_DAL {
         return result;
     }
     
+    //Update PhieuNhap
     public boolean updatePhieuNhapKho(PhieuNhapKho phieuNhapKho)
     {
         connection = new DBConnection();
@@ -150,6 +156,7 @@ public class PhieuNhapKho_DAL {
         }
     }
     
+    //Delete PhieuNhap
     public boolean deletePhieuNhapKho(String maPNK)
     {
         connection = new DBConnection();

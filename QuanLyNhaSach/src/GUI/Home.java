@@ -537,6 +537,7 @@ public class Home extends javax.swing.JFrame {
         revenueManagement.show();
     }//GEN-LAST:event_RevenuePnMouseClicked
 
+    //Check Account Role
     private void StaffPnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StaffPnMouseClicked
         // TODO add your handling code here:
         if(role.equals("Admin"))
@@ -552,6 +553,7 @@ public class Home extends javax.swing.JFrame {
         
     }//GEN-LAST:event_StaffPnMouseClicked
 
+    //Account LogOut
     private void LogOutPnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogOutPnMouseClicked
         // TODO add your handling code here:
         int response = JOptionPane.showConfirmDialog(this, "Do you want to continue?", "Confirm",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);

@@ -64,6 +64,7 @@ public class RevenueManagement extends javax.swing.JFrame {
 
     public void reset()
     {
+        //reset Data
         resetBill();
         resetImportBill();
         resetText();
@@ -71,6 +72,7 @@ public class RevenueManagement extends javax.swing.JFrame {
     
     public void resetBill()
     {
+        //reset BillTable Data
         DefaultTableModel tableModel = (DefaultTableModel) BillShowTable.getModel();
         tableModel.setRowCount(0);
         BillShowTable.setModel(tableModel);
@@ -78,6 +80,7 @@ public class RevenueManagement extends javax.swing.JFrame {
     
     public void resetImportBill()
     {
+        //reset ImportBillTable Data
         DefaultTableModel tableModel = (DefaultTableModel) ImportBillShowTable.getModel();
         tableModel.setRowCount(0);
         ImportBillShowTable.setModel(tableModel);
@@ -85,6 +88,7 @@ public class RevenueManagement extends javax.swing.JFrame {
     
     public void resetSaleBill()
     {
+        //Reset SaleBillTable Data
         DefaultTableModel tableModel = (DefaultTableModel) SaleBillTable.getModel();
         tableModel.setRowCount(0);
         SaleBillTable.setModel(tableModel);
@@ -92,7 +96,7 @@ public class RevenueManagement extends javax.swing.JFrame {
     
     public void resetText()
     {
-        
+        //reset Text
     }
     
     private void loadCurrentDate() {
@@ -105,6 +109,7 @@ public class RevenueManagement extends javax.swing.JFrame {
     
     private void LoadStaffIDCb()
     {
+        //Load StaffID to StaffID ComboBox
         connection = new DBConnection();
         String query = "select * from TaiKhoan";
         try {
@@ -224,7 +229,7 @@ public class RevenueManagement extends javax.swing.JFrame {
         }
     }
     
-    private void selectBillRow()
+    private void selectBillRow() //select BillTable row to get Data
     {
         DefaultTableModel selecttable = (DefaultTableModel) BillShowTable.getModel();
         IDBill = selecttable.getValueAt(BillShowTable.getSelectedRow(), 0).toString();
@@ -234,7 +239,7 @@ public class RevenueManagement extends javax.swing.JFrame {
         receive = Double.parseDouble(selecttable.getValueAt(BillShowTable.getSelectedRow(), 4).toString());
     }
     
-    private void selectImportBillRow()
+    private void selectImportBillRow() //select ImportBillTable Row to get Data
     {
         DefaultTableModel selecttable = (DefaultTableModel) ImportBillShowTable.getModel();
         IDimportBill = selecttable.getValueAt(ImportBillShowTable.getSelectedRow(), 0).toString();
@@ -245,7 +250,7 @@ public class RevenueManagement extends javax.swing.JFrame {
         totalImport = Double.parseDouble(selecttable.getValueAt(ImportBillShowTable.getSelectedRow(), 5).toString());
     }
     
-    private void selectSaleBillRow()
+    private void selectSaleBillRow() //select SaleBillTable row to get Data
     {
         DefaultTableModel selecttable = (DefaultTableModel) SaleBillTable.getModel();
         IDSaleBill = selecttable.getValueAt(SaleBillTable.getSelectedRow(), 0).toString();
@@ -726,7 +731,7 @@ public class RevenueManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_BillShowTableMouseClicked
 
     private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
-        // TODO add your handling code here:
+        // Delete Bill
         try {
             selectBillRow();
             if(IDBill.equals(""))
@@ -750,7 +755,7 @@ public class RevenueManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_DeleteBtnActionPerformed
 
     private void PreviewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PreviewBtnActionPerformed
-        // TODO add your handling code here:
+        // Preview Bill before Print
         
         try {
             selectBillRow();
@@ -794,7 +799,7 @@ public class RevenueManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_PreviewBtnActionPerformed
 
     private void PrintBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintBtnActionPerformed
-        // TODO add your handling code here:
+        // Print Bill
         try {
             PrintPreview.print();
         } catch (Exception e) {
@@ -803,7 +808,7 @@ public class RevenueManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_PrintBtnActionPerformed
 
     private void PreviewImportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PreviewImportBtnActionPerformed
-        // TODO add your handling code here:
+        // Preview Import Bill before print
         try {
             selectImportBillRow();
             ArrayList<ChiTietPhieuNhap> arr = new ArrayList<ChiTietPhieuNhap>();
@@ -839,7 +844,7 @@ public class RevenueManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_PreviewImportBtnActionPerformed
 
     private void PrintImportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintImportBtnActionPerformed
-        // TODO add your handling code here:
+        // print Import Bill
         try {
             ImportPrintPreview.print();
         } catch (Exception e) {
@@ -848,7 +853,7 @@ public class RevenueManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_PrintImportBtnActionPerformed
 
     private void DeleteBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtn1ActionPerformed
-        // TODO add your handling code here:
+        // Delete Import Bill
         try {
             selectImportBillRow();
             if(IDimportBill.equals(""))
@@ -893,7 +898,7 @@ public class RevenueManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_BackBtnMouseClicked
 
     private void SearchBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBtn2ActionPerformed
-        // TODO add your handling code here:
+        // Preview Revenue before print
         try {
                 String month = MonthCb.getSelectedItem().toString();
                 String year = YearTxb.getText();
@@ -932,13 +937,13 @@ public class RevenueManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_SearchBtn2ActionPerformed
 
     private void SearchBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBtn3ActionPerformed
-        // TODO add your handling code here:
+        // load SaleBill Data
         resetSaleBill();
         loadSaleBill();
     }//GEN-LAST:event_SearchBtn3ActionPerformed
 
     private void PrintImportBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintImportBtn1ActionPerformed
-        // TODO add your handling code here:
+        // print Revenue
         try {
             RevenuePrintPreview.print();
         } catch (Exception e) {
@@ -947,7 +952,7 @@ public class RevenueManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_PrintImportBtn1ActionPerformed
 
     private void DeleteBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtn2ActionPerformed
-        // TODO add your handling code here:
+        // Delete Sale Bill+
         try {
             PhieuThuTien_BUS bus = new PhieuThuTien_BUS();
             bus.deletePhieuThuTien(IDSaleBill);
@@ -961,12 +966,12 @@ public class RevenueManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_DeleteBtn2ActionPerformed
 
     private void SaleBillTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SaleBillTableMouseClicked
-        // TODO add your handling code here:
+        // select row from SaleBillTable
         selectSaleBillRow();
     }//GEN-LAST:event_SaleBillTableMouseClicked
 
     private void YearTxbKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_YearTxbKeyTyped
-        // TODO add your handling code here:
+        // YearTxb Number only
         char c = evt.getKeyChar();
         
         if(!Character.isDigit(c))
@@ -977,7 +982,7 @@ public class RevenueManagement extends javax.swing.JFrame {
 
     
     //
-    //Calculate Revenue in #Monthly Revenue Tab
+    //Calculate Revenue Sale in #Monthly Revenue Tab
     private double loadRevenue_Sale(String month, String year)
     {
         double saleTotal = 0;
@@ -999,6 +1004,7 @@ public class RevenueManagement extends javax.swing.JFrame {
         return saleTotal;
     }
     
+    //Calculate Revenue Import in #Monthly Revenue Tab
      private double loadRevenue_Import(String month, String year)
     {
         double importTotal = 0;
@@ -1022,7 +1028,7 @@ public class RevenueManagement extends javax.swing.JFrame {
      
      private void calculateRevenue(double saleTotal, double importTotal)
      {
-         
+         //Calculate revenue in month
          RevenueLb.setText(Double.toString(saleTotal - importTotal));
      }
      

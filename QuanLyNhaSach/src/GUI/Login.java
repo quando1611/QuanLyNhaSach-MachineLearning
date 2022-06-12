@@ -244,8 +244,11 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Login failed!!", "Fail",JOptionPane.OK_OPTION);
         }
     }//GEN-LAST:event_LoginBtnActionPerformed
+    
+    //Check Account when login
     private boolean CheckLogin(String email, String pass)
     {
+        
         boolean result = false;
         String query = "select * from TaiKhoan where Email = '" + email + "' and MatKhau = '" + pass + "'";
         System.out.println(query);

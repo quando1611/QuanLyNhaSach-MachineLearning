@@ -17,6 +17,7 @@ public class HoaDon_DAL {
     
     DBConnection connection;
     
+    //Get All HoaDOn
     public ArrayList<HoaDon> danhSachHoaDon()
     {
         connection = new DBConnection();
@@ -42,6 +43,7 @@ public class HoaDon_DAL {
         return result;
     }
     
+    //Get All HoaDOn with status = COmplete
     public ArrayList<HoaDon> danhSachHoaDonComplete()
     {
         connection = new DBConnection();
@@ -67,6 +69,7 @@ public class HoaDon_DAL {
         return result;
     }
     
+    //Get All HoaDOn with Status = Return
     public ArrayList<HoaDon> danhSachHoaDonReturn()
     {
         connection = new DBConnection();
@@ -92,6 +95,7 @@ public class HoaDon_DAL {
         return result;
     }
     
+    //Get All HoaDon with Date
     public ArrayList<HoaDon> danhSachHoaDonByDay(String date)
     {
         connection = new DBConnection();
@@ -117,6 +121,7 @@ public class HoaDon_DAL {
         return result;
     }
     
+    //get ALl HoaDOn with Day & Status = COmplete
     public ArrayList<HoaDon> danhSachHoaDonCompleteByDate(String date)
     {
         connection = new DBConnection();
@@ -142,6 +147,7 @@ public class HoaDon_DAL {
         return result;
     }
     
+    //get ALl HoaDOn with Month & Status = COmplete
     public ArrayList<HoaDon> danhSachHoaDonCompleteByMonth(String month,String year)
     {
         connection = new DBConnection();
@@ -167,6 +173,7 @@ public class HoaDon_DAL {
         return result;
     }
     
+    //Search HoaDOn by KhachHangID
     public ArrayList<HoaDon> seacrhHoaDonByKhachHangID(String search)
     {
         connection = new DBConnection();
@@ -192,6 +199,7 @@ public class HoaDon_DAL {
         return result;
     }
     
+    //Add HoaDOn
     public boolean addHoaDon(HoaDon hoaDon)
     {
         connection = new DBConnection();
@@ -205,6 +213,7 @@ public class HoaDon_DAL {
         }
     }
     
+    //Update HoaDOn
     public boolean updateHoaDon(HoaDon hoaDon)
     {
         connection = new DBConnection();
@@ -219,6 +228,7 @@ public class HoaDon_DAL {
         }
     }
     
+    //Delete HoaDon
     public boolean deleteHoaDon(String maHD)
     {
         connection = new DBConnection();

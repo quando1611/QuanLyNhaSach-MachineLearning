@@ -85,7 +85,7 @@ public class CustomerManagement extends javax.swing.JFrame {
         return id;
     }
 
-    public void SelectRow()
+    public void SelectRow() //Function when select row from table 
     {
         DefaultTableModel tableModel = (DefaultTableModel) SearchCustomerTable.getModel();
             //Get Data from Table
@@ -474,11 +474,11 @@ public class CustomerManagement extends javax.swing.JFrame {
         ArrayList<KhachHang> existarr = new ArrayList<KhachHang>();
         KhachHang_BUS khachHang_BUS = new KhachHang_BUS();
         existarr = khachHang_BUS.seacrhKhachHangExist(NameTxb.getText(), PhoneNumberTxb.getText());
-        if(NameTxb.getText().equals(""))
+        if(NameTxb.getText().equals("")) //Check Null
         {
             JOptionPane.showMessageDialog(this, "Please fill atleast the name of the customer...");
         }
-        else if(existarr.size()>0)
+        else if(existarr.size()>0) //Check Cusstomer Exist wwhen add
         {
             JOptionPane.showMessageDialog(this, "Already existed this customer...");
         }
@@ -505,11 +505,11 @@ public class CustomerManagement extends javax.swing.JFrame {
         ArrayList<KhachHang> existarr = new ArrayList<KhachHang>();
         KhachHang_BUS khachHang_BUS = new KhachHang_BUS();
         existarr = khachHang_BUS.seacrhKhachHangExistNoUpdate(NameTxb.getText(), AddressTxb.getText(), PhoneNumberTxb.getText(), EmailTxb.getText(), ProductTxb.getText());
-        if(NameTxb.getText().equals(""))
+        if(NameTxb.getText().equals("")) //Check Null
         {
             JOptionPane.showMessageDialog(this, "Please fill atleast the name of customer...");
         }
-        else if(existarr.size() > 0)
+        else if(existarr.size() > 0) //Check Customer Exist when Update
         {
             JOptionPane.showMessageDialog(this, "No Update...");
         }

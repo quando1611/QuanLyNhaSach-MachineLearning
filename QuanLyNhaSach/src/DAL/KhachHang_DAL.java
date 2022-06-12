@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
 public class KhachHang_DAL {
     DBConnection connection;
     
-    //All
+    //Get All KhachHang
     public ArrayList<KhachHang> getAllKhachHang()
     {
         connection = new DBConnection();
@@ -44,7 +44,7 @@ public class KhachHang_DAL {
         return result;
     }
     
-    //Search
+    //Search KhachHang
     public ArrayList<KhachHang> searchKhachHang(String search)
     {
         connection = new DBConnection();
@@ -70,6 +70,7 @@ public class KhachHang_DAL {
         return result;
     }
     
+    //Check KhachHang Exist
     public ArrayList<KhachHang> searchKhachHangExist(String name , String phone )
     {
         connection = new DBConnection();
@@ -95,6 +96,7 @@ public class KhachHang_DAL {
         return result;
     }
     
+    //Check KhachHang Exist when update
     public ArrayList<KhachHang> searchKhachHangExistNoUpdate(String name , String Address, String phone, String Email, String SoSPDaMua )
     {
         connection = new DBConnection();
@@ -120,7 +122,7 @@ public class KhachHang_DAL {
         return result;
     }
     
-    
+    //Add KhachHang
     public boolean addKhachHang(KhachHang khachHang)
     {
         connection = new DBConnection();
@@ -135,6 +137,7 @@ public class KhachHang_DAL {
         }
     }
     
+    //Updater KhachHang
     public boolean updateKhachHang(KhachHang khachHang)
     {
         connection = new DBConnection();
@@ -149,6 +152,7 @@ public class KhachHang_DAL {
         }
     }
     
+    //Delete AmountProduct KhachHang
      public boolean updateAmountProductKhachHang(String id, int amount)
     {
         connection = new DBConnection();
@@ -163,6 +167,7 @@ public class KhachHang_DAL {
         }
     }
     
+     //Delete KhachHang
     public boolean deleteKhachHang(String maKH)
     {
         connection = new DBConnection();

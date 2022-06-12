@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class ChiTietPhieuNhap_DAL{
         DBConnection connection;
         
+        //Add CHiTietPhieuNhap
         public boolean addChiTietPhieuNhap(ChiTietPhieuNhap chitietnhap)
         {
             connection = new DBConnection();
@@ -32,6 +33,7 @@ public class ChiTietPhieuNhap_DAL{
         }
         }
         
+        //Get ChitietphieuNhap
         public ArrayList<ChiTietPhieuNhap> danhSachChiTietPhieuNhap(String id)
     {
         connection = new DBConnection();
@@ -54,6 +56,7 @@ public class ChiTietPhieuNhap_DAL{
         return result;
     }
         
+        //Search CHiTietPhieuNhap With SupplierID
         public ArrayList<ChiTietPhieuNhap> seacrChiTietPhieuNhapBySupplierID(String search)
     {
         connection = new DBConnection();
@@ -76,7 +79,7 @@ public class ChiTietPhieuNhap_DAL{
         return result;
     }
     
-        
+        //Delete ChiTietPhieuNhap
         public boolean deleteChiTietPhieuNhap(String manhap)
     {
        
