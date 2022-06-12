@@ -987,15 +987,17 @@ public class SaleManagement extends javax.swing.JFrame {
             PhieuThuTien_BUS phieuThuTien_BUS = new PhieuThuTien_BUS();
             phieuThuTien_BUS.addPhieuThuTien(phieuthutien);
             System.err.println("Succeed!");
+            JOptionPane.showMessageDialog(this, "Create Bill Successful!");
+            resetSelectTableAfterConfirm();
+            resetSearchData();
+            resetBillShowTable();
+            resetDetailBillTable();
+            resetText();
+            loadAllBill();
+            loadAllBook();
+            ParentPanel.setSelectedIndex(2);
         }
-        resetSelectTableAfterConfirm();
-        resetSearchData();
-        resetBillShowTable();
-        resetDetailBillTable();
-        resetText();
-        loadAllBill();
-        loadAllBook();
-        ParentPanel.setSelectedIndex(2);
+        
     }//GEN-LAST:event_ConfirmBillBtnActionPerformed
 
     private void BillShowTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BillShowTableMouseClicked
