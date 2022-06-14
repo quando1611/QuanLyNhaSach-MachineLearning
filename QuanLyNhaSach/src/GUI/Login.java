@@ -64,7 +64,7 @@ public class Login extends javax.swing.JFrame {
         jLabel4.setText("BOOK-KEEPER");
 
         jLabel1.setFont(new java.awt.Font("Ink Free", 1, 24)); // NOI18N
-        jLabel1.setText("For a bright feature ...");
+        jLabel1.setText("For a bright future ...");
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));

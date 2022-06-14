@@ -88,7 +88,7 @@ public class Home extends javax.swing.JFrame {
         WelcomeLb.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
         WelcomeLb.setForeground(new java.awt.Color(255, 255, 255));
         WelcomeLb.setText("Welcome Back, ..........................................");
-        jPanel2.add(WelcomeLb, new org.netbeans.lib.awtextra.AbsoluteConstraints(414, 185, -1, -1));
+        jPanel2.add(WelcomeLb, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 180, -1, -1));
 
         ExitBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/icons8_close_window_70px.png"))); // NOI18N
         ExitBtn.addMouseListener(new java.awt.event.MouseAdapter() {

@@ -882,7 +882,6 @@ public class ImportManagement extends javax.swing.JFrame {
             }
         });
         BillShowTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        BillShowTable.setColumnSelectionAllowed(true);
         BillShowTable.setGridColor(new java.awt.Color(0, 0, 0));
         BillShowTable.setShowGrid(true);
         BillShowTable.addMouseListener(new java.awt.event.MouseAdapter() {
