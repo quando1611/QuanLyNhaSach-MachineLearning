@@ -1066,7 +1066,7 @@ public class ImportManagement extends javax.swing.JFrame {
         resetDetailBillTable();
         loadAllBill();
         loadAllBook();
-        ParentPanel.setSelectedIndex(0);
+        ParentPanel.setSelectedIndex(4);
     }//GEN-LAST:event_ConfirmBillBtnActionPerformed
                                
 
