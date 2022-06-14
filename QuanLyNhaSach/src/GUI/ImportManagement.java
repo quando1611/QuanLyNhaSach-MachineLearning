@@ -1059,14 +1059,14 @@ public class ImportManagement extends javax.swing.JFrame {
             }
             System.out.println("Succeed!");
             JOptionPane.showMessageDialog(this, "Successful!");
+            resetBillTableAfterConfirm();
+            resetSearchBookTable();
+            resetBillShowTable();
+            resetDetailBillTable();
+            loadAllBill();
+            loadAllBook();
+            ParentPanel.setSelectedIndex(4);
         }
-        resetBillTableAfterConfirm();
-        resetSearchBookTable();
-        resetBillShowTable();
-        resetDetailBillTable();
-        loadAllBill();
-        loadAllBook();
-        ParentPanel.setSelectedIndex(4);
     }//GEN-LAST:event_ConfirmBillBtnActionPerformed
                                
 
