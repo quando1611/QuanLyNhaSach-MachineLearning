@@ -36,6 +36,6 @@
 
 ## 5 GIẤY PHÉP
 ```
-Copyright 2021 Tran Thanh Trung, Vương Hoang trung, Do Vu Minh Quan
+Copyright 2022 Tran Thanh Trung, Vương Hoang trung, Do Vu Minh Quan
 
 ```
