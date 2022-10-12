@@ -29,10 +29,7 @@
 - Công cụ quản lý code : Github
 - Công cụ quản lý công việc : Trello
  
-## 4 TÁC GIẢ
-- Trần Thành Trung - 19522436
-- Đỗ Vũ minh Quân - 19522075
-- Vương Hoàng Trung - 19522438
+
 
 ## 5 GIẤY PHÉP
 ```
