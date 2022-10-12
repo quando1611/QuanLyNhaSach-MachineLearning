@@ -31,8 +31,5 @@
  
 
 
-## 5 GIẤY PHÉP
-```
-Copyright 2022 Tran Thanh Trung, Vương Hoang trung, Do Vu Minh Quan
 
 ```
