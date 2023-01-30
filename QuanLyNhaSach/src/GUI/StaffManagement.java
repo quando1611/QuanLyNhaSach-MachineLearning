@@ -234,7 +234,7 @@ public class StaffManagement extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        jPanel2.setBackground(new java.awt.Color(153, 153, 200));
+        jPanel2.setBackground(new java.awt.Color(102, 153, 255));
 
         jLabel1.setFont(new java.awt.Font("Impact", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -272,8 +272,10 @@ public class StaffManagement extends javax.swing.JFrame {
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
-        ParentPanel.setBackground(new java.awt.Color(204, 204, 255));
+        ParentPanel.setBackground(new java.awt.Color(153, 153, 255));
+        ParentPanel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
+        SearchTab.setBackground(new java.awt.Color(255, 255, 255));
         SearchTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jScrollPane1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -305,7 +307,8 @@ public class StaffManagement extends javax.swing.JFrame {
         SearchTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         SearchTxb.setText("Search here ...");
         SearchTxb.setToolTipText("Search Here....");
-        SearchTab.add(SearchTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 60, 310, 42));
+        SearchTxb.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        SearchTab.add(SearchTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 60, 250, 42));
 
         SearchBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png"))); // NOI18N
         SearchBtn.setToolTipText("Search");
@@ -319,10 +322,11 @@ public class StaffManagement extends javax.swing.JFrame {
                 SearchBtnActionPerformed(evt);
             }
         });
-        SearchTab.add(SearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 110, -1, 52));
+        SearchTab.add(SearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 60, 60, 40));
 
         DeleteBtn.setBackground(new java.awt.Color(255, 51, 102));
         DeleteBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        DeleteBtn.setForeground(new java.awt.Color(255, 255, 255));
         DeleteBtn.setText("DELETE");
         DeleteBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -395,10 +399,12 @@ public class StaffManagement extends javax.swing.JFrame {
 
         ParentPanel.addTab("Search Staff", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png")), SearchTab); // NOI18N
 
+        AddTab.setBackground(new java.awt.Color(255, 255, 255));
         AddTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         EmailText.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         EmailText.setToolTipText("");
+        EmailText.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         AddTab.add(EmailText, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 20, 431, 52));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -411,6 +417,7 @@ public class StaffManagement extends javax.swing.JFrame {
 
         PhoneText.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         PhoneText.setToolTipText("");
+        PhoneText.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         PhoneText.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 PhoneTextKeyTyped(evt);
@@ -424,6 +431,7 @@ public class StaffManagement extends javax.swing.JFrame {
 
         NameText.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         NameText.setToolTipText("");
+        NameText.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         NameText.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 NameTextKeyTyped(evt);
@@ -446,6 +454,7 @@ public class StaffManagement extends javax.swing.JFrame {
         AddTab.add(AddStaffBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 480, 244, 51));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/istockphoto-1223671392-612x612-1.jpg"))); // NOI18N
+        jLabel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         AddTab.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(116, 99, -1, -1));
 
         UpdateStaffBtn.setBackground(new java.awt.Color(255, 204, 204));
@@ -473,6 +482,7 @@ public class StaffManagement extends javax.swing.JFrame {
 
         AddTab.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 15, 3, 490));
 
+        RoleCb.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         AddTab.add(RoleCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 390, 240, 50));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -485,10 +495,12 @@ public class StaffManagement extends javax.swing.JFrame {
 
         PassText.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         PassText.setToolTipText("");
+        PassText.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         AddTab.add(PassText, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 100, 430, 52));
 
         AddressText.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         AddressText.setToolTipText("");
+        AddressText.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         AddTab.add(AddressText, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 240, 430, 52));
 
         ParentPanel.addTab("Add Staff", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_Plus_+_35px.png")), AddTab); // NOI18N

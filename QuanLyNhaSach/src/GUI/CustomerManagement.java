@@ -148,7 +148,7 @@ public class CustomerManagement extends javax.swing.JFrame {
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1280, 720));
 
-        jPanel2.setBackground(new java.awt.Color(153, 153, 200));
+        jPanel2.setBackground(new java.awt.Color(102, 153, 255));
 
         jLabel1.setFont(new java.awt.Font("Impact", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -186,7 +186,8 @@ public class CustomerManagement extends javax.swing.JFrame {
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
-        ParentPanel.setBackground(new java.awt.Color(204, 204, 255));
+        ParentPanel.setBackground(new java.awt.Color(153, 153, 255));
+        ParentPanel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         SearchTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -219,7 +220,7 @@ public class CustomerManagement extends javax.swing.JFrame {
         SearchTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         SearchTxb.setText("Search here ...");
         SearchTxb.setToolTipText("Search Here....");
-        SearchTab.add(SearchTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 10, 310, 42));
+        SearchTab.add(SearchTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 10, 260, 42));
 
         SearchBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png"))); // NOI18N
         SearchBtn.setToolTipText("Search");
@@ -228,10 +229,11 @@ public class CustomerManagement extends javax.swing.JFrame {
                 SearchBtnActionPerformed(evt);
             }
         });
-        SearchTab.add(SearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 70, -1, 52));
+        SearchTab.add(SearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 10, -1, -1));
 
         DeleteBtn.setBackground(new java.awt.Color(255, 51, 102));
         DeleteBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        DeleteBtn.setForeground(new java.awt.Color(255, 255, 255));
         DeleteBtn.setText("DELETE");
         DeleteBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -277,10 +279,12 @@ public class CustomerManagement extends javax.swing.JFrame {
 
         ParentPanel.addTab("Search Customer", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png")), SearchTab); // NOI18N
 
+        AddTab.setBackground(new java.awt.Color(255, 255, 255));
         AddTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         NameTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         NameTxb.setToolTipText("");
+        NameTxb.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         NameTxb.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 NameTxbKeyTyped(evt);
@@ -298,14 +302,16 @@ public class CustomerManagement extends javax.swing.JFrame {
 
         AddressTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         AddressTxb.setToolTipText("");
+        AddressTxb.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         AddTab.add(AddressTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 110, 544, 52));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel4.setText("Phonenumber :");
+        jLabel4.setText("Phone Number :");
         AddTab.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 230, -1, -1));
 
         PhoneNumberTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         PhoneNumberTxb.setToolTipText("");
+        PhoneNumberTxb.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         PhoneNumberTxb.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 PhoneNumberTxbKeyTyped(evt);
@@ -319,6 +325,7 @@ public class CustomerManagement extends javax.swing.JFrame {
 
         EmailTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         EmailTxb.setToolTipText("");
+        EmailTxb.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         AddTab.add(EmailTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 310, 370, 52));
 
         AddCustomerBtn.setBackground(new java.awt.Color(153, 255, 153));
@@ -332,6 +339,7 @@ public class CustomerManagement extends javax.swing.JFrame {
         AddTab.add(AddCustomerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 480, 244, 51));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/istockphoto-1223671392-612x612-1.jpg"))); // NOI18N
+        jLabel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         AddTab.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(116, 99, -1, -1));
 
         UpdateCustomerBtn.setBackground(new java.awt.Color(255, 204, 204));
@@ -351,6 +359,7 @@ public class CustomerManagement extends javax.swing.JFrame {
         ProductTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ProductTxb.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         ProductTxb.setToolTipText("");
+        ProductTxb.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         ProductTxb.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 ProductTxbKeyTyped(evt);
@@ -395,11 +404,11 @@ public class CustomerManagement extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1292, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 749, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 746, Short.MAX_VALUE)
         );
 
         pack();

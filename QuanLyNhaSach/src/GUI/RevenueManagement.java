@@ -323,7 +323,7 @@ public class RevenueManagement extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        jPanel2.setBackground(new java.awt.Color(153, 153, 200));
+        jPanel2.setBackground(new java.awt.Color(102, 153, 255));
 
         jLabel1.setFont(new java.awt.Font("Impact", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -361,8 +361,10 @@ public class RevenueManagement extends javax.swing.JFrame {
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
-        ParentPanel.setBackground(new java.awt.Color(204, 204, 255));
+        ParentPanel.setBackground(new java.awt.Color(153, 153, 255));
+        ParentPanel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
+        DailyTurnOver.setBackground(new java.awt.Color(255, 255, 255));
         DailyTurnOver.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         SearchBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png"))); // NOI18N
@@ -374,11 +376,13 @@ public class RevenueManagement extends javax.swing.JFrame {
         });
         DailyTurnOver.add(SearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 60, 40));
 
+        DateBox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         DateBox.setDateFormatString("yyyy-MM-dd");
         DailyTurnOver.add(DateBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 280, 40));
 
         jScrollPane5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        BillShowTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         BillShowTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -409,6 +413,7 @@ public class RevenueManagement extends javax.swing.JFrame {
 
         DeleteBtn.setBackground(new java.awt.Color(255, 51, 102));
         DeleteBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        DeleteBtn.setForeground(new java.awt.Color(255, 255, 255));
         DeleteBtn.setText("DELETE");
         DeleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -450,8 +455,10 @@ public class RevenueManagement extends javax.swing.JFrame {
 
         ParentPanel.addTab("Daily Turnover", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_today_35px.png")), DailyTurnOver); // NOI18N
 
+        ImportReportTab.setBackground(new java.awt.Color(255, 255, 255));
         ImportReportTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        DateImportBox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         DateImportBox.setDateFormatString("yyyy-MM-dd");
         ImportReportTab.add(DateImportBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 280, 40));
 
@@ -503,6 +510,7 @@ public class RevenueManagement extends javax.swing.JFrame {
 
         jScrollPane6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        ImportBillShowTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         ImportBillShowTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -537,9 +545,11 @@ public class RevenueManagement extends javax.swing.JFrame {
 
         ParentPanel.addTab("Import Report", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_add_list_35px.png")), ImportReportTab); // NOI18N
 
+        MonthlyRevenue.setBackground(new java.awt.Color(255, 255, 255));
         MonthlyRevenue.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         RevenueCal.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -549,6 +559,7 @@ public class RevenueManagement extends javax.swing.JFrame {
         MonthlyRevenue.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 520, 50));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -569,6 +580,7 @@ public class RevenueManagement extends javax.swing.JFrame {
         MonthlyRevenue.add(SaleTotalLb, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, -1, -1));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -604,6 +616,7 @@ public class RevenueManagement extends javax.swing.JFrame {
         YearTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         YearTxb.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         YearTxb.setToolTipText("Search Here....");
+        YearTxb.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         YearTxb.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 YearTxbKeyTyped(evt);
@@ -623,10 +636,12 @@ public class RevenueManagement extends javax.swing.JFrame {
 
         ParentPanel.addTab("Monthly Revenue", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_schedule_35px.png")), MonthlyRevenue); // NOI18N
 
+        StaffBillTab.setBackground(new java.awt.Color(255, 255, 255));
         StaffBillTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jScrollPane2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        SaleBillTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         SaleBillTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -656,6 +671,7 @@ public class RevenueManagement extends javax.swing.JFrame {
 
         StaffBillTab.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 916, 430));
 
+        DateSaleBillBox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         DateSaleBillBox.setDateFormatString("yyyy-MM-dd");
         StaffBillTab.add(DateSaleBillBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 60, 310, 40));
 
@@ -669,6 +685,7 @@ public class RevenueManagement extends javax.swing.JFrame {
         StaffBillTab.add(SearchBtn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 60, 60, 40));
 
         StaffIDCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
+        StaffIDCb.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         StaffBillTab.add(StaffIDCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, 310, 40));
 
         buttonGroup1.add(BothRadio);
@@ -684,6 +701,7 @@ public class RevenueManagement extends javax.swing.JFrame {
 
         DeleteBtn2.setBackground(new java.awt.Color(255, 51, 102));
         DeleteBtn2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        DeleteBtn2.setForeground(new java.awt.Color(255, 255, 255));
         DeleteBtn2.setText("DELETE");
         DeleteBtn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

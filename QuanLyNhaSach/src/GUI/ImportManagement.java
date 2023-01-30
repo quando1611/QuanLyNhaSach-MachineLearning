@@ -478,7 +478,7 @@ public class ImportManagement extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        jPanel2.setBackground(new java.awt.Color(153, 153, 200));
+        jPanel2.setBackground(new java.awt.Color(102, 153, 255));
 
         jLabel1.setFont(new java.awt.Font("Impact", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -516,8 +516,10 @@ public class ImportManagement extends javax.swing.JFrame {
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
-        ParentPanel.setBackground(new java.awt.Color(204, 204, 255));
+        ParentPanel.setBackground(new java.awt.Color(153, 153, 255));
+        ParentPanel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
+        SearchTab.setBackground(new java.awt.Color(255, 255, 255));
         SearchTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jScrollPane1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -549,7 +551,8 @@ public class ImportManagement extends javax.swing.JFrame {
         SupplySearchTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         SupplySearchTxb.setText("Search here ...");
         SupplySearchTxb.setToolTipText("Search Here....");
-        SearchTab.add(SupplySearchTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(953, 0, 310, 52));
+        SupplySearchTxb.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        SearchTab.add(SupplySearchTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(953, 0, 250, 52));
 
         SearchBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png"))); // NOI18N
         SearchBtn.setToolTipText("Search");
@@ -558,9 +561,11 @@ public class ImportManagement extends javax.swing.JFrame {
                 SearchBtnActionPerformed(evt);
             }
         });
-        SearchTab.add(SearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1076, 70, -1, 52));
+        SearchTab.add(SearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 0, -1, 52));
 
+        DeleteBtn.setBackground(new java.awt.Color(255, 51, 51));
         DeleteBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        DeleteBtn.setForeground(new java.awt.Color(255, 255, 255));
         DeleteBtn.setText("DELETE");
         DeleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -596,10 +601,12 @@ public class ImportManagement extends javax.swing.JFrame {
 
         ParentPanel.addTab("Search Supplier", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png")), SearchTab); // NOI18N
 
+        AddTab.setBackground(new java.awt.Color(255, 255, 255));
         AddTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         NameSupplierTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         NameSupplierTxb.setToolTipText("");
+        NameSupplierTxb.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         AddTab.add(NameSupplierTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 140, 431, 52));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -617,6 +624,7 @@ public class ImportManagement extends javax.swing.JFrame {
         AddTab.add(AddSupplierBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 300, 244, 51));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/istockphoto-1223671392-612x612-1.jpg"))); // NOI18N
+        jLabel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         AddTab.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(116, 99, -1, -1));
 
         UpdateSupplierBtn.setBackground(new java.awt.Color(255, 204, 204));
@@ -631,6 +639,7 @@ public class ImportManagement extends javax.swing.JFrame {
 
         ParentPanel.addTab("Add Supplier", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_Plus_+_35px.png")), AddTab); // NOI18N
 
+        Search.setBackground(new java.awt.Color(255, 255, 255));
         Search.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         SearchBtn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png"))); // NOI18N
@@ -640,7 +649,7 @@ public class ImportManagement extends javax.swing.JFrame {
                 SearchBtn2ActionPerformed(evt);
             }
         });
-        Search.add(SearchBtn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 240, -1, 52));
+        Search.add(SearchBtn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 180, -1, 40));
 
         PlusBtn.setBackground(new java.awt.Color(153, 255, 153));
         PlusBtn.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -688,6 +697,7 @@ public class ImportManagement extends javax.swing.JFrame {
         AmountTxb.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         AmountTxb.setText("0");
         AmountTxb.setToolTipText("Search Here....");
+        AmountTxb.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         AmountTxb.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 AmountTxbKeyTyped(evt);
@@ -696,6 +706,7 @@ public class ImportManagement extends javax.swing.JFrame {
         Search.add(AmountTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 440, 70, 50));
 
         TypeCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
+        TypeCb.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Search.add(TypeCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(1055, 116, 200, 45));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -708,10 +719,12 @@ public class ImportManagement extends javax.swing.JFrame {
 
         AuthorSearchTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         AuthorSearchTxb.setToolTipText("Search Here....");
-        Search.add(AuthorSearchTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 180, 210, 42));
+        AuthorSearchTxb.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Search.add(AuthorSearchTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 180, 160, 42));
 
         jScrollPane2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        SearchBookTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         SearchBookTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -742,10 +755,12 @@ public class ImportManagement extends javax.swing.JFrame {
 
         ParentPanel.addTab("Choose Book", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png")), Search); // NOI18N
 
+        CreateBillTab.setBackground(new java.awt.Color(255, 255, 255));
         CreateBillTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jScrollPane3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        BillTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         BillTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -772,14 +787,18 @@ public class ImportManagement extends javax.swing.JFrame {
 
         jLabel12.setText("Import Bill ID");
         CreateBillTab.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, -1, -1));
+
+        ImportBillText.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         CreateBillTab.add(ImportBillText, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 160, 30));
 
         jLabel13.setText("Date");
         CreateBillTab.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 60, -1, -1));
 
+        DateBox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         DateBox.setDateFormatString("yyyy-MM-dd");
         CreateBillTab.add(DateBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 50, 210, 30));
 
+        SupplierNameCb.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         CreateBillTab.add(SupplierNameCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 50, 180, 30));
 
         jLabel14.setText("Supplier ID");
@@ -787,6 +806,7 @@ public class ImportManagement extends javax.swing.JFrame {
 
         CancelBillBtn.setBackground(new java.awt.Color(255, 51, 102));
         CancelBillBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        CancelBillBtn.setForeground(new java.awt.Color(255, 255, 255));
         CancelBillBtn.setText("CANCEL");
         CancelBillBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -797,6 +817,7 @@ public class ImportManagement extends javax.swing.JFrame {
 
         TotalText.setEditable(false);
         TotalText.setText("0.0");
+        TotalText.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         CreateBillTab.add(TotalText, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 420, 210, 50));
 
         jLabel15.setText("Total");
@@ -814,6 +835,7 @@ public class ImportManagement extends javax.swing.JFrame {
 
         ConfirmBillBtn.setBackground(new java.awt.Color(255, 51, 102));
         ConfirmBillBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        ConfirmBillBtn.setForeground(new java.awt.Color(255, 255, 255));
         ConfirmBillBtn.setText("CONFIRM");
         ConfirmBillBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -824,6 +846,7 @@ public class ImportManagement extends javax.swing.JFrame {
 
         DeleteBillBtn.setBackground(new java.awt.Color(255, 51, 102));
         DeleteBillBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        DeleteBillBtn.setForeground(new java.awt.Color(255, 255, 255));
         DeleteBillBtn.setText("DELETE");
         DeleteBillBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -834,10 +857,12 @@ public class ImportManagement extends javax.swing.JFrame {
 
         ParentPanel.addTab("Create Bill", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_bill_35px_1.png")), CreateBillTab); // NOI18N
 
+        PurchasedBillTab.setBackground(new java.awt.Color(255, 255, 255));
         PurchasedBillTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jScrollPane4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        DetailBillTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         DetailBillTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -899,7 +924,8 @@ public class ImportManagement extends javax.swing.JFrame {
         PurchasedBillTab.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 20, -1, -1));
 
         SuppliersID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
-        PurchasedBillTab.add(SuppliersID, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 10, 182, 45));
+        SuppliersID.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        PurchasedBillTab.add(SuppliersID, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 10, 160, 45));
 
         SearchPurchaseBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png"))); // NOI18N
         SearchPurchaseBtn.setToolTipText("Search");
@@ -908,7 +934,7 @@ public class ImportManagement extends javax.swing.JFrame {
                 SearchPurchaseBtnActionPerformed(evt);
             }
         });
-        PurchasedBillTab.add(SearchPurchaseBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 80, -1, 52));
+        PurchasedBillTab.add(SearchPurchaseBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 10, 60, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel9.setText("Detail");

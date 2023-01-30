@@ -437,7 +437,7 @@ public class SaleManagement extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        jPanel2.setBackground(new java.awt.Color(153, 153, 200));
+        jPanel2.setBackground(new java.awt.Color(153, 153, 255));
 
         jLabel1.setFont(new java.awt.Font("Impact", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -475,12 +475,15 @@ public class SaleManagement extends javax.swing.JFrame {
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
-        ParentPanel.setBackground(new java.awt.Color(204, 204, 255));
+        ParentPanel.setBackground(new java.awt.Color(153, 153, 255));
+        ParentPanel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
+        SearchTab.setBackground(new java.awt.Color(255, 255, 255));
         SearchTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         SearchBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png"))); // NOI18N
         SearchBtn.setToolTipText("Search");
+        SearchBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         SearchBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SearchBtnActionPerformed(evt);
@@ -539,6 +542,7 @@ public class SaleManagement extends javax.swing.JFrame {
         AmountTxb.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         AmountTxb.setText("0");
         AmountTxb.setToolTipText("Search Here....");
+        AmountTxb.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         AmountTxb.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 AmountTxbKeyTyped(evt);
@@ -547,6 +551,7 @@ public class SaleManagement extends javax.swing.JFrame {
         SearchTab.add(AmountTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 440, 70, 50));
 
         TypeCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
+        TypeCb.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         SearchTab.add(TypeCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 120, 200, 45));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -559,10 +564,12 @@ public class SaleManagement extends javax.swing.JFrame {
 
         AuthorSearchTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         AuthorSearchTxb.setToolTipText("Search Here....");
+        AuthorSearchTxb.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         SearchTab.add(AuthorSearchTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 180, 200, 42));
 
         jScrollPane1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        SearchBookTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         SearchBookTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -590,14 +597,17 @@ public class SaleManagement extends javax.swing.JFrame {
         SearchTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         SearchTxb.setText("Search name ...");
         SearchTxb.setToolTipText("Search Here....");
+        SearchTxb.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         SearchTab.add(SearchTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(942, 56, 310, 42));
 
         ParentPanel.addTab("Choose Book", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png")), SearchTab); // NOI18N
 
+        CreateBillTab.setBackground(new java.awt.Color(255, 255, 255));
         CreateBillTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jScrollPane3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        SelectBookTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         SelectBookTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -626,15 +636,18 @@ public class SaleManagement extends javax.swing.JFrame {
         CreateBillTab.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, -1, -1));
 
         IDBill.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        IDBill.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         IDBill.setEnabled(false);
         CreateBillTab.add(IDBill, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 160, 30));
 
         jLabel3.setText("Date");
         CreateBillTab.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 60, -1, -1));
 
+        DatePicker.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         DatePicker.setDateFormatString("yyyy-MM-dd");
         CreateBillTab.add(DatePicker, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 50, 210, 30));
 
+        CustomerID.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         CreateBillTab.add(CustomerID, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 50, 180, 30));
 
         jLabel4.setText("Customer ID");
@@ -651,6 +664,7 @@ public class SaleManagement extends javax.swing.JFrame {
         CreateBillTab.add(CancelBillBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 510, 116, 51));
 
         TotalTxb.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        TotalTxb.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         TotalTxb.setEnabled(false);
         TotalTxb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -666,6 +680,7 @@ public class SaleManagement extends javax.swing.JFrame {
         CreateBillTab.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 430, 50, 30));
 
         ReceiveTxb.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        ReceiveTxb.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         ReceiveTxb.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 ReceiveTxbKeyTyped(evt);
@@ -675,6 +690,7 @@ public class SaleManagement extends javax.swing.JFrame {
 
         DeleteRowBtn.setBackground(new java.awt.Color(255, 51, 102));
         DeleteRowBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        DeleteRowBtn.setForeground(new java.awt.Color(255, 255, 255));
         DeleteRowBtn.setText("DELETE");
         DeleteRowBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -705,6 +721,7 @@ public class SaleManagement extends javax.swing.JFrame {
 
         ParentPanel.addTab("Create Bill", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_bill_35px_1.png")), CreateBillTab); // NOI18N
 
+        PurchasedBillTab.setBackground(new java.awt.Color(255, 255, 255));
         PurchasedBillTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jScrollPane4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -770,6 +787,7 @@ public class SaleManagement extends javax.swing.JFrame {
 
         ReturnBillBtn.setBackground(new java.awt.Color(255, 51, 102));
         ReturnBillBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        ReturnBillBtn.setForeground(new java.awt.Color(255, 255, 255));
         ReturnBillBtn.setText("RETURN");
         ReturnBillBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -783,7 +801,8 @@ public class SaleManagement extends javax.swing.JFrame {
         PurchasedBillTab.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 30, -1, -1));
 
         CustomerBillIDCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
-        PurchasedBillTab.add(CustomerBillIDCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 20, 182, 45));
+        CustomerBillIDCb.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        PurchasedBillTab.add(CustomerBillIDCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 20, 150, 45));
 
         SearchBillBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png"))); // NOI18N
         SearchBillBtn.setToolTipText("Search");
@@ -792,10 +811,11 @@ public class SaleManagement extends javax.swing.JFrame {
                 SearchBillBtnActionPerformed(evt);
             }
         });
-        PurchasedBillTab.add(SearchBillBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 100, -1, 52));
+        PurchasedBillTab.add(SearchBillBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 20, -1, 50));
 
         ParentPanel.addTab("Purchased Bills", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_initiate_money_transfer_35px_1.png")), PurchasedBillTab); // NOI18N
 
+        ReturnTab.setBackground(new java.awt.Color(255, 255, 255));
         ReturnTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jScrollPane6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -838,8 +858,9 @@ public class SaleManagement extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(ParentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ParentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

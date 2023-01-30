@@ -75,10 +75,10 @@ public class Home extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(0, 0));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(213, 203, 231));
+        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(153, 153, 200));
+        jPanel2.setBackground(new java.awt.Color(102, 153, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         LogoLb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/icons8_book_250px.png"))); // NOI18N
@@ -106,6 +106,7 @@ public class Home extends javax.swing.JFrame {
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
 
         StoragePn.setBackground(new java.awt.Color(251, 251, 251));
+        StoragePn.setBorder(new javax.swing.border.MatteBorder(null));
         StoragePn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 StoragePnMouseClicked(evt);
@@ -151,6 +152,7 @@ public class Home extends javax.swing.JFrame {
         jPanel1.add(StoragePn, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 310, 163, -1));
 
         CustomerPn.setBackground(new java.awt.Color(251, 251, 251));
+        CustomerPn.setBorder(new javax.swing.border.MatteBorder(null));
         CustomerPn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 CustomerPnMouseClicked(evt);
@@ -196,6 +198,7 @@ public class Home extends javax.swing.JFrame {
         jPanel1.add(CustomerPn, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, 163, -1));
 
         RevenuePn.setBackground(new java.awt.Color(251, 251, 251));
+        RevenuePn.setBorder(new javax.swing.border.MatteBorder(null));
         RevenuePn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 RevenuePnMouseClicked(evt);
@@ -240,6 +243,7 @@ public class Home extends javax.swing.JFrame {
         jPanel1.add(RevenuePn, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 510, 163, -1));
 
         SalePn.setBackground(new java.awt.Color(251, 251, 251));
+        SalePn.setBorder(new javax.swing.border.MatteBorder(null));
         SalePn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 SalePnMouseClicked(evt);
@@ -284,6 +288,7 @@ public class Home extends javax.swing.JFrame {
         jPanel1.add(SalePn, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 310, 163, -1));
 
         LogOutPn.setBackground(new java.awt.Color(251, 251, 251));
+        LogOutPn.setBorder(new javax.swing.border.MatteBorder(null));
         LogOutPn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 LogOutPnMouseClicked(evt);
@@ -328,6 +333,7 @@ public class Home extends javax.swing.JFrame {
         jPanel1.add(LogOutPn, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 510, 163, -1));
 
         ImportPn.setBackground(new java.awt.Color(251, 251, 251));
+        ImportPn.setBorder(new javax.swing.border.MatteBorder(null));
         ImportPn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ImportPnMouseClicked(evt);
@@ -372,6 +378,7 @@ public class Home extends javax.swing.JFrame {
         jPanel1.add(ImportPn, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 310, 163, -1));
 
         StaffPn.setBackground(new java.awt.Color(251, 251, 251));
+        StaffPn.setBorder(new javax.swing.border.MatteBorder(null));
         StaffPn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 StaffPnMouseClicked(evt);

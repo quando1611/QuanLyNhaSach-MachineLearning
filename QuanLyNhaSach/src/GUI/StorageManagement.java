@@ -225,7 +225,7 @@ public class StorageManagement extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        jPanel2.setBackground(new java.awt.Color(153, 153, 200));
+        jPanel2.setBackground(new java.awt.Color(153, 153, 255));
 
         jLabel1.setFont(new java.awt.Font("Impact", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -263,7 +263,8 @@ public class StorageManagement extends javax.swing.JFrame {
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
-        ParentPanel.setBackground(new java.awt.Color(204, 204, 255));
+        ParentPanel.setBackground(new java.awt.Color(153, 153, 255));
+        ParentPanel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         SearchTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -304,6 +305,7 @@ public class StorageManagement extends javax.swing.JFrame {
 
         DeleteBtn.setBackground(new java.awt.Color(255, 51, 102));
         DeleteBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        DeleteBtn.setForeground(new java.awt.Color(255, 255, 255));
         DeleteBtn.setText("DELETE");
         DeleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -376,10 +378,12 @@ public class StorageManagement extends javax.swing.JFrame {
 
         ParentPanel.addTab("Search Book", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_search_35px.png")), SearchTab); // NOI18N
 
+        AddTab.setBackground(new java.awt.Color(255, 255, 255));
         AddTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         NameTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         NameTxb.setToolTipText("");
+        NameTxb.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         AddTab.add(NameTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 30, 431, 52));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -392,6 +396,7 @@ public class StorageManagement extends javax.swing.JFrame {
 
         AuthorTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         AuthorTxb.setToolTipText("");
+        AuthorTxb.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         AddTab.add(AuthorTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 120, 260, 52));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -401,6 +406,7 @@ public class StorageManagement extends javax.swing.JFrame {
         TypeTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         TypeTxb.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         TypeTxb.setToolTipText("");
+        TypeTxb.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         AddTab.add(TypeTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 210, 210, 50));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -409,6 +415,7 @@ public class StorageManagement extends javax.swing.JFrame {
 
         PriceTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         PriceTxb.setToolTipText("");
+        PriceTxb.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         AddTab.add(PriceTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 370, 200, 50));
 
         AddBookBtn.setBackground(new java.awt.Color(153, 255, 153));
@@ -439,6 +446,7 @@ public class StorageManagement extends javax.swing.JFrame {
         AddTab.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 240, -1, -1));
 
         TypeSelectCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
+        TypeSelectCb.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         AddTab.add(TypeSelectCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 210, 200, 50));
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
@@ -462,6 +470,7 @@ public class StorageManagement extends javax.swing.JFrame {
 
         AmountTxb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         AmountTxb.setToolTipText("");
+        AmountTxb.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         AddTab.add(AmountTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 290, 200, 50));
 
         ParentPanel.addTab("Add Book", new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/Minisize/icons8_Plus_+_35px.png")), AddTab); // NOI18N

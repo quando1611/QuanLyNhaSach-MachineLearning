@@ -55,7 +55,7 @@ public class Login extends javax.swing.JFrame {
         setModalExclusionType(null);
         setUndecorated(true);
 
-        jPanel4.setBackground(new java.awt.Color(213, 203, 231));
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Component/icons8_book_250px.png"))); // NOI18N
         jLabel5.setText(" ");
@@ -105,20 +105,18 @@ public class Login extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel5.setBackground(new java.awt.Color(144, 208, 231));
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        EmailTxb.setBackground(new java.awt.Color(144, 193, 223));
+        EmailTxb.setBackground(new java.awt.Color(204, 255, 255));
         EmailTxb.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        EmailTxb.setForeground(new java.awt.Color(255, 255, 255));
         EmailTxb.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         EmailTxb.setText("admin@gmail.com");
         EmailTxb.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         EmailTxb.setPreferredSize(new java.awt.Dimension(74, 26));
         jPanel5.add(EmailTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 281, 50));
 
-        PasswordTxb.setBackground(new java.awt.Color(144, 193, 223));
-        PasswordTxb.setForeground(new java.awt.Color(255, 255, 255));
+        PasswordTxb.setBackground(new java.awt.Color(204, 255, 255));
         PasswordTxb.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         PasswordTxb.setText("admin");
         PasswordTxb.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -187,7 +185,6 @@ public class Login extends javax.swing.JFrame {
         jPanel5.add(LoginBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 380, 100, 40));
 
         jLabel6.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("LOGIN");
         jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, -1, -1));
 
