@@ -144,7 +144,6 @@ public class CustomerManagement extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1280, 720));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1280, 720));
 
@@ -229,7 +228,7 @@ public class CustomerManagement extends javax.swing.JFrame {
                 SearchBtnActionPerformed(evt);
             }
         });
-        SearchTab.add(SearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 10, -1, -1));
+        SearchTab.add(SearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 10, -1, -1));
 
         DeleteBtn.setBackground(new java.awt.Color(255, 51, 102));
         DeleteBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N

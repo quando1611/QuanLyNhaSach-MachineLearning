@@ -121,6 +121,7 @@ INSERT INTO PhanQuyen VALUES('Sale','SaleStaff')
 
 	--TaiKhoan
 INSERT INTO TaiKhoan VALUES('admin1', 'admin@gmail.com', 'admin', 'Tran Thanh Trung', 'Admin', 'Binh Duong', '01234')
+INSERT INTO TaiKhoan VALUES('admin2', 'admin2@gmail.com', 'admin2', 'Do Vu Minh Quan', 'Admin', 'Binh Duong', '56789')
 
 	--KhachHang
 INSERT INTO KhachHang VALUES('1', 'Trung', 'KTX Khu B', '0345304407', 'trung@gmail.com', 0)

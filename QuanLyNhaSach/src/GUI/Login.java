@@ -114,6 +114,11 @@ public class Login extends javax.swing.JFrame {
         EmailTxb.setText("admin@gmail.com");
         EmailTxb.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         EmailTxb.setPreferredSize(new java.awt.Dimension(74, 26));
+        EmailTxb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EmailTxbActionPerformed(evt);
+            }
+        });
         jPanel5.add(EmailTxb, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 281, 50));
 
         PasswordTxb.setBackground(new java.awt.Color(204, 255, 255));
@@ -241,6 +246,10 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Login failed!!", "Fail",JOptionPane.OK_OPTION);
         }
     }//GEN-LAST:event_LoginBtnActionPerformed
+
+    private void EmailTxbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmailTxbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EmailTxbActionPerformed
     
     //Check Account when login
     private boolean CheckLogin(String email, String pass)

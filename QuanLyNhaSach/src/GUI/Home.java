@@ -221,13 +221,14 @@ public class Home extends javax.swing.JFrame {
         RevenuePn.setLayout(RevenuePnLayout);
         RevenuePnLayout.setHorizontalGroup(
             RevenuePnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(RevenuePnLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(RevenuePnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RevenuePnLayout.createSequentialGroup()
+                .addGroup(RevenuePnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(RevenuePnLayout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jLabel9)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel9))
+                    .addGroup(RevenuePnLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(120, 120, 120))
         );
         RevenuePnLayout.setVerticalGroup(
@@ -240,7 +241,7 @@ public class Home extends javax.swing.JFrame {
                 .addGap(21, 21, 21))
         );
 
-        jPanel1.add(RevenuePn, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 510, 163, -1));
+        jPanel1.add(RevenuePn, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 500, 163, -1));
 
         SalePn.setBackground(new java.awt.Color(251, 251, 251));
         SalePn.setBorder(new javax.swing.border.MatteBorder(null));
@@ -330,7 +331,7 @@ public class Home extends javax.swing.JFrame {
                 .addGap(21, 21, 21))
         );
 
-        jPanel1.add(LogOutPn, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 510, 163, -1));
+        jPanel1.add(LogOutPn, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 500, 163, -1));
 
         ImportPn.setBackground(new java.awt.Color(251, 251, 251));
         ImportPn.setBorder(new javax.swing.border.MatteBorder(null));
@@ -420,7 +421,7 @@ public class Home extends javax.swing.JFrame {
                 .addGap(21, 21, 21))
         );
 
-        jPanel1.add(StaffPn, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 510, 163, -1));
+        jPanel1.add(StaffPn, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 500, 163, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 720));
 
